@@ -1,0 +1,10 @@
+# Para ejecutar el proyecto
+
+# instalar los paquetes
+npm install
+
+# transpilacion de typescript a javascript
+./node_modules/.bin/tsc
+
+# ejecutar proyecto
+node TS+MascayanoRafael.js

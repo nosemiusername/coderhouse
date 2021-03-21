@@ -1,0 +1,14 @@
+{
+  "name": "desafio2",
+  "version": "1.0.0",
+  "description": "ecmascript avanzado y typescript",
+  "main": "TS+MascayanoRafael.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafael Mascayano",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  }
+}
