@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.6.6/rxjs.umd.min.js" integrity="sha512-r0R52UFUS1Wx7K9DKFCzPkZbmB0xVXJjc/sk9JByGAcHH2VXrj3tKBzmoYp9PgJm8xRVHlfjvDYN4mG7mhnv4w==" crossorigin="anonymous"></script>  </head>
+  <body>  
+    <input type="text" id="text"/>
+    <label id="label"></label>
+
+    <script>
+      const {Observable,fromEvent} = rxjs;
+      const {mapTo} = rxjs.operators;
+      const keyup = fromEvent(document.getElementById("text"), 'keyup');
+      let textElement;
+      function writeReverse(){
+        return new Observable ( suscriber => {
+          keyup.subscribe( () => {
+            textElement = document.getElementById("text").value;
+            const [... splitedText] = textElement;
+            const revSplitedText = splitedText.reverse();
+            document.getElementById("label").innerHTML = revSplitedText.join("");
+            if (textElement == 'Error'){
+              suscriber.error('Error');
+            }
+            if (textElement == 'Complete'){
+              suscriber.complete();
+            }
+          });
+          return() => {
+              console.log('Unsubscribe');
+              document.getElementById("text").value = '';
+              document.getElementById("label").innerHTML = '';
+              document.getElementById("text").disabled = true;
+            }
+        }
+        )
+      }
+
+      let suscriptor = writeReverse()
+      .subscribe( 
+        () => console.log('Inicio'),
+        error => console.log(error),
+        () => console.log('Fin suscribe')
+      );
+
+      setTimeout(()=>{
+        suscriptor.unsubscribe();
+      }, 5000)
+  </script>
+  
+  </body>
+</html>
+
