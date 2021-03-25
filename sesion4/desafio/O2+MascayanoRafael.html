@@ -10,19 +10,18 @@
 
     <script>
       const {Observable,fromEvent} = rxjs;
+      const {map} = rxjs.operators;
       const keyup = fromEvent(document.getElementById("text"), 'keyup');
-      let textElement;
+      const mapText = keyup.pipe(map(ev => ev.target.value.split("").reverse().join("")));
+
       function writeReverse(){
         return new Observable ( subscriber => {
-          keyup.subscribe( () => {
-            textElement = document.getElementById("text").value;
-            const [... splitedText] = textElement;
-            const revSplitedText = splitedText.reverse();
-            document.getElementById("label").innerHTML = revSplitedText.join("");
-            if (textElement == 'Error'){
+          mapText.subscribe(x => {
+            document.getElementById("label").innerHTML = x;
+            if (x == 'rorrE'){
               subscriber.error('Error');
             }
-            if (textElement == 'Complete'){
+            if (x == 'etelpmoC'){
               subscriber.complete();
             }
           });
@@ -50,4 +49,3 @@
   
   </body>
 </html>
-
