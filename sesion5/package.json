@@ -1,11 +1,20 @@
 {
-  "name": "sesion5",
+  "name": "desafio5",
   "version": "1.0.0",
-  "description": "crear servidor web",
-  "main": "servidor.js",
+  "description": "",
+  "main": "node servidor.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node servidor.js"
   },
-  "author": "",
-  "license": "ISC"
-}
+  "engines": { "node": "10.5.0" },
+  "repository": {
+  "type": "git",
+  "url": ""
+  },
+  "author": "rafael mascayano",
+  "license": "",
+  "bugs": {
+  },
+  "homepage": ""
+  }
