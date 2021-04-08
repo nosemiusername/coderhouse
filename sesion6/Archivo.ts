@@ -25,7 +25,7 @@ export class Archivo {
     }
 
     /**
-     * guardar
+     * guardar un nuevo objeto usando la libreria chance que retorna elementos random
      */
     public async guardar() {
         const chance = new Chance();
