@@ -9,14 +9,14 @@ export class Archivo {
     /**
      * getter jsonObject
      */
-    get jsonObject():[] {
+    get jsonObject(): [] {
         return this._jsonObject;
     }
 
     /**
      * setter jsonObject
      */
-    set jsonObject(value:[]){
+    set jsonObject(value: []) {
         this._jsonObject = value;
     }
 
@@ -32,10 +32,17 @@ export class Archivo {
      * leer
      */
     public async leer() {
+        let isExist = false;
+
         try {
-            const contenido = await fs.promises.readFile(this.filename, 'utf-8');
-            this._jsonObject = JSON.parse(contenido);
-            console.log(this.jsonObject);
+            isExist = await this.checkIfExist(this.filename);
+            if (isExist) {
+                const contenido = await fs.promises.readFile(this.filename, 'utf-8');
+                this._jsonObject = JSON.parse(contenido);
+                console.log(this._jsonObject);
+            } else {
+                console.log('Archivo Vacio');
+            }
 
         } catch (error) {
             console.error(error);
@@ -46,25 +53,19 @@ export class Archivo {
      * guardar un nuevo objeto usando la libreria chance que retorna elementos random
      */
     public async guardar() {
-        let isExist = false;
         const chance = new Chance();
         const newElement = {
             title: chance.animal(),
             price: Math.ceil(Math.random() * 1000),
             thumbmail: chance.avatar(),
-            id: this.jsonObject.length + 1
+            id: this._jsonObject.length + 1
         }
         this._jsonObject.push(newElement);
 
         try {
-            isExist = await this.checkIfExist(this.filename);
-            if (!isExist) {
-                await fs.promises.writeFile(this.filename,
-                    JSON.stringify(this.jsonObject, null, '\t'), 'utf-8');
-            } else {
-                await fs.promises.appendFile(this.filename,
-                    JSON.stringify(this.jsonObject, null, '\t'), 'utf-8');
-            }
+            await fs.promises.writeFile(this.filename,
+                JSON.stringify(this._jsonObject, null, '\t'), 'utf-8');
+
         } catch (error) {
             console.error(error);
         }
