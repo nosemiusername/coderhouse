@@ -4,14 +4,14 @@ export class Producto{
     /**
      * obtener todos los productos
      */
-    public list(){
+    get list(){
         return this._list;
     }
 
     /**
      * agregar un nuevo producto
      */
-    public addList(value:any){
+    set list(value:any){
         value.id = (this._list.length||0)+1;
         this._list.push(value);
     }

@@ -12,7 +12,7 @@ const products = new Producto();
  * Listar en forma total
  */
 app.get('/api/productos', (req, res) => {
-    const listOfProducts = products.list();
+    const listOfProducts = products.list;
     let status = 200;
     let result;
 
@@ -20,7 +20,7 @@ app.get('/api/productos', (req, res) => {
         status = 200
         result = listOfProducts;
     } else {
-        status = 204;
+        status = 404;
         result = { 'error': 'no hay productos cargados' };
     }
 
@@ -55,7 +55,7 @@ app.get('/api/productos/:id', (req, res) => {
  * Almacenar productos
  */
 app.post('/api/productos', (req, res) => {
-    products.addList(req.body);
+    products.list = req.body;
     console.log(req.body);
     res.status(200).json({ 'message': 'producto cargado correctamente' });
 })
