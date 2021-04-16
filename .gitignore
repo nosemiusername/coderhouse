@@ -2,3 +2,6 @@ node_modules
 sesion6/*.js
 sesion8/desafio/*.js
 sesion9/desafio/*.js
+sesion9/desafio/apiRoutes.js
+sesion9/desafio/index.js
+sesion9/desafio/Producto.js

@@ -1,9 +1,9 @@
 import express from 'express';
-import { apiRoutes } from './apiRoutes'
+import { apiRoute } from './apiRoutes'
 
 const app = express();
 const PORT = 3000;
 
-
-app.use('/api', apiRoutes);
+app.use(express.static('public'));
+app.use('/api', apiRoute);
 app.listen(PORT);
