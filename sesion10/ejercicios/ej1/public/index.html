@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Clase 10</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <span></span>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script>
+        const template = Handlebars.compile(`<h1> Datos Personales </h1>
+            <ul class="list-group">
+                <li class="list-group-item"> {{nombre}} </li>
+                <li class="list-group-item"> {{apellido}} </li>
+                <li class="list-group-item"> {{edad}} </li>
+                <li class="list-group-item"> {{mail}} </li>
+                <li class="list-group-item"> {{telefono}} </li>
+                </ul>
+                
+        `)
+        const html = template({
+            nombre: "Juan",
+            apellido: "Perez",
+            edad: 30,
+            mail: "r@.cl",
+            telefono: 2310534
+        });
+        document.querySelector("span").innerHTML = html;
+    </script>
+
+</body>
+
+</html>
