@@ -5,7 +5,7 @@ import { Producto } from './Producto'
 export const apiRoute = express.Router();
 apiRoute.use(express.json());
 apiRoute.use(express.urlencoded({ extended: false })); 
-const products = new Producto();
+const products = Producto.Instance;
 
 /**
  * Listar en forma total
@@ -86,6 +86,7 @@ apiRoute.delete('/productos/:id', (req, res) => {
 apiRoute.post('/productos', (req, res) => {
     products.list = req.body;
     console.log(req.body);
+    if (req.)
     res.status(200).json({ 'message': 'producto cargado correctamente' });
 })
 

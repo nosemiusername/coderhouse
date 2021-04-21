@@ -1,5 +1,11 @@
 export class Producto {
+    private static _instance: Producto;
     private _list: any = []
+    
+
+    public static get Instance(){
+        return this._instance||(this._instance = new this());
+    }
 
     /**
      * obtener todos los productos
