@@ -1,0 +1,68 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card" style="border-radius: 2rem;">
+                <div class="card-body p-5 text-center">
+                    <div class="my-md-5 pb-5">
+                        <form action="http://localhost:3000/personas" method="POST">
+                            <div class="form-group">
+                                <input id="title" class="form-control" name="nombre" type="text"
+                                    placeholder="ingrese nombre del producto" />
+                            </div>
+                            <div class="form-group">
+                                <input id="price" class="form-control" name="apellido" type="text"
+                                    placeholder="ingrese precio" />
+                            </div>
+                            <div class="form-group">
+                                <input id="thumbnail" class="form-control" name="edad" type="text"
+                                    placeholder="ingrese url" />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Crear Persona</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%if (hasElements) { %>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% listProducts.forEach( element=> { ) >
+                    <tr>
+                        <td>
+                            <%= this.nombre %>
+                        </td>
+                        <td>
+                            <%= this.apellido %>
+                        </td>
+                        <<td>
+                            <%= this.edad %>
+                                </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+        <%} else { %>
+            <div class="alert alert-warning" role="alert">
+                No hay productos
+            </div>
+            <% } %>
+
+
+
+</body>
+
+</html>
