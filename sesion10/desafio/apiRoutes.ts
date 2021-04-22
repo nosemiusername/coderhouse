@@ -1,12 +1,12 @@
 import express from 'express';
 import { Producto } from './Producto'
 
-
 export const apiRoute = express.Router();
 apiRoute.use(express.json());
-apiRoute.use(express.urlencoded({ extended: false })); 
+apiRoute.use(express.urlencoded({ extended: false }));
 const products = Producto.Instance;
-
+const PORT = '3000';
+const HOST = 'http://localhost:' + PORT;
 /**
  * Listar en forma total
  */
@@ -35,11 +35,10 @@ apiRoute.delete('/productos/:id', (req, res) => {
     let result = {};
 
     if (isNumber(id)) {
-        console.log(products.isExist(id) );
-        if ( products.isExist(id) ) {
+        if (products.isExist(id)) {
             products.removeProduct(id);
             status = 200;
-            result = { 'mensaje': 'producto eliminado' };        
+            result = { 'mensaje': 'producto eliminado' };
         }
         else {
             status = 404;
@@ -56,17 +55,16 @@ apiRoute.delete('/productos/:id', (req, res) => {
 /**
  * Update producto
  */
- apiRoute.put('/productos/:id', (req, res) => {
+apiRoute.put('/productos/:id', (req, res) => {
     const id = parseInt(req.params.id);
     let status = 200;
     let result = {};
 
     if (isNumber(id)) {
-        console.log(products.isExist(id) );
-        if ( products.isExist(id) ) {
+        if (products.isExist(id)) {
             products.updateProduct(id, req.body);
             status = 200;
-            result = { 'mensaje': 'producto actualizado' };        
+            result = { 'mensaje': 'producto actualizado' };
         }
         else {
             status = 404;
@@ -85,9 +83,11 @@ apiRoute.delete('/productos/:id', (req, res) => {
  */
 apiRoute.post('/productos', (req, res) => {
     products.list = req.body;
-    console.log(req.body);
-    if (req.)
-    res.status(200).json({ 'message': 'producto cargado correctamente' });
+    if (req.body.form) {
+        res.redirect(HOST);
+    } else {
+        res.status(200).json({ 'message': 'producto cargado correctamente' });
+    }
 })
 
 const isNumber = (value: any) => {

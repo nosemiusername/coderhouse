@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 app.get('/list', (req, res) => {
     const listProducts = product.list;
     const hasProducts = product.list.length > 0 ? true : false;
-    console.log(typeof listProducts);
     res.render('listProducts', {hasProducts:hasProducts, listProducts:listProducts});
 })
 app.use(express.static('public'));

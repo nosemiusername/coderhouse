@@ -4,16 +4,17 @@
             <div class="card-body p-5 text-center">
                 <div class="my-md-5 pb-5">
                     <form action="http://localhost:3000/api/productos" method="POST">
+                        <input type="hidden" name="form" value="1">
                         <div class="form-group">
-                            <input id="title" class="form-control" name="title" type="text"
+                            <input id="title" class="form-control" id="title" name="title" type="text"
                                 placeholder="ingrese nombre del producto" />
                         </div>
                         <div class="form-group">
-                            <input id="price" class="form-control" name="price" type="text"
+                            <input id="price" class="form-control" id="price" name="price" type="text"
                                 placeholder="ingrese precio" />
                         </div>
                         <div class="form-group">
-                            <input id="thumbnail" class="form-control" name="thumbnail" type="text"
+                            <input id="thumbnail" class="form-control" id="thumbnail" name="thumbnail" type="text"
                                 placeholder="ingrese url" />
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Crear Producto</button>
