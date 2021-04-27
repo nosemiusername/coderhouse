@@ -1,11 +1,11 @@
 <%- include('layouts/index'); -%>
-    <div class="container">
+    <div class="container" id="form-container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card" style="border-radius: 2rem;">
                     <div class="card-body p-5 text-center">
                         <div class="my-md-5 pb-5">
-                            <form action="http://localhost:3000/api/productos" method="POST">
+                            <form id="form-product">
                                 <input type="hidden" name="form" value="1">
                                 <div class="form-group">
                                     <input id="title" class="form-control" id="title" name="title" type="text"
@@ -18,7 +18,7 @@
                                 <div class="form-group">
                                     <input id="thumbnail" class="form-control" id="thumbnail" name="thumbnail"
                                         type="text" placeholder="ingrese url" />
-                                        <button type="submit" class="btn btn-primary btn-block">Crear Producto</button>
+                                        <button type="submit" class="btn btn-primary btn-block" id="btn-add-product">Crear Producto</button>
                                 </div>
                             </form>
                         </div>
@@ -26,5 +26,38 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container" id="table-container">
+        <h1>Vista de Productos</h1>
+        <% if (hasProducts) { %>
+            <table class="table table-hover" id="table-products">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>foto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% listProducts.forEach( element=> { %>
+                        <tr>
+                            <td>
+                                <%= element.title %>
+                            </td>
+                            <td>
+                                <%= element.price %>
+                            </td>
+                            <td><img src=<%=element.thumbnail %> alt=<%= element.thumbnail %> width="24" height="24">
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <% } else {%>
+                <div class="alert alert-warning" role="alert">
+                    No hay productos
+                </div>
+                <% } %>
     </div>
 <%- include('layouts/footer'); -%>
