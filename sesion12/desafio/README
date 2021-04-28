@@ -7,11 +7,8 @@ npm install
 3. ejecutar servidor
 npm index.js
 
-4. crear productos
+4. crear y productos
 abrir navegador en http://localhost:3000/
 
 5. crud desde servicio
 Importar adjunto en postman Coderhouse.postman_collection.json
-
-6. listar productos
-abrir navegador en http://localhost:3000/list
