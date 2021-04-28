@@ -1,18 +1,14 @@
 const socket = io();
-socket.on('mensaje', data => {
-    const tableContainder = $('#table-products');
-    const dataTable = fillTable;
-    tableContainder.empty();
-    tableContainder.innerHTML = dataTable;
-});
 
 document.getElementById("btn-add-product").addEventListener("click", () => {
-    const socket = io();
-    io.on('mensaje', socket => {
-        const myForm = document.getElementById();
-        const formData = new FormData(myForm);
-        socket.emit('mensaje', formData);
-    });
+    const elements = document.getElementById("form-product").elements;
+    const obj ={};
+    
+    for(var i = 0 ; i < elements.length ; i++){
+        var item = elements.item(i);
+        obj[item.name] = item.value;
+    }
+    socket.emit('mensaje', obj);
 
 })
 
@@ -38,6 +34,6 @@ const fillTable = (data) => {
     dataTable += `
         </tbody>
         `
-    ;
+        ;
     return dataTable;
 }
