@@ -14,9 +14,7 @@ const io = new ioServer(http);
 app.set('view engine', 'ejs');
 app.set('views', './productos/vista');
 app.get('/', (req, res) => {
-    const listProducts = product.list;
-    const hasProducts = product.list.length > 0 ? true : false;
-    res.render('addProducts',{hasProducts:hasProducts, listProducts:listProducts});
+    res.render('addProducts');
 });
 
 app.use(express.static('public'));
@@ -24,11 +22,13 @@ app.use('/api', apiRoute);
 http.listen(PORT);
 
 io.on('connection', (socket) => {
-    socket.emit('mensaje', product.list);
+    console.log("New Connection");
+    socket.emit('message', product.list);
 
-    socket.on('mensaje', data => {
+    socket.on('new-message', data => {
+        console.log(data);
         product.list = data;
-        socket.emit('mensaje', product.list);
+        io.sockets.emit('message', product.list);
     })
 })
 
