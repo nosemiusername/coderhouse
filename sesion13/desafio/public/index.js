@@ -18,13 +18,13 @@ socket.on('chats', data => {
 
 const addChat = () => {
     socket.emit('new-chat', obtainElementsByForm('form-chat'));
-    $('#form-chat').trigger("reset");
+    document.getElementById('message').value = "";
     return false;
 }
 
 const addProduct = () => {
     socket.emit('new-product', obtainElementsByForm('form-product'));
-    $('#form-product').trigger("reset");
+    document.getElementById('configform').reset();
     return false;
 }
 
