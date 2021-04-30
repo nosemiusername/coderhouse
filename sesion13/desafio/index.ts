@@ -8,6 +8,7 @@ import { Server as ioServer} from 'socket.io';
 const app = express();
 const PORT = 3000;
 const product = Producto.Instance;
+const chats = Array();
 const http = new httpServer(app);
 const io = new ioServer(http);
 
@@ -23,12 +24,21 @@ http.listen(PORT);
 
 io.on('connection', (socket) => {
     console.log("New Connection");
-    socket.emit('message', product.list);
+    socket.emit('products', product.list);
+    socket.emit('chats', chats);
 
-    socket.on('new-message', data => {
-        console.log(data);
+    socket.on('new-product', data => {
         product.list = data;
-        io.sockets.emit('message', product.list);
+        io.sockets.emit('products', product.list);
+    });
+
+    socket.on('new-chat', data => {
+        const chat = {
+            time: new Date(),
+            ... data
+        }
+        chats.push(chat);
+        io.sockets.emit('chats',chats);
     })
 })
 
