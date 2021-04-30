@@ -1,3 +1,4 @@
+let validForm = true;
 const socket = io();
 socket.on('products', data => {
     const divTableContainer = document.getElementById('div-table-container');
@@ -15,14 +16,17 @@ socket.on('chats', data => {
     }
 })
 
-document.getElementById('btn-add-chat').addEventListener("click", () => {
+const addChat = () => {
     socket.emit('new-chat', obtainElementsByForm('form-chat'));
-})
+    $('#form-chat').trigger("reset");
+    return false;
+}
 
-document.getElementById("btn-add-product").addEventListener("click", () => {
-    const obj = obtainElementsByForm('form-product');
+const addProduct = () => {
     socket.emit('new-product', obtainElementsByForm('form-product'));
-})
+    $('#form-product').trigger("reset");
+    return false;
+}
 
 const fillTable = (data) => {
     let dataTable = `
@@ -69,7 +73,7 @@ const fillChatList = (data) => {
     let chatList = ``;
 
     data.forEach(element => {
-        chatList += 
+        chatList +=
             `<span style='color:blue'>${element.email}</span> 
             <span style='color:red'>[${element.time}]:</span>
             <span style='color:green'>${element.message}</span>  
