@@ -1,15 +1,15 @@
 import express, { Application } from 'express';
 import { apiRoute } from './apiRoutes'
 import { Producto } from './Producto';
-import { Server as httpServer} from 'http';
-import { Server as ioServer, Server} from 'socket.io';
+import { Server as httpServer } from 'http';
+import { Server as ioServer, Server } from 'socket.io';
 
-const app:Application = express();
-const PORT:number = 3000;
-const product:Producto = Producto.Instance;
-const chats:object[] = Array();
-const http:httpServer = new httpServer(app);
-const io = new ioServer(http);
+const app: Application = express();
+const PORT: number = 3000;
+const product: Producto = Producto.Instance;
+const chats: object[] = Array();
+const http: httpServer = new httpServer(app);
+const io:ioServer = new ioServer(http);
 
 app.set('view engine', 'ejs');
 app.set('views', './productos/vista');
@@ -32,12 +32,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('new-chat', data => {
-        const chat = {
+        const chat:object = {
             time: new Date(),
-            ... data
+            ...data
         }
         chats.push(chat);
-        io.sockets.emit('chats',chats);
+        io.sockets.emit('chats', chats);
     })
 })
 
