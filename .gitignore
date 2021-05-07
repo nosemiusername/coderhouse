@@ -11,6 +11,7 @@ sesion12/desafio/*.js
 sesion13/desafio/*.js
 sesion14/desafio/*.js
 !sesion14/desafio/*.es6.js
+desafio_final/*/*.js
 desafio_final/*.js
 
 

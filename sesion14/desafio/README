@@ -2,16 +2,18 @@
 npm install
 
 2. transpilar
-./node_modules/.bin/tsc
+2.1 desde ES6 con babel
+npm run buildb
+
+2.2. desde typescript con tsc
+npm run buildt
 
 3. ejecutar servidor
-npm index.js
+npm run start
 
-4. crear productos
+4. crear y listar productos, y chatear
 abrir navegador en http://localhost:3000/
 
 5. crud desde servicio
 Importar adjunto en postman Coderhouse.postman_collection.json
 
-6. listar productos
-abrir navegador en http://localhost:3000/list
