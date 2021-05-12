@@ -1,10 +1,14 @@
 import express, { Application } from 'express';
-import {carritoRoutes} from './routes/carrito';
-import {productosRoutes} from './routes/productos';
+import {shoppingCartRouter} from './routes/shoppingCartRoutes';
+import {productRouter} from './routes/productRoutes';
 
 const app:Application = express();
-app.use('/api/carrito',carritoRoutes);
-app.use('/api/productos',productosRoutes);
+app.use('/api/carrito',shoppingCartRouter);
+app.use('/api/productos',productRouter);
+app.all('/*', (req, res) => {
+    res.json({error:-2, descripcion: `ruta ${req.url} metodo ${req.method} no implementado`});
+})
+app.listen(process.env.PORT || 8080);
 
-app.listen(process.env.PORT || 3000);
+
 

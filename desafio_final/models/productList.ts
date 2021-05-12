@@ -4,8 +4,8 @@ export class ProductList {
     private _list: Array<Product> = [];
     static _instance: ProductList;
 
-    public static getInstance() {
-        return this._instance || (this._instance = new ProductList())
+    public static get Instance() {
+        return this._instance || (this._instance = new this())
     }
 
     public get list(): Array<Product> {
@@ -15,12 +15,19 @@ export class ProductList {
     public getSize(): number {
         return this._list.length;
     }
-    public addProduct(product: Product) {
-        this._list.push(product);
+    
+    public addProduct(product: any) {
+        this._list.push(new Product(product));
     }
 
     public updateProduct(id: string, product: Product) {
-        this.getById(id)[0].update(product);
+        const productToUpdate = this.getById(id)[0];
+        if (productToUpdate) { 
+            productToUpdate.update(product);
+            return 1;
+        } else {
+            throw new Error(`Id not found`);
+        }
     }
 
     public getById(id: string, equal: boolean = true): Array<Product> {
@@ -28,7 +35,17 @@ export class ProductList {
     }
 
     public removeProduct(id: string) {
-        this._list = this.getById(id, false);
+        const productToRemove = this.getById(id)[0];
+        if (productToRemove) { 
+            this._list = this.getById(id, false);
+            return 1;
+        } else {
+            throw new Error(`Id not found`);
+        }
+
     }
 
+    constructor (){
+
+    }
 }
