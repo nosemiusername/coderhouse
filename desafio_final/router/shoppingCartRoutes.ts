@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { Carrito } from '../models/shoppingCart'
+import { Carrito } from '../api/shoppingCart'
 export const shoppingCartRouter:Router = express.Router();
 
 shoppingCartRouter.get('', () => {
