@@ -1,5 +1,5 @@
 import { Product } from './product';
-
+import { save } from '../helper/functions';
 export class ProductList {
     private _list: Array<Product> = [];
     static _instance: ProductList;
@@ -18,12 +18,14 @@ export class ProductList {
     
     public addProduct(product: any) {
         this._list.push(new Product(product));
+        save(this._list);
     }
 
     public updateProduct(id: string, product: Product) {
         const productToUpdate = this.getById(id)[0];
         if (productToUpdate) { 
             productToUpdate.update(product);
+            save(this._list);
             return 1;
         } else {
             throw new Error(`Id not found`);
@@ -38,6 +40,7 @@ export class ProductList {
         const productToRemove = this.getById(id)[0];
         if (productToRemove) { 
             this._list = this.getById(id, false);
+            save(this._list);
             return 1;
         } else {
             throw new Error(`Id not found`);

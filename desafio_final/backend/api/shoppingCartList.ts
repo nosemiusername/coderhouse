@@ -1,7 +1,7 @@
 import { Product } from './product';
 import { ProductList } from './productList';
 import { ShoppingCart } from './shoppingCart';
-
+import { save } from '../helper/functions';
 export class ShoppingCartList {
     private _list: Array<ShoppingCart> = [];
     static _instance: ShoppingCartList;
@@ -30,6 +30,7 @@ export class ShoppingCartList {
                 this._list.push(newCart);
                 console.log(newCart);
             }
+            save(this._list, 'shoppngCartList');
         } else {
             throw Error('Product not found');
         }
@@ -39,6 +40,7 @@ export class ShoppingCartList {
         const cart: ShoppingCart = this.getCarByUid(uid)[0];
         if (cart) {
             cart.removeProduct(idProduct);
+            save(this._list, 'shoppngCartList');
         } else {
             throw Error('Cart not found');
         }
