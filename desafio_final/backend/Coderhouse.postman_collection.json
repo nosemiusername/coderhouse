@@ -6,100 +6,398 @@
 	},
 	"item": [
 		{
-			"name": "Listar Productos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/api/productos",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"productos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear productos",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"title\":\"tv4\",\n    \"price\":1400,\n    \"thumbnail\":\"http://rafa.com/1.jpg\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Desafio 1-14",
+			"item": [
+				{
+					"name": "Listar Productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:3000/api/productos",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"productos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar productos",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/api/productos/1",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"productos",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Actualizar",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"title\":\"tv\",\n    \"price\":1300,\n    \"thumbnail\":\"http://rafa.com/3.jpg\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear productos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"tv4\",\n    \"price\":1400,\n    \"thumbnail\":\"http://rafa.com/1.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:3000/api/productos/2",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"productos",
-						"2"
+				{
+					"name": "Eliminar productos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"tv\",\n    \"price\":1300,\n    \"thumbnail\":\"http://rafa.com/3.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/productos/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Desafio final",
+			"item": [
+				{
+					"name": "Productos",
+					"item": [
+						{
+							"name": "Listar Productos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "123456",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalle producto",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "123456",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear productos",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "123456",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"tv4\",\n    \"price\":1400,\n    \"thumbnail\":\"http://rafa.com/1.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "123456",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar productos",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "123456",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8080/api/productos/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"3"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "123456",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "auth-token",
+										"value": "123456",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\":\"tv\",\n    \"price\":1300,\n    \"thumbnail\":\"http://rafa.com/3.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"2"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "123456",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Carrito",
+					"item": [
+						{
+							"name": "Listar todos los carritos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalle de un carrito",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/12344/show",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"12344",
+										"show"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detalle de  producto en carrito",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/12344/show",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"12344",
+										"show"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear carrito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/1234",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"1234"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar carrito",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/1234/delete/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"1234",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
 					]
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
