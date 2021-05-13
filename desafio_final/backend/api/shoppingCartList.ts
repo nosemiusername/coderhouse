@@ -14,13 +14,28 @@ export class ShoppingCartList {
         return this._list;
     }
 
-    public getCarByUid(uid: string): Array<ShoppingCart> {
+    public getCartByUid(uid: string): Array<ShoppingCart> {
         return this._list.filter(element => element.uid == uid);
+    }
+
+    public getProductById(uid: string, idProduct: string): Product {
+        if (this.getCartByUid(uid)[0]) {
+            if (ProductList.Instance.getById(idProduct)[0]) {
+                const cart: ShoppingCart = this.getCartByUid(uid)[0];
+                return cart.productList.filter(element => element.id == parseInt(idProduct))[0];
+            }
+            else {
+                throw Error('Product not found');
+            }
+        } else {
+            throw Error('Cart not found');
+        }
+
     }
 
     public addProductToCart(uid: string, idProduct: string) {
         if (ProductList.Instance.getById(idProduct)[0]) {
-            const cart: ShoppingCart = this.getCarByUid(uid)[0];
+            const cart: ShoppingCart = this.getCartByUid(uid)[0];
             console.log(cart);
             if (cart) {
                 cart.addProduct(idProduct);
@@ -37,7 +52,7 @@ export class ShoppingCartList {
     }
 
     public removeProductFromCart(uid: string, idProduct: string) {
-        const cart: ShoppingCart = this.getCarByUid(uid)[0];
+        const cart: ShoppingCart = this.getCartByUid(uid)[0];
         if (cart) {
             cart.removeProduct(idProduct);
             save(this._list, 'shoppngCartList');

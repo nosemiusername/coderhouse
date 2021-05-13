@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import { Product } from '../api/product';
 import { ProductList } from '../api/productList';
 import { ShoppingCartList } from '../api/shoppingCartList';
 
@@ -12,11 +13,25 @@ shoppingCartRouter.get('', (req, res) => {
 });
 
 shoppingCartRouter.get('/:uid/show', (req, res) => {
-    const shoppingCart = shoppingCartList.getCarByUid(req.params.uid)[0];
+    const shoppingCart = shoppingCartList.getCartByUid(req.params.uid)[0];
     if (shoppingCart) {
         res.status(200).json(shoppingCart);
     } else {
         res.status(404).json("ShoppingCart not found");
+    }
+});
+
+
+shoppingCartRouter.get('/:uid/show/:id', (req, res) => {
+    try {
+        const product: Product = shoppingCartList.getProductById(req.params.uid, req.params.id);
+        if (product) {
+            res.status(200).json(product);
+        } else {
+            res.status(404).json("Product not found");
+        }
+    } catch (e) {
+        res.status(404).json(e.message);
     }
 });
 
@@ -28,7 +43,7 @@ shoppingCartRouter.post('/:uid', (req, res) => {
     } catch (e) {
         res.status(404).json(e.message);
     }
-    
+
 });
 
 shoppingCartRouter.delete('/:uid/delete/:id', (req, res) => {

@@ -16,6 +16,10 @@ export class ShoppingCart {
         return this._uid;
     }
 
+    get productList(){
+        return this._productList;
+    }
+
     public addProduct(idProduct: string) {
         if (!this.getById(idProduct)[0]){
         const product: Product = ProductList.Instance.getById(idProduct)[0];
