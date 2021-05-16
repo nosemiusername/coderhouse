@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.83.1">
+  <title>Checkout example · Bootstrap v5.0</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+</head>
+
+<body class="bg-light" onload="loadProductList()">
+
+  <div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <h2>Desafio final - Coderhouse</h2>
+      </div>
+
+      <div class="row g-5">
+        <div id="shoppingCart" class="col-md-5 col-lg-4 order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Tu carrito</span>
+            <span class="badge bg-primary rounded-pill">0</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total</span>
+              <strong>$0</strong>
+            </li>
+          </ul>
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <button type="submit" class="btn btn-secondary">Pagar</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Productos disponibles</h4>
+          <div id="productList" class="my-3">
+          </div>
+        </div>
+
+    </main>
+
+
+  </div>
+
+
+  <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const loadProductList = async () => {
+      document.getElementById("productList").innerHTML = `
+      <% products.forEach( element=> { %>
+            <div class="card mb-3">
+              <img class="card-img-top" src="<%= element._thumbnail %>" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><%= element._name %></h5>
+                <p class="card-text"><%= element._description %></p>
+                <a href="#" onclick="addCart(<%= element._id %>)" class="btn btn-primary">Agregar al carro</a>
+              </div>
+            </div>
+          <% }); %>
+      `
+      showCart();
+    }
+
+    async function addCart(id) {
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        "id": id
+      });
+
+      const requestOptionsAdd = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      const resultAdd = await fetch(`/cart/1234/add`, requestOptionsAdd);
+      showCart();
+
+    }
+
+    async function removeCart(id) {
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const requestOptionsremove = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      const resultAdd = await fetch(`/cart/1234/remove/${id}`, requestOptionsremove);
+      showCart();
+    }
+
+
+    async function showCart() {
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const requestOptionsList = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      const resultList = await fetch(`/cart/1234/show`, requestOptionsList);
+      let cart = await resultList.json();
+      document.getElementById('shoppingCart').innerHTML =
+        `
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-primary">Tu carrito</span>
+              <span class="badge bg-primary rounded-pill">${cart.length}</span>
+            </h4>
+            <ul class="list-group mb-3">
+                ${cart._productList.map(product => {
+                  return `
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0">` + product._name + `  </h6>
+                  <small class="text-muted">` + product._description.slice(0, 15) + `...</small>
+                </div>
+                <div>
+                  <span class="text-muted">$` + product._price + `</span>
+                  <a href="#" onClick="removeCart(${product._id})" class="bi bi-trash text-danger"></a>
+                </div>
+              </li>`
+                }).join("")}            
+              
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total</span>
+                <strong>$${cart.sum}</strong>
+              </li>
+
+            </ul>
+            <form class="card p-2">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Promo code">
+                <button type="submit" class="btn btn-secondary">Pagar</button>
+              </div>
+            </form>
+        `
+    }
+  </script>
+</body>
+
+</html>

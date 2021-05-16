@@ -17,7 +17,7 @@ export class Product {
     get price() {
         return this._price;
     }
-    
+
     // TODO: Implementar una forma mas elegante de actualizar 
     // sin tener que listarcada propiedad
     public update(newProduct: any) {
