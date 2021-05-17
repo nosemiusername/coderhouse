@@ -26,20 +26,28 @@ app.get('/', async (req, res) => {
 
 app.get('/cart/:idCart/show', async (req, res) => {
 
-    const cart = await axios({
-        method: 'get',
-        url: `https://exciting-efficient-roquefort.glitch.me/api/carrito/${req.params.idCart}/show`,
-    });
-    const sum = cart.data._productList.map((element: any) => element._price)
-        .reduce((accum: number, actual: number) => accum + actual, 0);
+    try {
+        const cart = await axios({
+            method: 'get',
+            url: `https://exciting-efficient-roquefort.glitch.me/api/carrito/${req.params.idCart}/show`,
+        });
 
-    const response = {
-        sum: sum,
-        length: cart.data._productList.length,
-        ...
-        cart.data
+        if (cart.data._productList.length > 0) {
+            const sum = cart.data._productList.map((element: any) => element._price)
+                .reduce((accum: number, actual: number) => accum + actual, 0);
+
+            const response = {
+                sum: sum,
+                length: cart.data._productList.length,
+                ...
+                cart.data
+            }
+            res.json(response);
+        } 
+
+    } catch (e) {
+        res.json({});
     }
-    res.json(response);
 
 });
 
@@ -51,17 +59,20 @@ app.post('/cart/:idCart/add', async (req, res) => {
         data: req.body
     });
 
-    res.status(200).json({status:"ok"});
+    res.status(200).json({ status: "ok" });
 
 });
 
 app.delete('/cart/:idCart/remove/:idProduct', async (req, res) => {
+    try{
     const cart = await axios({
         method: 'delete',
         url: `https://exciting-efficient-roquefort.glitch.me/api/carrito/${req.params.idCart}/delete/${req.params.idProduct}`,
     });
-    console.log(cart.data);
-    res.status(200).json({status:"ok"});
+    } catch (e) {
+        console.log(e.message);
+    }
+    res.status(200).json({ status: "ok" });
 
 });
 

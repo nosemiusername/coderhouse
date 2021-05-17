@@ -77,20 +77,29 @@ app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); });
 app.get('/cart/:idCart/show', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var cart, sum, response;
+    var cart, sum, response, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default({
-                    method: 'get',
-                    url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/show",
-                })];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, axios_1.default({
+                        method: 'get',
+                        url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/show",
+                    })];
             case 1:
                 cart = _a.sent();
-                sum = cart.data._productList.map(function (element) { return element._price; })
-                    .reduce(function (accum, actual) { return accum + actual; }, 0);
-                response = __assign({ sum: sum, length: cart.data._productList.length }, cart.data);
-                res.json(response);
-                return [2 /*return*/];
+                if (cart.data._productList.length > 0) {
+                    sum = cart.data._productList.map(function (element) { return element._price; })
+                        .reduce(function (accum, actual) { return accum + actual; }, 0);
+                    response = __assign({ sum: sum, length: cart.data._productList.length }, cart.data);
+                    res.json(response);
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                e_1 = _a.sent();
+                res.json({});
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); });
@@ -111,16 +120,23 @@ app.post('/cart/:idCart/add', function (req, res) { return __awaiter(void 0, voi
     });
 }); });
 app.delete('/cart/:idCart/remove/:idProduct', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var cart;
+    var cart, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default({
-                    method: 'delete',
-                    url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/delete/" + req.params.idProduct,
-                })];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, axios_1.default({
+                        method: 'delete',
+                        url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/delete/" + req.params.idProduct,
+                    })];
             case 1:
                 cart = _a.sent();
-                console.log(cart.data);
+                return [3 /*break*/, 3];
+            case 2:
+                e_2 = _a.sent();
+                console.log(e_2.message);
+                return [3 /*break*/, 3];
+            case 3:
                 res.status(200).json({ status: "ok" });
                 return [2 /*return*/];
         }
