@@ -49,7 +49,7 @@
         <h2>Desafio final - Coderhouse</h2>
       </div>
       <form id="addormodify" onsubmit="return sendForm()">
-        <input type="hidden" id="productId" name="productId">
+        <input type="hidden" id="productId" name="productId" value="0">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" name="name" id="name">
@@ -115,18 +115,28 @@
       const myHeaders = new Headers();
       myHeaders.append("auth-token", "123456");
       myHeaders.append("Content-Type", "application/json");
-
       const raw = obtainElementsByForm('addormodify');
-      console.log(raw);
-      const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: JSON.stringify(raw)
-      };
+      
+      const idProduct = document.getElementById("productId").value;
 
-      const result = await fetch(`/product/add`, requestOptions);
-      document.getElementById('addormodify').reset();
-      return false;
+      if (idProduct == 0) {
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: JSON.stringify(raw)
+        }
+        const result = await fetch(`/product/add`, requestOptions);
+        document.getElementById('addormodify').reset();
+      } else {
+        const requestOptions = {
+          method: 'PUT',
+          headers: myHeaders,
+          body: JSON.stringify(raw)
+        }
+        const result = await fetch(`/product/update/${idProduct}`, requestOptions);
+        document.getElementById('addormodify').reset();
+      }
+      location.reload();
     }
 
     const removeProduct = async (idProducto) => {
@@ -170,8 +180,8 @@
         redirect: 'follow'
       };
       const data = await fetch(`/product/show/${idProduct}`, requestOptions);
-      const product =  await data.json();
-      console.log(product); 
+      const product = await data.json();
+      console.log(product);
       document.getElementById("name").value = product._name;
       document.getElementById("description").value = product._description;
       document.getElementById("code").value = product._code;

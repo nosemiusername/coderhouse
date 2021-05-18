@@ -7,8 +7,6 @@ productRouter.use(express.json());
 productRouter.use(express.static('public'));
 
 productRouter.post('/add', async (req, res) => {
-    console.log(Date.now());
-    console.log(req.body);
     const resultAdd = await axios({
         method: 'post',
         url: 'https://exciting-efficient-roquefort.glitch.me/api/productos',
@@ -41,4 +39,21 @@ productRouter.delete('/remove/:idProduct', async (req, res) => {
 productRouter.get('/show/:idProduct', async (req, res) => {
     const products: any = await obtainProductById(parseInt(req.params.idProduct));
     res.status(200).json(products.data);
+});
+
+productRouter.put('/update/:idProduct', async (req, res) => {
+    try {
+        const cart = await axios({
+            method: 'put',
+            url: `https://exciting-efficient-roquefort.glitch.me/api/productos/${req.params.idProduct}`,
+            headers: {
+                'auth-token': '123456',
+                'Content-Type': 'application/json'
+            },
+            data: req.body
+        })
+    } catch (e) {
+        console.log(e.message);
+    }
+    res.status(200).json({ status: "ok" });
 });
