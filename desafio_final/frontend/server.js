@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -51,7 +40,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var axios_1 = __importDefault(require("axios"));
+var cart_1 = require("./route/cart");
+var product_1 = require("./route/product");
+var functions_1 = require("./helper/functions");
 var app = express_1.default();
 var PORT = 3000;
 app.use(express_1.default.json());
@@ -62,13 +53,7 @@ app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, func
     var products;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default({
-                    method: 'get',
-                    url: 'https://exciting-efficient-roquefort.glitch.me/api/productos',
-                    headers: {
-                        'auth-token': '123456'
-                    }
-                })];
+            case 0: return [4 /*yield*/, functions_1.obtainProducts()];
             case 1:
                 products = _a.sent();
                 res.render('index', { products: products.data });
@@ -76,70 +61,18 @@ app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); });
-app.get('/cart/:idCart/show', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var cart, sum, response, e_1;
+app.get('/admin', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var products;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default({
-                        method: 'get',
-                        url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/show",
-                    })];
+            case 0: return [4 /*yield*/, functions_1.obtainProducts()];
             case 1:
-                cart = _a.sent();
-                if (cart.data._productList.length > 0) {
-                    sum = cart.data._productList.map(function (element) { return element._price; })
-                        .reduce(function (accum, actual) { return accum + actual; }, 0);
-                    response = __assign({ sum: sum, length: cart.data._productList.length }, cart.data);
-                    res.json(response);
-                }
-                return [3 /*break*/, 3];
-            case 2:
-                e_1 = _a.sent();
-                res.json({});
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); });
-app.post('/cart/:idCart/add', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var addResult;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default({
-                    method: 'post',
-                    url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart,
-                    data: req.body
-                })];
-            case 1:
-                addResult = _a.sent();
-                res.status(200).json({ status: "ok" });
+                products = _a.sent();
+                res.render('admin', { products: products.data });
                 return [2 /*return*/];
         }
     });
 }); });
-app.delete('/cart/:idCart/remove/:idProduct', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var cart, e_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default({
-                        method: 'delete',
-                        url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/delete/" + req.params.idProduct,
-                    })];
-            case 1:
-                cart = _a.sent();
-                return [3 /*break*/, 3];
-            case 2:
-                e_2 = _a.sent();
-                console.log(e_2.message);
-                return [3 /*break*/, 3];
-            case 3:
-                res.status(200).json({ status: "ok" });
-                return [2 /*return*/];
-        }
-    });
-}); });
+app.use('/product', product_1.productRouter);
+app.use('/cart', cart_1.cartRouter);
 app.listen(PORT);

@@ -38,6 +38,12 @@
 
 <body class="bg-light" onload="loadProductList()">
 
+  <nav class="navbar navbar-light bg-light">
+    <form  class="form-inline">
+      <button onclick="location.href='/admin';" class="btn btn-sm btn-outline-secondary" type="button">Admin</button>
+    </form>
+  </nav>
+
   <div class="container">
     <main>
       <div class="py-5 text-center">
@@ -69,7 +75,7 @@
               <div class="card-body">
                 <h5 class="card-title"><%= element._name %></h5>
                 <p class="card-text"><%= element._description %></p>
-                <a href="#" onclick="addCart(<%= element._id %>)" class="btn btn-primary">Agregar al carro</a>
+                <a href="#" onclick="addCart(<%= element._id %>)" class="btn btn-success">Agregar al carro</a>
               </div>
             </div>
           <% }); %>
@@ -146,6 +152,7 @@
 
       const resultList = await fetch(`/cart/1234/show`, requestOptionsList);
       const cart = await resultList.json();
+      if (cart._productList){
       document.getElementById('shoppingCart').innerHTML =
         `
             <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -181,6 +188,7 @@
             </form>
         `
     }
+  }
   </script>
 </body>
 

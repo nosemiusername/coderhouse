@@ -10,6 +10,25 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -50,49 +69,75 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.obtainProductById = exports.obtainProducts = exports.calculateCart = void 0;
+exports.cartRouter = void 0;
 var axios_1 = __importDefault(require("axios"));
-var calculateCart = function (cart) {
-    var sum = cart.list.map(function (element) { return element.price; })
-        .reduce(function (accum, actual) { return accum + actual; }, 0);
-    return __assign({ sum: sum, length: cart.getSize() }, cart);
-};
-exports.calculateCart = calculateCart;
-var obtainProducts = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var products;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default({
-                    method: 'get',
-                    url: 'https://exciting-efficient-roquefort.glitch.me/api/productos',
-                    headers: {
-                        'auth-token': '123456'
-                    }
-                })];
-            case 1:
-                products = _a.sent();
-                return [2 /*return*/, products];
-        }
-    });
-}); };
-exports.obtainProducts = obtainProducts;
-var obtainProductById = function (idProduct) { return __awaiter(void 0, void 0, void 0, function () {
-    var products;
+var express_1 = __importStar(require("express"));
+exports.cartRouter = express_1.Router();
+exports.cartRouter.use(express_1.default.json());
+exports.cartRouter.use(express_1.default.static('public'));
+exports.cartRouter.get('/:idCart/show', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var cart, sum, response, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log("https://exciting-efficient-roquefort.glitch.me/api/productos/" + idProduct + "/show");
+                _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, axios_1.default({
                         method: 'get',
-                        url: "https://exciting-efficient-roquefort.glitch.me/api/productos/" + idProduct + "/show",
-                        headers: {
-                            'auth-token': '123456'
-                        }
+                        url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/show",
                     })];
             case 1:
-                products = _a.sent();
-                return [2 /*return*/, products];
+                cart = _a.sent();
+                if (cart.data._productList.length > 0) {
+                    sum = cart.data._productList.map(function (element) { return element._price; })
+                        .reduce(function (accum, actual) { return accum + actual; }, 0);
+                    response = __assign({ sum: sum, length: cart.data._productList.length }, cart.data);
+                    res.json(response);
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                e_1 = _a.sent();
+                res.json({});
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
-}); };
-exports.obtainProductById = obtainProductById;
+}); });
+exports.cartRouter.post('/:idCart/add', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var addResult;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, axios_1.default({
+                    method: 'post',
+                    url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart,
+                    data: req.body
+                })];
+            case 1:
+                addResult = _a.sent();
+                res.status(200).json({ status: "ok" });
+                return [2 /*return*/];
+        }
+    });
+}); });
+exports.cartRouter.delete('/:idCart/remove/:idProduct', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var cart, e_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, axios_1.default({
+                        method: 'delete',
+                        url: "https://exciting-efficient-roquefort.glitch.me/api/carrito/" + req.params.idCart + "/delete/" + req.params.idProduct,
+                    })];
+            case 1:
+                cart = _a.sent();
+                return [3 /*break*/, 3];
+            case 2:
+                e_2 = _a.sent();
+                console.log(e_2.message);
+                return [3 /*break*/, 3];
+            case 3:
+                res.status(200).json({ status: "ok" });
+                return [2 /*return*/];
+        }
+    });
+}); });
