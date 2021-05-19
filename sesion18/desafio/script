@@ -1,0 +1,21 @@
+ 
+1. Instalar la imagen de docker y levantarla
+ > docker pull mongo
+ > docker exec -it 88bffcac9557 bin/bash
+ > docker run -d -p 27017-27019:27017-27019 -v carpeta_local:/data/db --name mongodb mongo
+
+2. Levantar el CLI
+> mongo
+
+1. crear base de datos
+> use prueba
+
+2. Crear la tabla e Insertar 3 items
+> db.prueba.insert([
+    { "nombre": "Fideos", "categoria": "Harina", "stock": 20 },
+    { "nombre": "Leche", "categoria": "Lácteos", "stock": 30 },
+    { "nombre": "Crema", "categoria": "Lácteos", "stock": 15 }
+]);
+
+3. Listar los items
+> db.prueba.find();
