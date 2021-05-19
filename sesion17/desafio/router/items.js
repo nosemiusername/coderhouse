@@ -5,7 +5,7 @@ import { sqlite3 as config } from '../config/db.js';
 export const itemRoute = Router();
 itemRoute.use(express.json());
 const item = new Item(config);
-const result = { };
+const result = {};
 
 try {
     await item.createTable();
@@ -16,37 +16,62 @@ try {
 }
 
 
-itemRoute.post('/update/:id', (req, res) => { 
-    if (result.status){
-
+itemRoute.put('/:id', async (req, res) => {
+    if (result.status) {
+        await item.updateTable(req.params.id, req.body);
+        res.status(200).json(result);
     } else {
         res.status(404).json("DB Error");
     }
-})
+});
 
 
-itemRoute.delete('/:id', (req, res) => {
-    if (result.status){
-
+itemRoute.delete('/:id', async (req, res) => {
+    try {
+    if (result.status) {
+        await item.deleteTable(req.params.id);
+        res.status(200).json(result);
     } else {
         res.status(404).json("DB Error");
     }
-})
+    }catch (e) {
+        res.status(404).json(e.message);
+    }
+});
 
-itemRoute.post('/add', (req, res) => {
-    if (result.status){
-        console.log(req.body);
-        item.insertTable(req.body);
+itemRoute.post('/add', async (req, res) => {
+    if (result.status) {
+        await item.insertTable(req.body);
+        res.status(200).json(result);
     } else {
         res.status(404).json("DB Error");
     }
-})
+});
+
+
+itemRoute.get('/list', async (req, res) => {
+    if (result.status) {
+        const itemList = await item.selectTable();
+        res.status(200).json(itemList);
+    } else {
+        res.status(404).json("DB Error");
+    }
+});
+
+
+itemRoute.get('/:id/show', async (req, res) => {
+    if (result.status) {
+        const itemList = await item.selectTableByID(req.params.id);
+        res.status(200).json(itemList);
+    } else {
+        res.status(404).json("DB Error");
+    }
+});
 
 itemRoute.get('/', async (req, res) => {
-    if (result.status){
+    if (result.status) {
         res.status(200).json("DB Ok");
-
     } else {
         res.status(404).json("DB Error");
     }
-})
+});

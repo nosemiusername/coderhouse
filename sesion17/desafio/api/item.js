@@ -20,18 +20,35 @@ export default class Item{
         })
     }
 
-    updateTable(){
-
+    updateTable(id,newItem){
+        return this.knex('items').where({id:id}).update(newItem);
     }
 
 
     selectTable(){
+        return this.knex('items').select();
+    }
 
+    selectTableByID(id){
+        return this.knex('items').where({id:id}).select();
     }
 
     insertTable(items){
-        return this.knex.schema.insertTable('items', items);
-    }   
+        return this.knex('items').insert(items);
+    } 
+
+    async deleteTable(id){
+        const item = await this.selectTableByID(id);
+        if (item.length) {
+            return this.knex('items').where({id:id}).delete();
+        } else {
+            throw Error('No data found');
+        } 
+    }
+
+    close (){
+        return this.knex.destroy();
+    }
 
 
 }
