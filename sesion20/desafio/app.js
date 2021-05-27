@@ -1,8 +1,10 @@
 import express from 'express';
-import {itemRoute} from './router/items.js';
+import {itemRoute} from './api/itemController.js';
+import config from './config/index.js';
 
 const app = express();
-const PORT = 8080;
+const PORT = config.port;
+console.log(config);
 app.use(express.json());
 app.use('/api', itemRoute);
 

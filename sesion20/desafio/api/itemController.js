@@ -1,10 +1,10 @@
 import express, { Router } from 'express';
-import Item from '../api/item.js';
-import { sqlite3 as config } from '../config/db.js';
+import Item from '../models/item.js';
+import config from '../config/index.js';
 
 export const itemRoute = Router();
 itemRoute.use(express.json());
-const item = new Item(config);
+const item = new Item(config.sqlite);
 const result = {};
 
 try {
