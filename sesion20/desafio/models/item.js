@@ -1,54 +1,9 @@
-"use strict";
+import mongoose from 'mongoose';
 
-import knex from 'knex';
+const itemSchema = mongoose.Schema({
+    nombre : {type:String, required:true},
+    categoria: {type:String, required:true},
+    stock: {type:Number, required:true }
+})
 
-export default class Item{
-
-    constructor(config){
-        this.knex = new knex(config);
-    }
-
-    createTable(){
-        return this.knex.schema.dropTableIfExists('items')
-        .then(() => {
-            return this.knex.schema.createTable('items', table => {
-                table.increments('id').primary();
-                table.string('nombre', 30).notNullable();
-                table.string('categoria', 30).notNullable();
-                table.integer('stock', 30);
-            })
-        })
-    }
-
-    updateTable(id,newItem){
-        return this.knex('items').where({id:id}).update(newItem);
-    }
-
-
-    selectTable(){
-        return this.knex('items').select();
-    }
-
-    selectTableByID(id){
-        return this.knex('items').where({id:id}).select();
-    }
-
-    insertTable(items){
-        return this.knex('items').insert(items);
-    } 
-
-    async deleteTable(id){
-        const item = await this.selectTableByID(id);
-        if (item.length) {
-            return this.knex('items').where({id:id}).delete();
-        } else {
-            throw Error('No data found');
-        } 
-    }
-
-    close (){
-        return this.knex.destroy();
-    }
-
-
-}
+export const Item = mongoose.model("Item",itemSchema);

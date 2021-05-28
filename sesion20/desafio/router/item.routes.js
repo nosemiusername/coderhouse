@@ -1,24 +1,13 @@
 import express, { Router } from 'express';
-import Item from '../models/item.js';
-import config from '../config/index.js';
+import ItemService from '../controllers/item.controller';
 
 export const itemRoute = Router();
 itemRoute.use(express.json());
-const item = new Item(config.sqlite);
 const result = {};
-
-try {
-    await item.createTable();
-    result.status = 1;
-} catch (e) {
-    console.log(e.message);
-    result.status = 0;
-}
-
 
 itemRoute.put('/:id', async (req, res) => {
     if (result.status) {
-        await item.updateTable(req.params.id, req.body);
+        await ItemService.updateItem(req.params.id, req.body);
         res.status(200).json(result);
     } else {
         res.status(404).json("DB Error");
@@ -29,7 +18,7 @@ itemRoute.put('/:id', async (req, res) => {
 itemRoute.delete('/:id', async (req, res) => {
     try {
     if (result.status) {
-        await item.deleteTable(req.params.id);
+        await ItemService.deleteItem(req.params.id);
         res.status(200).json(result);
     } else {
         res.status(404).json("DB Error");
@@ -41,7 +30,7 @@ itemRoute.delete('/:id', async (req, res) => {
 
 itemRoute.post('/add', async (req, res) => {
     if (result.status) {
-        await item.insertTable(req.body);
+        await ItemService.insertItem(req.body);
         res.status(200).json(result);
     } else {
         res.status(404).json("DB Error");
@@ -51,7 +40,7 @@ itemRoute.post('/add', async (req, res) => {
 
 itemRoute.get('/list', async (req, res) => {
     if (result.status) {
-        const itemList = await item.selectTable();
+        const itemList = await ItemService.selectAllItems();
         res.status(200).json(itemList);
     } else {
         res.status(404).json("DB Error");
@@ -61,7 +50,7 @@ itemRoute.get('/list', async (req, res) => {
 
 itemRoute.get('/:id/show', async (req, res) => {
     if (result.status) {
-        const itemList = await item.selectTableByID(req.params.id);
+        const itemList = await ItemService.selectItemByID(req.params.id);
         res.status(200).json(itemList);
     } else {
         res.status(404).json("DB Error");

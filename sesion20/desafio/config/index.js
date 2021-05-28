@@ -10,6 +10,6 @@ export default {
         },
         useNullAsDefault: process.env.SQLITE_UNAD 
     },
-    mongo: process.env.MONGO_URL,
+    mongoURI: process.env.MONGO_URI,
     flagDB: process.env.FLAG_DB
 }
