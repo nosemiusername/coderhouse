@@ -1,13 +1,13 @@
 import ItemService from '../services/itemService.js';
 
-export class Item {
+export default class Item {
 
     static async apiUpdateItem(req, res, next) {
         try {
             await ItemService.updateItem(req.params.id, req.body);
             res.status(200).json(result);
         } catch (error) {
-            res.status(404).json("DB Error");
+            res.status(404).json(error);
         }
     };
 
@@ -16,7 +16,7 @@ export class Item {
             await ItemService.deleteItem(req.params.id);
             res.status(200).json(result);
         } catch (error) {
-            res.status(404).json("DB Error");
+            res.status(404).json(error);
         }
     };
 
@@ -31,16 +31,17 @@ export class Item {
 
     static async apiGetAllItems(req, res, next) {
         try {
-            const itemList = await ItemService.selectAllItems();
+            const itemList = await ItemService.getAllItems();
             res.status(200).json(itemList);
         } catch (error) {
-            res.status(404).json("DB Error");
+            res.status(404).json(error);
         }
     };
 
     static async apiGetItemsByID(req, res, next) {
         try {
-            const itemList = await ItemService.selectItemByID(req.params.id);
+            console.log(req.params.id);
+            const itemList = await ItemService.getItemByID(req.params.id);
             res.status(200).json(itemList);
         } catch (error) {
             res.status(404).json("DB Error");

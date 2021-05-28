@@ -1,31 +1,50 @@
 "use strict";
 import { Item } from '../models/Item.js'
 
-export default class ItemService{
+export default class ItemService {
 
-    static async updateItem(id,newItem){
-        return Item.updateOne({ObjectID:id},{$set:{newItem}});
+    static async updateItem(id, newItem) {
+        try {
+            return await Item.updateOne({ _id: ObjectId(id) }, { $set: { newItem } });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    static async getAllItems(){
-        return Item.findMany({});
+    static async getAllItems() {
+        try {
+            return await Item.find();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    static async getItemByID(id){
-        return this.knex('items').where({ObjectID:id}).select();
+    static async getItemByID(id) {
+        try {
+            return await Item.find({ _id: id });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    static async insertItem(items){
-        return this.knex('items').insert(items);
-    } 
-
-    static async deleteItem(id){
-        const item = await this.selectTableByID(id);
-        if (item.length) {
-            return this.knex('items').where({id:id}).delete();
-        } else {
-            throw Error('No data found');
-        } 
+    static async insertItem(items) {
+        try {
+            return await Item.create(items);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
+    static async deleteItem(id) {
+        try {
+            const item = await this.getItemByID(id);
+            if (item) {
+                return await Item.deleteOne({ _id: id });
+            } else {
+                throw Error('No data found');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
