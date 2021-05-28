@@ -5,7 +5,7 @@ export default class ItemService {
 
     static async updateItem(id, newItem) {
         try {
-            return await Item.updateOne({ _id: ObjectId(id) }, { $set: { newItem } });
+            return await Item.updateOne({ _id:id }, { $set: newItem});
         } catch (error) {
             console.error(error);
         }

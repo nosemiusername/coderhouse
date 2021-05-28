@@ -4,17 +4,18 @@ export default class Item {
 
     static async apiUpdateItem(req, res, next) {
         try {
-            await ItemService.updateItem(req.params.id, req.body);
-            res.status(200).json(result);
+            const itemList = await ItemService.updateItem(req.params.id, req.body);
+            res.status(200).json(itemList);
         } catch (error) {
+            console.error(error);
             res.status(404).json(error);
         }
     };
 
     static async apiDeleteItem(req, res, next) {
         try {
-            await ItemService.deleteItem(req.params.id);
-            res.status(200).json(result);
+            const itemList =await ItemService.deleteItem(req.params.id);
+            res.status(200).json(itemList);
         } catch (error) {
             res.status(404).json(error);
         }
@@ -22,10 +23,10 @@ export default class Item {
 
     static async apiCreateItem(req, res, next) {
         try {
-            await ItemService.insertItem(req.body);
-            res.status(200).json(result);
+            const itemList = await ItemService.insertItem(req.body);
+            res.status(200).json(itemList);
         } catch (error) {
-            res.status(404).json("DB Error");
+            res.status(404).json(error);
         }
     };
 
@@ -44,7 +45,7 @@ export default class Item {
             const itemList = await ItemService.getItemByID(req.params.id);
             res.status(200).json(itemList);
         } catch (error) {
-            res.status(404).json("DB Error");
+            res.status(404).json(error);
         }
     };
 
