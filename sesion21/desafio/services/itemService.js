@@ -1,9 +1,16 @@
 "use strict";
-import { Item } from '../models/Item.js'
+import { Item } from '../models/Item.mongo.js'
 
-export default class ItemService {
+class MongoLocalFactory{
+    crud(){
+        return new MongoCrud();
+    }
+}
 
-    static async updateItem(id, newItem) {
+
+export default class MongoCrud {
+
+    async updateItem(id, newItem) {
         try {
             return await Item.updateOne({ _id:id }, { $set: newItem});
         } catch (error) {
@@ -11,7 +18,7 @@ export default class ItemService {
         }
     }
 
-    static async getAllItems() {
+    async getAllItems() {
         try {
             return await Item.find();
         } catch (error) {
@@ -19,7 +26,7 @@ export default class ItemService {
         }
     }
 
-    static async getItemByID(id) {
+    async getItemByID(id) {
         try {
             return await Item.find({ _id: id });
         } catch (error) {
@@ -27,7 +34,7 @@ export default class ItemService {
         }
     }
 
-    static async insertItem(items) {
+    async insertItem(items) {
         try {
             return await Item.create(items);
         } catch (error) {
@@ -35,7 +42,7 @@ export default class ItemService {
         }
     }
 
-    static async deleteItem(id) {
+    async deleteItem(id) {
         try {
             const item = await this.getItemByID(id);
             if (item) {
