@@ -9,8 +9,6 @@ async function startServer() {
     const PORT = config.port;
     app.use(express.json());
     app.use('/api', itemRoute);
-
-
     app.listen(PORT, () => {
         console.log(`Application is listening at port ${PORT}`)
     });

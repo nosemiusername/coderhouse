@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 class MongoLocal {
     static connect = async () => {
         try {
-            const res = await mongoose.connect(config.mongoURI, {
+            const res = await mongoose.connect(config.mongoLocalURI, {
                 useNewUrlParser: true,
                 useCreateIndex: true, useUnifiedTopology: true
             });
@@ -16,6 +16,5 @@ class MongoLocal {
 }
 
 export const loader = async() => { 
-    console.log('Loading...');
     const connection = await eval(`${config.flagDB}.connect()`);
 }

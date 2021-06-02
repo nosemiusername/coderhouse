@@ -1,52 +1,54 @@
 "use strict";
-import { Item } from '../models/Item.mongo.js'
+import { Item as SchemaMongo} from '../models/Item.mongo.js'
+import config from '../config/index.js';
 
-class MongoLocalFactory{
-    crud(){
-        return new MongoCrud();
+class MongoLocal {
+    crud;
+
+    constructor() {
+        this.crud = MongoCrud;
     }
 }
 
+class MongoCrud {
 
-export default class MongoCrud {
-
-    async updateItem(id, newItem) {
+    static async updateItem(id, newItem) {
         try {
-            return await Item.updateOne({ _id:id }, { $set: newItem});
+            return await SchemaMongo.updateOne({ _id: id }, { $set: newItem });
         } catch (error) {
             console.error(error);
         }
     }
 
-    async getAllItems() {
+    static async getAllItems() {
         try {
-            return await Item.find();
+            return await SchemaMongo.find();
         } catch (error) {
             console.error(error);
         }
     }
 
-    async getItemByID(id) {
+    static async getItemByID(id) {
         try {
-            return await Item.find({ _id: id });
+            return await SchemaMongo.find({ _id: id });
         } catch (error) {
             console.error(error);
         }
     }
 
-    async insertItem(items) {
+    static async insertItem(items) {
         try {
-            return await Item.create(items);
+            return await SchemaMongo.create(items);
         } catch (error) {
             console.error(error);
         }
     }
 
-    async deleteItem(id) {
+    static async deleteItem(id) {
         try {
             const item = await this.getItemByID(id);
             if (item) {
-                return await Item.deleteOne({ _id: id });
+                return await SchemaMongo.deleteOne({ _id: id });
             } else {
                 throw Error('No data found');
             }
@@ -55,3 +57,18 @@ export default class MongoCrud {
         }
     }
 }
+
+class Factory {
+    item;
+
+    constructor(type) {
+
+        this.item = eval(`new ${type}()`);
+
+    }
+}
+
+const factory = new Factory(config.flagDB);
+factory.item.crud.getAllItems().then(value => console.log(value));
+// const itemService = MongoCrud;
+export default factory;
