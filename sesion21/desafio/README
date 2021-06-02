@@ -1,3 +1,12 @@
+
+1) File System (fs) = fs
+2) MySQL/MariaDB local = MySQLLocaL
+3) MySQL/MariaDB DBaaS = MYSQLDBaaS
+4) SQLite3 = Sqlite3
+5) MongoDB Local = MongoLocal
+6) MongoDB DBaaS = MongoDBaaS
+7) Firebase = Firebase
+
 Instalación
     npm install
 

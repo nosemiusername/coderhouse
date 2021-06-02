@@ -1,5 +1,5 @@
 "use strict";
-import { Item as SchemaMongo} from '../models/Item.mongo.js'
+import { Item as SchemaMongo } from '../models/Item.mongo.js'
 import config from '../config/index.js';
 
 class MongoLocal {
@@ -10,6 +10,13 @@ class MongoLocal {
     }
 }
 
+class MongoDBaaS {
+    crud;
+
+    constructor() {
+        this.crud = MongoCrud;
+    }
+}
 class MongoCrud {
 
     static async updateItem(id, newItem) {
@@ -58,17 +65,54 @@ class MongoCrud {
     }
 }
 
+
+class SQLiteCrud {
+
+
+    updateTable(id, newItem) {
+        return this.knex('items').where({ id: id }).update(newItem);
+    }
+
+
+    selectTable() {
+        return this.knex('items').select();
+    }
+
+    selectTableByID(id) {
+        return this.knex('items').where({ id: id }).select();
+    }
+
+    insertTable(items) {
+        return this.knex('items').insert(items);
+    }
+
+    async deleteTable(id) {
+        const item = await this.selectTableByID(id);
+        if (item.length) {
+            return this.knex('items').where({ id: id }).delete();
+        } else {
+            throw Error('No data found');
+        }
+    }
+
+    close() {
+        return this.knex.destroy();
+    }
+
+
+}
 class Factory {
     item;
 
     constructor(type) {
-
-        this.item = eval(`new ${type}()`);
+        try {
+            this.item = eval(`new ${type}()`);
+        } catch (e) {
+            console.log('Error flagDB value');
+            throw new Error(`flagDB v`)
+        }
 
     }
 }
 
-const factory = new Factory(config.flagDB);
-factory.item.crud.getAllItems().then(value => console.log(value));
-// const itemService = MongoCrud;
-export default factory;
+export default new Factory(config.flagDB);
