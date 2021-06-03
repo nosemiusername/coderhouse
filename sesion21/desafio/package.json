@@ -2,7 +2,7 @@
   "type": "module",
   "name": "desafio",
   "version": "1.0.0",
-  "description": "",
+  "description": "1) File System (fs) = fs 2) MySQL/MariaDB local = MySQLLocaL 3) MySQL/MariaDB DBaaS = MYSQLDBaaS 4) SQLite3 = Sqlite3 5) MongoDB Local = MongoLocal 6) MongoDB DBaaS = MongoDBaaS 7) Firebase = Firebase",
   "main": "app.js",
   "scripts": {
     "start": "nodemon ./app.js --exec babel-node -e js",
@@ -17,6 +17,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jest": "^27.0.3",
     "knex": "^0.95.6",
     "mongoose": "^5.12.11",
     "sqlite3": "^5.0.2"
