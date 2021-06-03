@@ -1,5 +1,6 @@
 "use strict";
-import { Item as SchemaMongo } from '../models/Item.mongo.js'
+import { mongoSchema } from '../models/Item.mongo.js'
+import { sqliteSchema } from '../models/Item.sqlite.js';
 import config from '../config/index.js';
 
 class MongoLocal {
@@ -17,11 +18,19 @@ class MongoDBaaS {
         this.crud = MongoCrud;
     }
 }
+
+class SQLite {
+    crud;
+
+    constructor() {
+        this.crud = new SQLiteCrud();
+    }
+}
 class MongoCrud {
 
     static async updateItem(id, newItem) {
         try {
-            return await SchemaMongo.updateOne({ _id: id }, { $set: newItem });
+            return await mongoSchema.updateOne({ _id: id }, { $set: newItem });
         } catch (error) {
             console.error(error);
         }
@@ -29,7 +38,7 @@ class MongoCrud {
 
     static async getAllItems() {
         try {
-            return await SchemaMongo.find();
+            return await mongoSchema.find();
         } catch (error) {
             console.error(error);
         }
@@ -37,7 +46,7 @@ class MongoCrud {
 
     static async getItemByID(id) {
         try {
-            return await SchemaMongo.find({ _id: id });
+            return await mongoSchema.find({ _id: id });
         } catch (error) {
             console.error(error);
         }
@@ -45,7 +54,7 @@ class MongoCrud {
 
     static async insertItem(items) {
         try {
-            return await SchemaMongo.create(items);
+            return await mongoSchema.create(items);
         } catch (error) {
             console.error(error);
         }
@@ -55,7 +64,7 @@ class MongoCrud {
         try {
             const item = await this.getItemByID(id);
             if (item) {
-                return await SchemaMongo.deleteOne({ _id: id });
+                return await mongoSchema.deleteOne({ _id: id });
             } else {
                 throw Error('No data found');
             }
@@ -68,37 +77,34 @@ class MongoCrud {
 
 class SQLiteCrud {
 
-
-    updateTable(id, newItem) {
-        return this.knex('items').where({ id: id }).update(newItem);
+    updateItem(id, newItem) {
+        return sqliteSchema.knex('items').where({ id: id }).update(newItem);
     }
 
-
-    selectTable() {
-        return this.knex('items').select();
+    getAllItems() {
+        return sqliteSchema.knex('items').select();
     }
 
-    selectTableByID(id) {
-        return this.knex('items').where({ id: id }).select();
+    getItemByID(id) {
+        return sqliteSchema.knex('items').where({ id: id }).select();
     }
 
-    insertTable(items) {
-        return this.knex('items').insert(items);
+    insertItem(items) {
+        return sqliteSchema.knex('items').insert(items);
     }
 
-    async deleteTable(id) {
+    async deleteItem(id) {
         const item = await this.selectTableByID(id);
         if (item.length) {
-            return this.knex('items').where({ id: id }).delete();
+            return sqliteSchema.knex('items').where({ id: id }).delete();
         } else {
             throw Error('No data found');
         }
     }
 
     close() {
-        return this.knex.destroy();
+        return sqliteSchema.knex.destroy();
     }
-
 
 }
 class Factory {
@@ -109,7 +115,7 @@ class Factory {
             this.item = eval(`new ${type}()`);
         } catch (e) {
             console.log('Error flagDB value');
-            throw new Error(`flagDB v`)
+            throw new Error(`flagDB is not valid`)
         }
 
     }

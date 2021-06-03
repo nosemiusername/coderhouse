@@ -8,7 +8,7 @@ class MongoLocal {
                 useNewUrlParser: true,
                 useCreateIndex: true, useUnifiedTopology: true
             });
-            console.log(`Connection Succesful ${res}`);
+            console.log(`Connection Succesful ${config.mongoLocalURI}`);
         } catch (error) {
             console.error(error);
         }
@@ -26,6 +26,12 @@ class MongoDBaaS {
         } catch (error) {
             console.error(error);
         }
+    }
+}
+
+class SQLite{
+    static connect = () => {
+        console.log(`Connection Succesful ${JSON.stringify(config.sqlite)}`);
     }
 }
 
