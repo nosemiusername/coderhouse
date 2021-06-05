@@ -1,6 +1,5 @@
 import config from '../config/index.js';
 import mongoose from 'mongoose';
-
 class MongoLocal {
     static connect = async () => {
         try {
@@ -32,6 +31,12 @@ class MongoDBaaS {
 class SQLite{
     static connect = () => {
         console.log(`Connection Succesful ${JSON.stringify(config.sqlite)}`);
+    }
+}
+
+class MySQLLocal{
+    static connect = () => {
+        console.log(`Connection Succesful ${JSON.stringify(config.mysql)}`);
     }
 }
 

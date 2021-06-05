@@ -1,6 +1,6 @@
 "use strict";
 import { mongoSchema } from '../models/Item.mongo.js'
-import { sqliteSchema } from '../models/Item.sqlite.js';
+import { Item as SQLSchema } from '../models/Item.sqlite.js';
 import config from '../config/index.js';
 
 class MongoLocal {
@@ -23,9 +23,20 @@ class SQLite {
     crud;
 
     constructor() {
-        this.crud = new SQLiteCrud();
+        const sqliteSchema = new SQLSchema(config.sqlite);
+        this.crud = new SQLCrud(sqliteSchema);
     }
 }
+
+class MySQLLocal {
+    crud;
+
+    constructor() {
+        const sqliteSchema = new SQLSchema(config.mysql);
+        this.crud = new SQLCrud(sqliteSchema);
+    }
+}
+
 class MongoCrud {
 
     static async updateItem(id, newItem) {
@@ -75,35 +86,40 @@ class MongoCrud {
 }
 
 
-class SQLiteCrud {
+class SQLCrud {
+    schema;
+
+    constructor(schema) {
+        this.schema = schema;
+    }
 
     updateItem(id, newItem) {
-        return sqliteSchema.knex('items').where({ id: id }).update(newItem);
+        return this.schema.knex('items').where({ id: id }).update(newItem);
     }
 
     getAllItems() {
-        return sqliteSchema.knex('items').select();
+        return this.schema.knex('items').select();
     }
 
     getItemByID(id) {
-        return sqliteSchema.knex('items').where({ id: id }).select();
+        return this.schema.knex('items').where({ id: id }).select();
     }
 
     insertItem(items) {
-        return sqliteSchema.knex('items').insert(items);
+        return this.schema.knex('items').insert(items);
     }
 
     async deleteItem(id) {
-        const item = await this.selectTableByID(id);
-        if (item.length) {
-            return sqliteSchema.knex('items').where({ id: id }).delete();
+        const item = await this.getItemByID(id);
+        if (item) {
+            return this.schema.knex('items').where({ id: id }).delete();
         } else {
             throw Error('No data found');
         }
     }
 
     close() {
-        return sqliteSchema.knex.destroy();
+        return this.schema.knex.destroy();
     }
 
 }
@@ -114,7 +130,6 @@ class Factory {
         try {
             this.item = eval(`new ${type}()`);
         } catch (e) {
-            console.log('Error flagDB value');
             throw new Error(`flagDB is not valid`)
         }
 

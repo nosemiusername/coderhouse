@@ -1,6 +1,6 @@
 import config from '../config/index.js';
 import knex from 'knex'
-export class Item {
+export class SqlSchema {
     knex;
 
     constructor(config) {
