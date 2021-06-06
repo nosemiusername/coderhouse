@@ -46,6 +46,12 @@ class Firebase{
     }
 }
 
+class FS{
+    static connect = () => {
+        console.log(`Connection Succesful ${JSON.stringify(config.fs)}`);
+    }
+}
+
 
 export const loader = async() => { 
     const connection = await eval(`${config.flagDB}.connect()`);

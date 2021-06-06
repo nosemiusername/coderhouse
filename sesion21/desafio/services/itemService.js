@@ -3,8 +3,15 @@ import { mongoSchema } from '../models/Item.mongo.js'
 import { Item as SQLSchema } from '../models/Item.sqlite.js';
 import config from '../config/index.js';
 import admin from 'firebase-admin';
+import { save } from '../helper/functions.js';
+import { FSSchema } from '../models/item.fs.js';
 
-
+class FS {
+    crud;
+    constructor() {
+        this.crud = new FSCrud();
+    }
+}
 class Firebase {
     crud;
 
@@ -154,7 +161,7 @@ class FirebaseCrud {
 
     async updateItem(id, newItem) {
         const doc = await this.schema.doc(String(id)).get()
-        if(doc.exists) return await this.schema.doc(String(id)).update(newItem);
+        if (doc.exists) return await this.schema.doc(String(id)).update(newItem);
         else throw new Error("No data");
     }
 
@@ -162,7 +169,7 @@ class FirebaseCrud {
         try {
             const snapshot = await this.schema.get();
             if (snapshot.empty) return
-    
+
             const documents = [];
             snapshot.forEach(doc => {
                 documents.push({ id: doc.id, data: doc.data() })
@@ -176,13 +183,13 @@ class FirebaseCrud {
 
     async getItemByID(id) {
         const doc = await this.schema.doc(String(id)).get()
-        if(doc.exists) return doc.data();
+        if (doc.exists) return doc.data();
         else throw new Error("No data");
     }
 
     async insertItem(items) {
         try {
-            for await (const item of items){
+            for await (const item of items) {
                 const allItems = await this.schema.get();
                 await this.schema.doc(String(allItems._size + 1)).set(item);
             }
@@ -194,11 +201,63 @@ class FirebaseCrud {
 
     async deleteItem(id) {
         const doc = await this.schema.doc(String(id)).get()
-        if(doc.exists) return await this.schema.doc(String(id)).delete();
+        if (doc.exists) return await this.schema.doc(String(id)).delete();
         else throw new Error("No data");
-        
+
     }
 
+}
+
+class FSCrud {
+    list;
+    constructor() {
+        this.list = [];
+    }
+
+    updateItem(id, newItem) {
+        try {
+            this.deleteItem(id);
+            newItem = [{ id: Number(id), ...newItem }];
+            this.list = [... this.list, ...newItem]
+            save(this.list, config.fs.connection.filename);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    getAllItems() {
+        try {
+            save(this.list, config.fs.connection.filename);
+            return this.list;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    getItemByID(id) {
+        const item = this.list.filter(item => item.id == Number(id));
+        if (!item.length) throw new Error("No data");
+        save(this.list, config.fs.connection.filename);
+        return item;
+    }
+
+    insertItem(items) {
+        items.forEach(item => {
+            this.list.push(new FSSchema(this.list.length, item));
+        });
+        save(this.list, config.fs.connection.filename);
+        return items;
+    }
+
+    deleteItem(id) {
+        const item = this.list.filter(item => item.id == Number(id));
+        if (!item.length) throw new Error("No data");
+
+        this.list = this.list.filter(element => element.id != Number(id))
+        save(this.list, config.fs.connection.filename);
+
+        return item;
+    }
 }
 class Factory {
     item;
