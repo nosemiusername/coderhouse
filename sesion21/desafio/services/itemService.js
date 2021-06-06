@@ -2,6 +2,27 @@
 import { mongoSchema } from '../models/Item.mongo.js'
 import { Item as SQLSchema } from '../models/Item.sqlite.js';
 import config from '../config/index.js';
+import admin from 'firebase-admin';
+
+
+class Firebase {
+    crud;
+
+    constructor() {
+        try {
+            admin.initializeApp({
+                credential: admin.credential.cert(config.firebase)
+            });
+
+            const db = admin.firestore();
+            const schema = db.collection(config.firebase_collection);
+
+            this.crud = new FirebaseCrud(schema);
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
 
 class MongoLocal {
     crud;
@@ -23,8 +44,8 @@ class SQLite {
     crud;
 
     constructor() {
-        const sqliteSchema = new SQLSchema(config.sqlite);
-        this.crud = new SQLCrud(sqliteSchema);
+        const schema = new SQLSchema(config.sqlite);
+        this.crud = new SQLCrud(schema);
     }
 }
 
@@ -32,8 +53,8 @@ class MySQLLocal {
     crud;
 
     constructor() {
-        const sqliteSchema = new SQLSchema(config.mysql);
-        this.crud = new SQLCrud(sqliteSchema);
+        const schema = new SQLSchema(config.mysql);
+        this.crud = new SQLCrud(schema);
     }
 }
 
@@ -123,16 +144,72 @@ class SQLCrud {
     }
 
 }
+
+class FirebaseCrud {
+    schema;
+
+    constructor(schema) {
+        this.schema = schema;
+    }
+
+    async updateItem(id, newItem) {
+        const doc = await this.schema.doc(String(id)).get()
+        if(doc.exists) return await this.schema.doc(String(id)).update(newItem);
+        else throw new Error("No data");
+    }
+
+    async getAllItems() {
+        try {
+            const snapshot = await this.schema.get();
+            if (snapshot.empty) return
+    
+            const documents = [];
+            snapshot.forEach(doc => {
+                documents.push({ id: doc.id, data: doc.data() })
+                    ;
+            })
+            return documents;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async getItemByID(id) {
+        const doc = await this.schema.doc(String(id)).get()
+        if(doc.exists) return doc.data();
+        else throw new Error("No data");
+    }
+
+    async insertItem(items) {
+        try {
+            for await (const item of items){
+                const allItems = await this.schema.get();
+                await this.schema.doc(String(allItems._size + 1)).set(item);
+            }
+            return items;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async deleteItem(id) {
+        const doc = await this.schema.doc(String(id)).get()
+        if(doc.exists) return await this.schema.doc(String(id)).delete();
+        else throw new Error("No data");
+        
+    }
+
+}
 class Factory {
     item;
 
     constructor(type) {
         try {
+            console.log(type);
             this.item = eval(`new ${type}()`);
         } catch (e) {
             throw new Error(`flagDB is not valid`)
         }
-
     }
 }
 

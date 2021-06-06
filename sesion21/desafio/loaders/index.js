@@ -40,6 +40,13 @@ class MySQLLocal{
     }
 }
 
+class Firebase{
+    static connect = () => {
+        console.log(`Connection Succesful ${JSON.stringify(config.firebase)}`);
+    }
+}
+
+
 export const loader = async() => { 
     const connection = await eval(`${config.flagDB}.connect()`);
 }
