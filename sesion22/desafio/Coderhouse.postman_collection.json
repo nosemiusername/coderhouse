@@ -585,27 +585,8 @@
 			]
 		},
 		{
-			"name": "Desafio 17",
+			"name": "Desafio 21",
 			"item": [
-				{
-					"name": "Obtener status",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Listar",
 					"request": {
@@ -632,7 +613,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/list",
+							"raw": "http://localhost:8080/api/1/show",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -640,7 +621,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"list"
+								"1",
+								"show"
 							]
 						}
 					},
@@ -652,14 +634,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/2",
+							"raw": "http://localhost:8080/api/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"2"
+								"api",
+								"1"
 							]
 						}
 					},
@@ -701,7 +684,152 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Leche-Yogurt\",\n    \"categoria\": \"Lácteos\",\n    \"stock\": 10\n}",
+							"raw": "{\n    \"nombre\": \"Leche-Yogurtss\",\n    \"categoria\": \"Lácteos\",\n    \"stock\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Desafio 22",
+			"item": [
+				{
+					"name": "Generar datos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/productos/vista-test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"productos",
+								"vista-test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar detalle de un item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/1/show",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"1",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un registro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    { \"nombre\": \"Fideos\", \"categoria\": \"Harina\", \"stock\": 20 },\n    { \"nombre\": \"Leche\", \"categoria\": \"Lácteos\", \"stock\": 30 },\n    { \"nombre\": \"Crema\", \"categoria\": \"Lácteos\", \"stock\": 15 }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un item",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Leche-Yogurtss\",\n    \"categoria\": \"Lácteos\",\n    \"stock\": 10\n}",
 							"options": {
 								"raw": {
 									"language": "json"

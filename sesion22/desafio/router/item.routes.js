@@ -10,3 +10,4 @@ itemRoute.delete('/:id', ItemController.apiDeleteItem);
 itemRoute.post('/add', ItemController.apiCreateItem);
 itemRoute.get('/list', ItemController.apiGetAllItems);
 itemRoute.get('/:id/show', ItemController.apiGetItemsByID);
+itemRoute.get('/productos/vista-test',ItemController.apiGenerate)

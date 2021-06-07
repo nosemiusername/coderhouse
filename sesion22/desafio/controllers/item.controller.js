@@ -1,5 +1,4 @@
 import ItemService from '../services/itemService.js';
-
 export default class Item {
 
     static async apiUpdateItem(req, res, next) {
@@ -48,5 +47,14 @@ export default class Item {
             res.status(404).json(error);
         }
     };
+
+    static apiGenerate(req, res, next){
+        try {
+            const itemList = ItemService.generateItem(req.query.cant);
+            res.status(200).json(itemList);
+        }catch (error){
+            res.status(404).json(error);
+        }
+    }
 
 }

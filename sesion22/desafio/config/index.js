@@ -11,5 +11,6 @@ export default {
         useNullAsDefault: process.env.SQLITE_UNAD 
     },
     mongoURI: process.env.MONGO_URI,
-    flagDB: process.env.FLAG_DB
+    flagDB: process.env.FLAG_DB,
+    default_factory_items: process.env.DEFAULT_FACTORY_ITEMS,
 }

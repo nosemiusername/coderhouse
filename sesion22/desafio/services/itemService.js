@@ -1,6 +1,7 @@
 "use strict";
-import { Item } from '../models/Item.js'
-
+import { Item } from '../models/Item.js';
+import { getItem } from '../factories/item.js'
+import config  from '../config/index.js';
 export default class ItemService {
 
     static async updateItem(id, newItem) {
@@ -46,5 +47,12 @@ export default class ItemService {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    static generateItem(cant){
+        const itemsQuantity = cant ? Number(cant) : config.default_factory_items;
+        Array.from(new Array(Number(itemsQuantity)), (v, k) => {
+          this.insertItem(getItem());  
+        })
     }
 }
