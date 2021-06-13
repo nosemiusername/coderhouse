@@ -1,5 +1,5 @@
 "use strict";
-import { Item } from '../models/Item.js';
+import { Item } from '../models/item.mongo.js';
 import { getItem } from '../factories/item.js'
 import config  from '../config/index.js';
 export default class ItemService {

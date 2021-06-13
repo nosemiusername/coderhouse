@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import config from './config/index.js';
 import { itemRoute } from './router/item.routes.js';
 import { MessageController } from './controllers/message.controller.js';
+import util from 'util';
 
 mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
@@ -32,7 +33,6 @@ io.on('connection', (socket) => {
 
     MessageController.getAllChats()
         .then(chats => {
-            console.log(chats);
             socket.emit('chats', chats);
         })
 

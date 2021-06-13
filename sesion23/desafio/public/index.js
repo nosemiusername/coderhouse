@@ -1,16 +1,9 @@
 let validForm = true;
 const socket = io();
-socket.on('products', data => {
-    const divTableContainer = document.getElementById('div-table-container');
-    if (data.length > 0) {
-        divTableContainer.innerHTML = fillTable(data);
-    } else {
-        divTableContainer.innerHTML = fillNoData();
-    }
-});
 
 socket.on('chats', data => {
     const divChatContainer = document.getElementById('div-chat-list');
+    const chats = denormalizer(data);
     if (data.length > 0) {
         divChatContainer.innerHTML = fillChatList(data);
     }
@@ -76,9 +69,9 @@ const fillChatList = (data) => {
 
     data.forEach(element => {
         chatList +=
-            `<span style='color:blue'>${element.email}</span> 
-            <span style='color:red'>[${element.time}]:</span>
-            <span style='color:green'>${element.message}</span>  
+            `<span style='color:blue'>${element.autor.email}</span> 
+            <span style='color:red'>[${element.fecha}]:</span>
+            <span style='color:green'>${element.text}</span>  
             <br>`
     })
 
@@ -95,4 +88,17 @@ const obtainElementsByForm = formName => {
     }
 
     return obj;
+}
+
+const denormalizer = (normalizedChats) => {
+    const autorSchema = new schema.Entity('autor', {}, { idAttribute: 'email' });
+    const chatSchema = new schema.Entity('chat', {
+        autor: autorSchema,
+    }, { idAttribute: 'fecha' });
+
+    const chatsSchema = new schema.Array(chatSchema);
+    const denormalizedChats = denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
+    console.log(denormalizedChats);
+    console.log(JSON.stringify(denormalizedChats).length);
+    return denormalizedChats;
 }

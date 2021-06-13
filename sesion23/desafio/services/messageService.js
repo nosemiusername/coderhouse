@@ -1,17 +1,27 @@
-import { Message } from '../models/message.js';
-import { normalize, schema } from 'normalizr';
+import { Message } from '../models/message.mongo.js';
+import { Message as LocalMessage } from '../models/message.local.js';
+import { normalize, schema, denormalize } from 'normalizr';
 import util from 'util';
 
 export class MessageService {
 
     static async getAllChats() {
         try {
-            const chats = await Message.find({}, '-_id autor.email autor.alias autor.avatar');
-            const autorSchema = new schema.Entity('autor','autor', {idAttribute:'email'});
-            const chatsSchema = { autores: new schema.Array(autorSchema)};
+            const locaMessage = LocalMessage.getInstance();
+            const chats = locaMessage.get();
+            console.log(chats);
+            const autorSchema = new schema.Entity('autor', {}, { idAttribute: 'email' });
+            const chatSchema = new schema.Entity('chat', {
+                autor: autorSchema,
+            }, { idAttribute: 'fecha' });
+
+            const chatsSchema = new schema.Array(chatSchema);
             const normalizedChats = normalize(chats, chatsSchema);
-            console.log(util.inspect(chats, false, 12, true));
-            console.log(util.inspect(normalizedChats, false, 12, true));
+
+            const denormalizedChats = denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
+            console.log(denormalizedChats);
+            console.log(JSON.stringify(denormalizedChats).length);
+
             return normalizedChats;
         } catch (error) {
             console.error(error);
@@ -20,13 +30,18 @@ export class MessageService {
 
     static async insertChat(chat) {
         try {
+            const localMessage = LocalMessage.getInstance();
             const text = chat.text;
             delete chat.text;
-            await Message.create({
+            const timeElapsed = Date.now();
+            const today = new Date(timeElapsed);
+            const updatedChat = {
                 autor: { ...chat },
                 text: text,
-                fecha: new Date(),
-            });
+                fecha: today.toISOString(),
+            };
+            await Message.create(updatedChat);
+            localMessage.add(updatedChat);
             return await this.getAllChats();
         } catch (error) {
             console.error(error);
