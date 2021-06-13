@@ -91,14 +91,17 @@ const obtainElementsByForm = formName => {
 }
 
 const denormalizer = (normalizedChats) => {
-    const autorSchema = new schema.Entity('autor', {}, { idAttribute: 'email' });
-    const chatSchema = new schema.Entity('chat', {
-        autor: autorSchema,
-    }, { idAttribute: 'fecha' });
+    // TODO Uncomment to implement denormalized fixing cdn import
 
-    const chatsSchema = new schema.Array(chatSchema);
-    const denormalizedChats = denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
-    console.log(denormalizedChats);
-    console.log(JSON.stringify(denormalizedChats).length);
-    return denormalizedChats;
+    // const autorSchema = new normalizr.schema.Entity('autor', {}, { idAttribute: 'email' });
+    // const chatSchema = new normalizr.schema.Entity('chat', {
+    //     autor: autorSchema,
+    // }, { idAttribute: 'fecha' });
+
+    // const chatsSchema = new schema.Array(chatSchema);
+    // const denormalizedChats = normalizr.denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
+    // console.log(denormalizedChats);
+    // console.log(JSON.stringify(denormalizedChats).length);
+    
+    return normalizedChats;
 }

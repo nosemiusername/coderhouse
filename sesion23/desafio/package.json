@@ -21,6 +21,7 @@
     "faker": "^5.5.3",
     "knex": "^0.95.6",
     "mongoose": "^5.12.11",
+    "normalizr": "^3.6.1",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.1.2",
     "sqlite3": "^5.0.2"

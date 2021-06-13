@@ -7,6 +7,7 @@ export class MessageService {
 
     static async getAllChats() {
         try {
+            // TODO obtain from mongo
             const locaMessage = LocalMessage.getInstance();
             const chats = locaMessage.get();
             console.log(chats);
@@ -21,8 +22,9 @@ export class MessageService {
             const denormalizedChats = denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
             console.log(denormalizedChats);
             console.log(JSON.stringify(denormalizedChats).length);
-
-            return normalizedChats;
+            
+            // TODO change to normalizedChats
+            return denormalizedChats;
         } catch (error) {
             console.error(error);
         }
