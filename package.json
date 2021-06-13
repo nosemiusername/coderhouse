@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "normalizr": "^3.6.1",
+    "util": "^0.12.4"
+  }
+}

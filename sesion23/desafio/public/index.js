@@ -24,7 +24,9 @@ const addChat = () => {
 
 const addProduct = () => {
     socket.emit('new-product', obtainElementsByForm('form-product'));
-    document.getElementById('configform').reset();
+    document.getElementById('title').value = "";
+    document.getElementById('price').value = "";
+    document.getElementById('thumbnail').value = "";
     return false;
 }
 
