@@ -3,9 +3,14 @@ const socket = io();
 
 socket.on('chats', data => {
     const divChatContainer = document.getElementById('div-chat-list');
-    const chats = denormalizer(data);
-    if (data.length > 0) {
-        divChatContainer.innerHTML = fillChatList(data);
+    const resp = denormalizer(data);
+    const chats = resp.denormalizedChats;
+    document.getElementById('compresionTitle').innerHTML = `(Compresión: ${resp.compresionRate}%)`
+    console.log(resp.compresionRate);
+    console.log(chats);
+    if (chats.length > 0) {
+        console.log('true');
+        divChatContainer.innerHTML = fillChatList(chats);
     }
 })
 
@@ -93,15 +98,14 @@ const obtainElementsByForm = formName => {
 const denormalizer = (normalizedChats) => {
     // TODO Uncomment to implement denormalized fixing cdn import
 
-    // const autorSchema = new normalizr.schema.Entity('autor', {}, { idAttribute: 'email' });
-    // const chatSchema = new normalizr.schema.Entity('chat', {
-    //     autor: autorSchema,
-    // }, { idAttribute: 'fecha' });
+    const autorSchema = new normalizr.schema.Entity('autor', {}, { idAttribute: 'email' });
+    const chatSchema = new normalizr.schema.Entity('chat', {
+        autor: autorSchema,
+    }, { idAttribute: 'fecha' });
 
-    // const chatsSchema = new schema.Array(chatSchema);
-    // const denormalizedChats = normalizr.denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
-    // console.log(denormalizedChats);
-    // console.log(JSON.stringify(denormalizedChats).length);
+    const chatsSchema = new normalizr.schema.Array(chatSchema);
+    const denormalizedChats = normalizr.denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
+    const compresionRate =  100 - (100 * JSON.stringify(normalizedChats).length / JSON.stringify(denormalizedChats).length).toFixed(2);
     
-    return normalizedChats;
+    return {denormalizedChats:denormalizedChats, compresionRate:compresionRate > 0 ? compresionRate : 0};
 }

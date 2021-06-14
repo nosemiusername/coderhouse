@@ -24,7 +24,7 @@ export class MessageService {
             console.log(JSON.stringify(denormalizedChats).length);
             
             // TODO change to normalizedChats
-            return denormalizedChats;
+            return normalizedChats;
         } catch (error) {
             console.error(error);
         }
