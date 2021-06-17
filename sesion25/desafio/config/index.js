@@ -11,6 +11,7 @@ export default {
         useNullAsDefault: process.env.SQLITE_UNAD 
     },
     mongoURI: process.env.MONGO_URI,
+    mongoMaxAge:process.env.MONGO_MAX_AGE,
     flagDB: process.env.FLAG_DB,
     default_factory_items: process.env.DEFAULT_FACTORY_ITEMS,
     loginUser: process.env.LOGIN_USER,

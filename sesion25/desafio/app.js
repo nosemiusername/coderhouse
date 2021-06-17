@@ -30,10 +30,10 @@ app.use(cookieParser());
 app.use(session({
     store: MongoStore.create({mongoUrl:config.mongoURI}),
     secret: 'coderhouse',
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     cookie:{ 
-        maxAge:10000,
+        maxAge:Number(config.mongoMaxAge),
     }
 }))
 app.use('/api', itemRoute);
