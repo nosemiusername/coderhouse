@@ -1,0 +1,44 @@
+<%- include('layouts/index'); -%>
+    <div class="alert alert-success" role="alert">
+        Te damos la bienvenida <%= user %>
+            <span style="float: right"> <button onclick="location.href='/logout'"
+                    class="btn btn-secondary btn-sm">Logout</button></span>
+    </div>
+
+    <div class="container" id="div-table-container"></div>
+    <div class="container" id="div-chat-container">
+        <h2 style='color:blue'>Centro de mensajes</h2>
+        <h3 id='compresionTitle' style='color:blue'></h3>
+        <hr>
+        <h2>Chat</h2>
+        <form id="form-chat" onsubmit="return addChat()">
+            <label for="nickname">
+                <div class="form-group">
+                    <input type="email" name="email" id="email" placeholder="Ingrese email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="apellido" id="apellido" placeholder="Ingrese apellido" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="edad" id="edad" placeholder="Ingrese edad" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="alias" id="alias" placeholder="Ingrese alias" required>
+                </div>
+                <div class="form-group">
+                    <input type="url" name="avatar" id="avatar" placeholder="Ingrese avatar" required>
+                </div>
+                <div id="div-chat-list"></div>
+                <div class="form-group">
+                    <input type="text" name="text" id="text" placeholder="Ingrese un mensaje..." minlength="1" required>
+                </div>
+                <button type="submit" id="btn-add-chat" class="btn btn-primary btn-success">Enviar!</button>
+            </label>
+        </form>
+    </div>
+
+    <script src="/index.js"></script>
+    <%- include('layouts/footer'); -%>
