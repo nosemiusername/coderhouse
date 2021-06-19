@@ -6,10 +6,7 @@ socket.on('chats', data => {
     const resp = denormalizer(data);
     const chats = resp.denormalizedChats;
     document.getElementById('compresionTitle').innerHTML = `(Compresión: ${resp.compresionRate}%)`
-    console.log(resp.compresionRate);
-    console.log(chats);
     if (chats.length > 0) {
-        console.log('true');
         divChatContainer.innerHTML = fillChatList(chats);
     }
 })

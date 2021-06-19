@@ -10,7 +10,6 @@ export class MessageService {
             // TODO obtain from mongo
             const locaMessage = LocalMessage.getInstance();
             const chats = locaMessage.get();
-            console.log(chats);
             const autorSchema = new schema.Entity('autor', {}, { idAttribute: 'email' });
             const chatSchema = new schema.Entity('chat', {
                 autor: autorSchema,
@@ -20,10 +19,7 @@ export class MessageService {
             const normalizedChats = normalize(chats, chatsSchema);
 
             const denormalizedChats = denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
-            console.log(denormalizedChats);
-            console.log(JSON.stringify(denormalizedChats).length);
-            
-            // TODO change to normalizedChats
+
             return normalizedChats;
         } catch (error) {
             console.error(error);

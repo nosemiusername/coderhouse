@@ -40,7 +40,6 @@ export default class Item {
 
     static async apiGetItemsByID(req, res, next) {
         try {
-            console.log(req.params.id);
             const itemList = await ItemService.getItemByID(req.params.id);
             res.status(200).json(itemList);
         } catch (error) {
