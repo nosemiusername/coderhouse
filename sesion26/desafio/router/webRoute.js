@@ -15,9 +15,9 @@ passport.use('login', new LocalStrategy((name, password, done) => {
 
 }))
 
-passport.use('register', new LocalStrategy({passReqToCallback:true}, async (req, name, password, done) => {
+passport.use('register', new LocalStrategy({passReqToCallback:true}, async (req, username, password, done) => {
     const { email } = req.body;
-    const user = UserService.find(name);
+    const user = UserService.find(username);
     if (user){
         return done('User already exist');
     } 
