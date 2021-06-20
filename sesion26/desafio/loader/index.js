@@ -24,16 +24,20 @@ class WebSoccket {
 }
 
 class MongoDBaaS {
-    static connect() {
-        mongoose.connect(config.mongoURI, {
-            useNewUrlParser: true,
-            useCreateIndex: true, useUnifiedTopology: true
-        }).then(res => console.log(`MongoDBaaS: Connection ${mongoose.STATES[res.connection.readyState]}`))
-            .catch(err => console.log(`Error in DB connection ${err}`));
+    static async connect() {
+        try {
+            const res = await mongoose.connect(config.mongoURI, {
+                useNewUrlParser: true,
+                useCreateIndex: true, useUnifiedTopology: true
+            });
+            console.log(`MongoDBaaS: Connection ${mongoose.STATES[res.connection.readyState]}`);
+        } catch (error) {
+            console.log(`Error in DB connection ${err}`);
+        }
     }
 }
 
-export const load = (http) => {
-    MongoDBaaS.connect();
+export const load = async (http) => {
+    await MongoDBaaS.connect();
     WebSoccket.connect(http);
 }

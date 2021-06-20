@@ -2,19 +2,17 @@ import express from 'express';
 import { Server as httpServer } from 'http';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import passport from 'passport';
-import {Strategy as LocalStrategy} from 'passport-local'
-import bCrypt from 'bcrypt';
 import MongoStore from 'connect-mongo';
 import config from './config/index.js';
 import { itemRoute } from './router/item.routes.js';
 import { webRoute } from './router/webRoute.js';
 import { load } from './loader/index.js';
+import passport from 'passport';
 
 const app = express();
 const http = new httpServer(app);
 const PORT = config.port;
-load(http);
+await load(http);
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -31,7 +29,9 @@ app.use(session({
     cookie:{ 
         maxAge:Number(config.mongoMaxAge),
     }
-}))
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/api', itemRoute);
 app.use('', webRoute);
 

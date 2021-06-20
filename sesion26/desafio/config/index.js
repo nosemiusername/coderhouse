@@ -16,5 +16,5 @@ export default {
     default_factory_items: process.env.DEFAULT_FACTORY_ITEMS,
     loginUser: process.env.LOGIN_USER,
     loginPass: process.env.LOGIN_PASS,
-
+    saltRounds: process.env.SALT_ROUNDS,
 }
