@@ -5,7 +5,7 @@ export default class UserService {
 
     static async create(user) {
         try {
-            const hash = await bcrypt.hash(password, config.saltRounds);
+            const hash = await bcrypt.hash(user.password, Number(config.saltRounds));
             user.password = hash;
             const newUser = await User.create(user);
             return newUser
@@ -14,8 +14,9 @@ export default class UserService {
         }
     };
 
-    static async find(name, password = null) {
-        const user = await User.findOne({ user: name});
+    static async find(username, password = null) {
+        const res = await User.findOne({ username: username});
+        const user = res == null ? null : res.toObject() ;
         // if it need to compare name and password and password it is not validate return null
         // if it there is not user then return null
         // finally third case if it just need to know if exist user

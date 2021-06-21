@@ -1,6 +1,3 @@
-import config from '../config/index.js';
-
-
 export default class WebController {
 
     static sendRegister(req, res, next) {
@@ -12,11 +9,11 @@ export default class WebController {
     };
 
     static sendIndex(req, res, next) {
-        res.render('chat', { user: req.session.user });
+        res.render('chat', { user: req.user });
     };
 
     static sendLogout(req, res, next) {
-        req.session.destroy();
+        req.logout();
         res.render('login');
     }
 
@@ -25,7 +22,7 @@ export default class WebController {
     }
 
     static sendFailLogin(req, res, next){
-        res.render('register-error', {});
+        res.render('login-error', {});
     }
 }
 
