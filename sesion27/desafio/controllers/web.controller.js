@@ -9,7 +9,17 @@ export default class WebController {
     };
 
     static sendIndex(req, res, next) {
-        res.render('chat', { user: req.user });
+        if (req.isAuthenticated()) {
+            req.user.counter = req.user.counter = 0 || req.user.counter++;
+            res.render('chat', {
+                name: req.user.displayName,
+                photo: req.user.photos[0].value,
+                email: req.user.emails[0].value,
+                contador: req.user.counter
+            });
+        } else {
+            res.render('login');
+        }
     };
 
     static sendLogout(req, res, next) {
@@ -17,11 +27,11 @@ export default class WebController {
         res.render('login');
     }
 
-    static sendFailRegister(req, res, next){
+    static sendFailRegister(req, res, next) {
         res.render('register-error', {});
     }
 
-    static sendFailLogin(req, res, next){
+    static sendFailLogin(req, res, next) {
         res.render('login-error', {});
     }
 }
