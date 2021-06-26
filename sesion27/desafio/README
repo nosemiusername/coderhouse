@@ -3,4 +3,4 @@ Instalación
 
 Ejecucion 
     npm start
-    http://localhost:8080/login
+    http://localhost:8080
