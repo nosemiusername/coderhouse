@@ -1,3 +1,5 @@
+import config from "../config/index.js";
+import { fork } from "child_process";
 export default class WebController {
 
     static sendRegister(req, res, next) {
@@ -33,6 +35,23 @@ export default class WebController {
 
     static sendFailLogin(req, res, next) {
         res.render('login-error', {});
+    }
+
+    static fbErrorHandler(err, req, res, next) {
+        req.flash('error', err);
+        res.render('login-error', { err });
+    }
+
+    static randoms(req, res, next) {
+        if (req.isAuthenticated()) {
+            req.user.counter = req.user.counter = 0 || req.user.counter++;
+            const cant = Number(req.query.cant) || config.random_numbers;
+            const forked = fork('../helper/random.js');
+            forked.on('message', numbers => {
+                res.json(numbers);
+            })
+            forked.send(cant);
+        }
     }
 }
 

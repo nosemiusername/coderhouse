@@ -13,15 +13,19 @@ passport.use(new FacebookStrategy({
     scope: ['email'],
 },
     async (accessesToken, refreshhToken, profile, done) => {
-        const user = await UserService.find(profile.id);
-        if (!user) {
-            await UserService.create({
-                id: profile.id,
-                username: profile.displayName,
-                email: profile.emails[0].value,
-            });
-        }
-        return done(null, profile);
+        try {
+            const user = await UserService.find(profile.id);
+            if (!user) {
+                await UserService.create({
+                    id: profile.id,
+                    username: profile.displayName,
+                    email: profile.emails[0].value,
+                });
+            }
+            return done(null, profile);
+        } catch (error) {
+            done(null, false, { message: error });
+        };
     }
 ))
 
@@ -30,7 +34,6 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (obj, done) => {
-    //const user = await UserService.find(username);
     done(null, obj);
 })
 
@@ -43,13 +46,12 @@ const isAuth = (req, res, next) => {
 }
 
 webRoute.get('/auth/fb', passport.authenticate('facebook'));
-webRoute.get('/auth/fb/callback', passport.authenticate('facebook', { failureRedirect: '/auth/fb', successRedirect: '/chat' }));
-webRoute.get('/register', WebController.sendRegister);
-webRoute.post('/register', passport.authenticate('register', { failureRedirect: '/failregister', successRedirect: '/' }));
-webRoute.get('/failregister', WebController.sendFailRegister);
+webRoute.get('/auth/fb/callback', passport.authenticate('facebook', { failureRedirect: '/auth/fb', successRedirect: '/chat' }),
+    WebController.fbErrorHandler, WebController.sendIndex);
 webRoute.get('/login', WebController.sendLogin);
 webRoute.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/chat' }));
 webRoute.get('/faillogin', WebController.sendFailLogin);
 webRoute.get('/chat', isAuth, WebController.sendIndex);
 webRoute.get('/logout', WebController.sendLogout);
+webRoute.get('/randoms', WebController.sendIndex);
 webRoute.get('/', WebController.sendIndex);

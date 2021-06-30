@@ -5,9 +5,10 @@ import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
 import config from './config/index.js';
 import { itemRoute } from './router/item.routes.js';
-import { webRoute } from './router/webRoute.js';
+import { webRoute } from './router/web.routes.js';
 import { load } from './loader/index.js';
 import passport from 'passport';
+import flash from 'connect-flash';
 
 const app = express();
 const http = new httpServer(app);
@@ -16,17 +17,18 @@ await load(http);
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(flash());
 app.use(cookieParser());
 app.use(session({
-    store: MongoStore.create({mongoUrl:config.mongoURI}),
+    store: MongoStore.create({ mongoUrl: config.mongoURI }),
     secret: 'coderhouse',
     resave: false,
     saveUninitialized: true,
-    cookie:{ 
-        maxAge:Number(config.mongoMaxAge),
+    cookie: {
+        maxAge: Number(config.mongoMaxAge),
     }
 }));
 app.use(passport.initialize());
@@ -36,5 +38,9 @@ app.use('/api', itemRoute);
 app.use('', webRoute);
 
 http.listen(PORT, () => {
-    console.log(`Application is listening at port ${PORT}`)
+    console.log(`Application is listening at port ${PORT}`);
+});
+
+process.on('exit', (code) => {
+    console.log(`Finished exit with code: ${code}`);
 });
