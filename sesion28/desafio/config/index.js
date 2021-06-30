@@ -24,7 +24,7 @@ export default {
     loginUser: process.env.LOGIN_USER,
     loginPass: process.env.LOGIN_PASS,
     saltRounds: process.env.SALT_ROUNDS,
-    fbToken: {
+    oauthStrategy: {
         clientID: process.env.FB_CLIENTID,
         clientSecret: process.env.FB_CLIENTSECRET,
         callbackURL: process.env.FB_CALLBACKURL,

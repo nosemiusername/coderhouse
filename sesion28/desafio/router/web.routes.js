@@ -2,16 +2,11 @@ import { Router } from 'express';
 import WebController from '../controllers/web.controller.js'
 export const webRoute = Router();
 import passport from 'passport';
-import { Strategy as FacebookStrategy } from 'passport-facebook';
 import UserService from '../services/userService.js'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import config from '../config/index.js';
 
-passport.use(new FacebookStrategy({
-    clientID: "496117064774752",
-    clientSecret: "d0619cb53fa5e4723ce3b381e3d1c013",
-    callbackURL: 'http://localhost:8080/auth/fb/callback',
-    profileFields: ['id', 'displayName', 'photos', 'emails'],
-    scope: ['email'],
-},
+passport.use(new GoogleStrategy(config.oauthStrategy,
     async (accessesToken, refreshhToken, profile, done) => {
         try {
             const user = await UserService.find(profile.id);
@@ -45,9 +40,8 @@ const isAuth = (req, res, next) => {
     }
 }
 
-webRoute.get('/auth/fb', passport.authenticate('facebook'));
-webRoute.get('/auth/fb/callback', passport.authenticate('facebook', { failureRedirect: '/auth/fb', successRedirect: '/chat' }),
-    WebController.fbErrorHandler, WebController.sendIndex);
+webRoute.get('/auth/google', passport.authenticate('google', { scope: ["profile", "email"] }));
+webRoute.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/google', successRedirect: '/chat' }));
 webRoute.get('/login', WebController.sendLogin);
 webRoute.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/chat' }));
 webRoute.get('/faillogin', WebController.sendFailLogin);
