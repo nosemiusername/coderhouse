@@ -46,7 +46,7 @@ export default class WebController {
         if (req.isAuthenticated()) {
             req.user.counter = req.user.counter = 0 || req.user.counter++;
             const cant = Number(req.query.cant) || config.random_numbers;
-            const forked = fork('../helper/random.js');
+            const forked = fork('./helper/random.js');
             forked.on('message', numbers => {
                 res.json(numbers);
             })

@@ -47,5 +47,5 @@ webRoute.post('/login', passport.authenticate('login', { failureRedirect: '/fail
 webRoute.get('/faillogin', WebController.sendFailLogin);
 webRoute.get('/chat', isAuth, WebController.sendIndex);
 webRoute.get('/logout', WebController.sendLogout);
-webRoute.get('/randoms', WebController.sendIndex);
+webRoute.get('/randoms', WebController.randoms);
 webRoute.get('/', WebController.sendIndex);
