@@ -1,12 +1,11 @@
 const app = require('express')()
-const PORT = process.argv[2] || 8080
-const maxRandomNumber = 10
 const fork = require('child_process').fork
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('./config/index.js');
+const PORT = config.port
 
 app.use(cookieParser());
 app.use(session({
@@ -41,7 +40,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 app.get('/random', (req, res) => {
     if (req.isAuthenticated()) {
-        const cant = Number(req.query.cant) || maxRandomNumber;
+        const cant = Number(req.query.cant) || Number(config.random_numbers);
         const forked = fork('./helper/random.js');
         forked.on('message', numbers => {
             res.json(numbers);
@@ -51,6 +50,18 @@ app.get('/random', (req, res) => {
         res.redirect('/auth/google');
     }
 
+})
+
+app.get('/info', (req, res, next) => {
+    res.json({
+        arg: process.argv,
+        platform_name: process.platform,
+        node_version: process.version,
+        memory_usage: process.memoryUsage(),
+        path_node: process.execPath,
+        pid: process.pid,
+        path_execution: process.cwd(),
+    });
 })
 
 app.listen(PORT, () => {
