@@ -8,7 +8,7 @@ import { itemRoute } from './router/item.routes.js';
 import { webRoute } from './router/web.routes.js';
 import { load } from './loader/index.js';
 import passport from 'passport';
-import flash from 'connect-flash';
+import { fork } from 'child_process';
 
 const app = express();
 const http = new httpServer(app);
@@ -20,7 +20,6 @@ app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
-app.use(flash());
 app.use(cookieParser());
 app.use(session({
     store: MongoStore.create({ mongoUrl: config.mongoURI }),
@@ -33,6 +32,17 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.get('/rnd', (req, res) => {
+    if (req.isAuthenticated()) {
+        req.user.counter = req.user.counter = 0 || req.user.counter++;
+        const cant = Number(req.query.cant) || config.random_numbers;
+        const forked = fork('./helper/random.js');
+        forked.on('message', numbers => {
+            res.json(numbers);
+        })
+        forked.send(cant);
+    }
+});
 
 app.use('/api', itemRoute);
 app.use('', webRoute);
