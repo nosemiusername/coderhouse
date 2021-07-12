@@ -7,7 +7,7 @@
             "script": "./src/app.js",
             "instances": 4,
             "env": {
-                "PORT": 8081
+                "PORT": 8082
             }
         },
         {
@@ -17,7 +17,7 @@
             "log_date_format": "MM/DD/YYYY HH:mm:ss",
             "script": "./src/app.js",
             "env": {
-                "PORT": 8082
+                "PORT": 8081
             }
         }
     ]
