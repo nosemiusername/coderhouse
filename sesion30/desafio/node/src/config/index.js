@@ -1,17 +1,7 @@
-const dotenv = require('dotenv')
-dotenv.config();
+const path = require('path');
+const dotenv = require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 /** Loading from console if there is parameter */
-if (process.argv.length == 4) {
-    process.env.PORT = Number(process.argv[3]);
-}
-
-if (process.argv.length == 6) {
-    process.env.PORT = process.argv[3];
-    process.env.FB_CLIENTID = process.argv[4];
-    process.env.FB_CLIENTSECRET = process.argv[5];
-}
-
 module.exports = {
     port: process.env.PORT,
     sqlite: {
