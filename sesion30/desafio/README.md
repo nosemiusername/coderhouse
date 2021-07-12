@@ -1,9 +1,7 @@
 # Instalación
 
-- npm install
+- docker-compose up
 
 # Ejecucion
 
-- npm run FORK
-- npm run CLUSTER
-- http://localhost:PORT
+- http://localhost
