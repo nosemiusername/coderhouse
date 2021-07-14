@@ -7,26 +7,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('./config/index.js');
 const PORT = config.port;
 const compression = require('compression');
-const pino = require('pino');
-
-const loggerWarn = pino({
-    prettyPrint: {
-        colorize: true,
-        levelFirst: true,
-        translateTime: "yyyy-dd-mm, h:MM:ss TT",
-    },
-}, pino.destination("./log/warn.log"));
-
-const loggerError = pino({
-    prettyPrint: {
-        colorize: true,
-        levelFirst: true,
-        translateTime: "yyyy-dd-mm, h:MM:ss TT",
-    },
-}, pino.destination("./log/error.log"));
-
-loggerWarn.level = 'warn';
-loggerError.level = 'error';
+const { info, warn, error } = require('./config/logger.js');
 
 app.use(cookieParser());
 app.use(session({
@@ -72,7 +53,7 @@ app.get('/random', (req, res) => {
     }
 })
 
-app.get('/info', (req, res, next) => {
+app.get('/info', compression(), (req, res, next) => {
     res.json({
         arg: process.argv,
         platform_name: process.platform,
@@ -82,8 +63,24 @@ app.get('/info', (req, res, next) => {
         pid: process.pid,
         path_execution: process.cwd(),
     });
-    loggerWarn.warn("Warn");
-    loggerError.error("Error");
+})
+
+app.get('/div', (req, res, next) => {
+    const { value1, value2 } = req.query;
+    const result = {};
+    result.value = 0;
+    const num1 = parseFloat(value1);
+    const num2 = parseFloat(value2);
+
+    if (!isNaN(num1) && !isNaN(num2)) {
+        if (num2 == 0) warn("0 divition")
+        if (num2 != 0) {
+            result.value = num1 / num2;
+            info(result.value);
+        }
+    } else error("Not numeric values")
+
+    res.json(result);
 })
 
 app.listen(PORT, () => {
