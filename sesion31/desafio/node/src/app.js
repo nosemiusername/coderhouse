@@ -5,7 +5,28 @@ const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const config = require('./config/index.js');
-const PORT = config.port
+const PORT = config.port;
+const compression = require('compression');
+const pino = require('pino');
+
+const loggerWarn = pino({
+    prettyPrint: {
+        colorize: true,
+        levelFirst: true,
+        translateTime: "yyyy-dd-mm, h:MM:ss TT",
+    },
+}, pino.destination("./log/warn.log"));
+
+const loggerError = pino({
+    prettyPrint: {
+        colorize: true,
+        levelFirst: true,
+        translateTime: "yyyy-dd-mm, h:MM:ss TT",
+    },
+}, pino.destination("./log/error.log"));
+
+loggerWarn.level = 'warn';
+loggerError.level = 'error';
 
 app.use(cookieParser());
 app.use(session({
@@ -49,7 +70,6 @@ app.get('/random', (req, res) => {
     } else {
         res.redirect('/auth/google');
     }
-
 })
 
 app.get('/info', (req, res, next) => {
@@ -62,6 +82,8 @@ app.get('/info', (req, res, next) => {
         pid: process.pid,
         path_execution: process.cwd(),
     });
+    loggerWarn.warn("Warn");
+    loggerError.error("Error");
 })
 
 app.listen(PORT, () => {
