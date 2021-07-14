@@ -4,4 +4,5 @@
 
 # Ejecucion
 
-- http://localhost
+- http://localhost/info
+- http://localhost/div?value1=x&&value2=y
