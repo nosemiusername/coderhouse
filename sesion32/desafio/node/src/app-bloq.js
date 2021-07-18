@@ -67,9 +67,9 @@ app.get('/div', (req, res, next) => {
         if (num2 == 0) warn("0 divition")
         if (num2 != 0) {
             result.value = num1 / num2;
+            info(result.value);
         }
     } else error("Not numeric values")
-
     res.json(result);
 })
 
