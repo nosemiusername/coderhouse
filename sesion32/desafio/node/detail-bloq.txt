@@ -1,0 +1,646 @@
+Statistical profiling result from bloq.log, (6788 ticks, 12 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+     15    0.2%          /usr/lib/system/libsystem_pthread.dylib
+      9    0.1%          /usr/lib/system/libsystem_malloc.dylib
+      6    0.1%          /usr/lib/system/libsystem_platform.dylib
+      3    0.0%          /usr/lib/system/libsystem_kernel.dylib
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+     18    0.3%    0.3%  LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      7    0.1%    0.1%  LazyCompile: *processTicksAndRejections node:internal/process/task_queues:66:35
+      7    0.1%    0.1%  LazyCompile: *clearBuffer node:internal/streams/writable:534:21
+      6    0.1%    0.1%  LazyCompile: *session /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:179:26
+      5    0.1%    0.1%  LazyCompile: *pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+      5    0.1%    0.1%  LazyCompile: *onwrite node:internal/streams/writable:431:17
+      5    0.1%    0.1%  LazyCompile: *<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/dateformat/lib/dateformat.js:1:696
+      4    0.1%    0.1%  RegExp: ^[\^_`a-zA-Z\-0-9!#$%&'*+.|~]+$
+      4    0.1%    0.1%  RegExp: ; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) *
+      4    0.1%    0.1%  LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      4    0.1%    0.1%  LazyCompile: *update node:internal/crypto/hash:95:40
+      4    0.1%    0.1%  LazyCompile: *processImmediate node:internal/timers:421:28
+      4    0.1%    0.1%  LazyCompile: *nextTick node:internal/process/task_queues:102:18
+      4    0.1%    0.1%  LazyCompile: *header /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:754:29
+      4    0.1%    0.1%  LazyCompile: *get node:_http_incoming:111:16
+      4    0.1%    0.1%  LazyCompile: *emit node:events:327:44
+      4    0.1%    0.1%  LazyCompile: *_storeHeader node:_http_outgoing:373:22
+      3    0.0%    0.0%  RegExp: d{1,4}|D{3,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|W{1,2}|[LlopSZN]|"[^"]*"|'[^']*'
+      3    0.0%    0.0%  RegExp: (\[[^[\]]*])
+      3    0.0%    0.0%  LazyCompile: *processPromiseRejections node:internal/process/promises:202:34
+      3    0.0%    0.0%  LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      3    0.0%    0.0%  LazyCompile: *getHeader node:_http_outgoing:587:57
+      3    0.0%    0.0%  LazyCompile: *fastparse /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/parseurl/index.js:95:20
+      3    0.0%    0.0%  LazyCompile: *asJson /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:92:17
+      2    0.0%    0.0%  RegExp: ^\d+
+      2    0.0%    0.0%  RegExp: ^[!#$%&'*+.^_`|~0-9A-Za-z-]+\/[!#$%&'*+.^_`|~0-9A-Za-z-]+$
+      2    0.0%    0.0%  RegExp: ;\s*charset\s*=
+      2    0.0%    0.0%  LazyCompile: *parserOnHeadersComplete node:_http_common:78:33
+      2    0.0%    0.0%  LazyCompile: *parse /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie/index.js:49:15
+      2    0.0%    0.0%  LazyCompile: *normalizeString node:path:61:25
+      2    0.0%    0.0%  LazyCompile: *get data /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/session/cookie.js:117:11
+      2    0.0%    0.0%  LazyCompile: *fromStringFast node:buffer:413:24
+      2    0.0%    0.0%  LazyCompile: *debug /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/debug/src/debug.js:65:17
+      2    0.0%    0.0%  LazyCompile: *ReadableState node:internal/streams/readable:77:23
+      1    0.0%    0.0%  RegExp: ^\/auth\/google\/callback\/?$
+      1    0.0%    0.0%  RegExp: \=+$
+      1    0.0%    0.0%  RegExp: ; *
+      1    0.0%    0.0%  RegExp: (?:^|\/)\.?\.$
+      1    0.0%    0.0%  LazyCompile: *writevGeneric node:internal/stream_base_commons:122:23
+      1    0.0%    0.0%  LazyCompile: *writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      1    0.0%    0.0%  LazyCompile: *write_ node:_http_outgoing:710:16
+      1    0.0%    0.0%  LazyCompile: *writeOrBuffer node:internal/streams/writable:371:23
+      1    0.0%    0.0%  LazyCompile: *writeHead node:_http_server:274:19
+      1    0.0%    0.0%  LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+      1    0.0%    0.0%  LazyCompile: *setHeader node:_http_outgoing:571:57
+      1    0.0%    0.0%  LazyCompile: *send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      1    0.0%    0.0%  LazyCompile: *parseQueryStringValues /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:41:50
+      1    0.0%    0.0%  LazyCompile: *parse /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/node_modules/cookie/index.js:49:15
+      1    0.0%    0.0%  LazyCompile: *normalizeParseOptions /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:189:59
+      1    0.0%    0.0%  LazyCompile: *module.exports /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:222:27
+      1    0.0%    0.0%  LazyCompile: *hash /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:596:14
+      1    0.0%    0.0%  LazyCompile: *end node:_http_outgoing:813:45
+      1    0.0%    0.0%  LazyCompile: *createHash node:crypto:129:20
+      1    0.0%    0.0%  LazyCompile: *adjustOffset node:buffer:1099:22
+      1    0.0%    0.0%  LazyCompile: *Object.entries.reduce.plain /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:363:58
+      1    0.0%    0.0%  LazyCompile: *Hash node:internal/crypto/hash:58:14
+
+ [C++]:
+   ticks  total  nonlib   name
+   2793   41.1%   41.3%  T __kernelrpc_thread_policy_set
+   2661   39.2%   39.4%  T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+    115    1.7%    1.7%  T _semaphore_wait
+    100    1.5%    1.5%  T _task_restartable_ranges_synchronize
+     98    1.4%    1.5%  t node::fs::WriteString(v8::FunctionCallbackInfo<v8::Value> const&)
+     96    1.4%    1.4%  T void node::StreamBase::JSMethod<&(node::StreamBase::Writev(v8::FunctionCallbackInfo<v8::Value> const&))>(v8::FunctionCallbackInfo<v8::Value> const&)
+     58    0.9%    0.9%  T __ZN4node6crypto4Hash3NewERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+     37    0.5%    0.5%  T node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+     37    0.5%    0.5%  T _read$NOCANCEL
+     36    0.5%    0.5%  T node::native_module::NativeModuleEnv::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+     26    0.4%    0.4%  T _vm_copy
+     26    0.4%    0.4%  T __kernelrpc_mach_vm_purgable_control_trap
+     24    0.4%    0.4%  T __ZN4node6crypto4Hmac8HmacInitERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+     16    0.2%    0.2%  t _szone_realloc
+     14    0.2%    0.2%  T __ZN4node6crypto4Hmac10HmacDigestERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+     13    0.2%    0.2%  T __ZN4node6crypto4Hash10HashUpdateERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+     13    0.2%    0.2%  T __ZN4node6crypto4Hash10HashDigestERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+     11    0.2%    0.2%  t node::fs::InternalModuleStat(v8::FunctionCallbackInfo<v8::Value> const&)
+     11    0.2%    0.2%  t _tiny_malloc_from_free_list
+     11    0.2%    0.2%  t _small_malloc_should_clear
+     10    0.1%    0.1%  t void node::Buffer::(anonymous namespace)::StringWrite<(node::encoding)1>(v8::FunctionCallbackInfo<v8::Value> const&)
+     10    0.1%    0.1%  T __ZN2v86Object3NewEPNS_7IsolateE
+      9    0.1%    0.1%  T ___bsdthread_create
+      9    0.1%    0.1%  T __ZN2v88Function4CallENS_5LocalINS_7ContextEEENS1_INS_5ValueEEEiPS5_
+      9    0.1%    0.1%  T __ZN2v86Object3GetENS_5LocalINS_7ContextEEEj
+      8    0.1%    0.1%  t _tiny_malloc_should_clear
+      8    0.1%    0.1%  t _tiny_free_no_lock
+      8    0.1%    0.1%  t _nanov2_find_block_and_allocate
+      8    0.1%    0.1%  T node::InternalCallbackScope::InternalCallbackScope(node::Environment*, v8::Local<v8::Object>, node::async_context const&, int)
+      8    0.1%    0.1%  T __platform_strncmp
+      7    0.1%    0.1%  t node::fs::InternalModuleReadJSON(v8::FunctionCallbackInfo<v8::Value> const&)
+      7    0.1%    0.1%  t node::TraceEventScope::TraceEventScope(char const*, char const*, void*)
+      7    0.1%    0.1%  t _free_tiny
+      7    0.1%    0.1%  t __ZN2v88internal17PrototypeIterator7AdvanceEv
+      7    0.1%    0.1%  T _task_policy_set
+      6    0.1%    0.1%  t _free_small
+      6    0.1%    0.1%  t __os_nospin_lock_lock_slow
+      6    0.1%    0.1%  T node::AsyncWrap::EmitTraceEventBefore()
+      6    0.1%    0.1%  T _kdebug_typefilter
+      5    0.1%    0.1%  t node::fs::Open(v8::FunctionCallbackInfo<v8::Value> const&)
+      5    0.1%    0.1%  t node::TraceEventScope::~TraceEventScope()
+      5    0.1%    0.1%  t node::AsyncHooks::push_async_context(double, double, v8::Local<v8::Object>)
+      5    0.1%    0.1%  t node::AsyncHooks::pop_async_context(double)
+      5    0.1%    0.1%  t _nanov2_allocate
+      5    0.1%    0.1%  T node::binding::GetInternalBinding(v8::FunctionCallbackInfo<v8::Value> const&)
+      5    0.1%    0.1%  T __ZNK2v85Value10IsFunctionEv
+      5    0.1%    0.1%  T __ZN4node6crypto4Hmac3NewERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+      4    0.1%    0.1%  t node::fs::LStat(v8::FunctionCallbackInfo<v8::Value> const&)
+      4    0.1%    0.1%  t node::Environment::RunAndClearNativeImmediates(bool)::$_5::operator()(node::CallbackQueue<void, node::Environment*>*) const
+      4    0.1%    0.1%  t _rack_region_insert
+      4    0.1%    0.1%  t __ZN2v812_GLOBAL__N_114CallDepthScopeILb0EEC1EPNS_8internal7IsolateENS_5LocalINS_7ContextEEE
+      4    0.1%    0.1%  T node::errors::TryCatchScope::~TryCatchScope()
+      4    0.1%    0.1%  T node::TTYWrap::New(v8::FunctionCallbackInfo<v8::Value> const&)
+      4    0.1%    0.1%  T node::InternalCallbackScope::~InternalCallbackScope()
+      4    0.1%    0.1%  T _os_packet_get_transport_traffic_realtime
+      3    0.0%    0.0%  t non-virtual thunk to cppgc::internal::MarkingVerifier::~MarkingVerifier()
+      3    0.0%    0.0%  t node::task_queue::RunMicrotasks(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.0%    0.0%  t node::(anonymous namespace)::ToggleImmediateRef(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.0%    0.0%  t node::(anonymous namespace)::Parser::on_message_begin()
+      3    0.0%    0.0%  t node::(anonymous namespace)::Parser::on_header_field(char const*, unsigned long)
+      3    0.0%    0.0%  t _tiny_try_realloc_in_place
+      3    0.0%    0.0%  t __pthread_mutex_firstfit_lock_slow
+      3    0.0%    0.0%  t __os_nospin_lock_unlock_slow
+      3    0.0%    0.0%  t __ZN2v88internal14LookupIteratorC2EPNS0_7IsolateENS0_6HandleINS0_6ObjectEEENS4_INS0_4NameEEEmNS4_INS0_10JSReceiverEEENS1_13ConfigurationE
+      3    0.0%    0.0%  t __ZN2v88internal12StringHasher20HashSequentialStringIhEEjPKT_iy
+      3    0.0%    0.0%  t __ZN2v88internal11StringShape33DispatchToSpecificTypeWithoutCastIZNS1_22DispatchToSpecificTypeIZNS0_6String3GetEiE19StringGetDispatchertJRiEEET0_S4_DpOT1_E17CastingDispatchertJRS4_S6_EEES7_SA_
+      3    0.0%    0.0%  T node::IsConstructCallCallback(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.0%    0.0%  T node::Environment::RunAndClearNativeImmediates(bool)
+      3    0.0%    0.0%  T node::Environment::RunAndClearInterrupts()
+      3    0.0%    0.0%  T node::Environment::CheckImmediate(uv_check_s*)
+      3    0.0%    0.0%  T __ZN2v87Context5EnterEv
+      3    0.0%    0.0%  T __ZN2v87Context4ExitEv
+      3    0.0%    0.0%  T __ZN2v811HandleScopeC1EPNS_7IsolateE
+      2    0.0%    0.0%  t std::__1::basic_ostream<char, std::__1::char_traits<char> >& std::__1::__put_character_sequence<char, std::__1::char_traits<char> >(std::__1::basic_ostream<char, std::__1::char_traits<char> >&, char const*, unsigned long)
+      2    0.0%    0.0%  t non-virtual thunk to node::(anonymous namespace)::Parser::OnStreamAlloc(unsigned long)
+      2    0.0%    0.0%  t node::LibuvStreamWrap::ReadStart()::$_0::__invoke(uv_handle_s*, unsigned long, uv_buf_t*)
+      2    0.0%    0.0%  t _tiny_free_list_add_ptr
+      2    0.0%    0.0%  t _small_malloc_from_free_list
+      2    0.0%    0.0%  t _nanov2_malloc
+      2    0.0%    0.0%  t __cxxabiv1::__function_type_info::~__function_type_info()
+      2    0.0%    0.0%  t __cxxabiv1::__free_with_fallback(void*)
+      2    0.0%    0.0%  t ___find_warguments
+      2    0.0%    0.0%  t __ZN2v88internal6String7FlattenEPNS0_7IsolateENS0_6HandleIS1_EENS0_14AllocationTypeE
+      2    0.0%    0.0%  t __ZN2v88internal22HandleScopeImplementer12EnterContextENS0_7ContextE
+      2    0.0%    0.0%  t __ZN2v88internal12_GLOBAL__N_124ProbeInstantiationsCacheEPNS0_7IsolateENS0_6HandleINS0_13NativeContextEEEiNS1_11CachingModeE
+      2    0.0%    0.0%  t __ZN2v88internal12_GLOBAL__N_117InstantiateObjectEPNS0_7IsolateENS0_6HandleINS0_18ObjectTemplateInfoEEENS4_INS0_10JSReceiverEEEb
+      2    0.0%    0.0%  t (anonymous namespace)::fallback_free(void*)
+      2    0.0%    0.0%  T node::ParseEncoding(char const*, node::encoding)
+      2    0.0%    0.0%  T node::LibuvStreamWrap::OnUvRead(long, uv_buf_t const*)
+      2    0.0%    0.0%  T node::InternalMakeCallback(node::Environment*, v8::Local<v8::Object>, v8::Local<v8::Object>, v8::Local<v8::Function>, int, v8::Local<v8::Value>*, node::async_context)
+      2    0.0%    0.0%  T _semaphore_create
+      2    0.0%    0.0%  T _realloc
+      2    0.0%    0.0%  T _os_packet_set_transport_traffic_realtime
+      2    0.0%    0.0%  T _malloc_zone_malloc
+      2    0.0%    0.0%  T _malloc
+      2    0.0%    0.0%  T _mach_msg_destroy
+      2    0.0%    0.0%  T ___ulock_wait
+      2    0.0%    0.0%  T ___thread_selfid
+      2    0.0%    0.0%  T __ZNK2v85Value8ToStringENS_5LocalINS_7ContextEEE
+      2    0.0%    0.0%  T __ZN2v88internal25FunctionCallbackArgumentsC1EPNS0_7IsolateENS0_6ObjectENS0_10HeapObjectES4_S5_Pmi
+      2    0.0%    0.0%  T __ZN2v87Isolate9InContextEv
+      2    0.0%    0.0%  T __ZN2v820EscapableHandleScopeC2EPNS_7IsolateE
+      1    0.0%    0.0%  t void node::Buffer::(anonymous namespace)::StringSlice<(node::encoding)1>(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  t unsigned long std::__1::__hash_table<node::CleanupHookCallback, node::CleanupHookCallback::Hash, node::CleanupHookCallback::Equal, std::__1::allocator<node::CleanupHookCallback> >::__erase_unique<node::CleanupHookCallback>(node::CleanupHookCallback const&)
+      1    0.0%    0.0%  t std::__1::istreambuf_iterator<wchar_t, std::__1::char_traits<wchar_t> > std::__1::num_get<wchar_t, std::__1::istreambuf_iterator<wchar_t, std::__1::char_traits<wchar_t> > >::__do_get_floating_point<float>(std::__1::istreambuf_iterator<wchar_t, std::__1::char_traits<wchar_t> >, std::__1::istreambuf_iterator<wchar_t, std::__1::char_traits<wchar_t> >, std::__1::ios_base&, unsigned int&, float&) const
+      1    0.0%    0.0%  t std::__1::basic_istream<wchar_t, std::__1::char_traits<wchar_t> >& std::__1::__input_arithmetic<long long, wchar_t, std::__1::char_traits<wchar_t> >(std::__1::basic_istream<wchar_t, std::__1::char_traits<wchar_t> >&, long long&)
+      1    0.0%    0.0%  t node::fs::Read(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  t node::Environment::ToggleImmediateRef(bool)::$_7::__invoke(uv_idle_s*)
+      1    0.0%    0.0%  t node::EnvGetter(v8::Local<v8::Name>, v8::PropertyCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  t node::Buffer::(anonymous namespace)::ByteLengthUtf8(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  t node::(anonymous namespace)::Parser::Proxy<int (node::(anonymous namespace)::Parser::*)(), &(node::(anonymous namespace)::Parser::on_message_begin())>::Raw(llhttp__internal_s*)
+      1    0.0%    0.0%  t node::(anonymous namespace)::Parser::OnStreamRead(long, uv_buf_t const&)
+      1    0.0%    0.0%  t node::(anonymous namespace)::IsAnyArrayBuffer(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  t node::(anonymous namespace)::GetLibuvNow(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  t dyld3::Loader::mapAndFixupAllImages(Diagnostics&, bool, bool)
+      1    0.0%    0.0%  t _nanov2_pointer_size
+      1    0.0%    0.0%  t _moreglue
+      1    0.0%    0.0%  t _default_zone_malloc
+      1    0.0%    0.0%  t _default_zone_free_definite_size
+      1    0.0%    0.0%  t __pthread_wqthread_setup
+      1    0.0%    0.0%  t __platform_memmove$VARIANT$Haswell
+      1    0.0%    0.0%  t __os_once_gate_broadcast
+      1    0.0%    0.0%  t __cxxabiv1::__shim_type_info::~__shim_type_info()
+      1    0.0%    0.0%  t __cxxabiv1::__array_type_info::~__array_type_info()
+      1    0.0%    0.0%  t ___vfwscanf
+      1    0.0%    0.0%  t __ZN2v88internal7JSArray10SetContentENS0_6HandleIS1_EENS2_INS0_14FixedArrayBaseEEE
+      1    0.0%    0.0%  t __ZN2v812_GLOBAL__N_114CallDepthScopeILb1EEC1EPNS_8internal7IsolateENS_5LocalINS_7ContextEEE
+      1    0.0%    0.0%  T std::__1::locale::classic()
+      1    0.0%    0.0%  T std::__1::basic_istream<wchar_t, std::__1::char_traits<wchar_t> >::get(std::__1::basic_streambuf<wchar_t, std::__1::char_traits<wchar_t> >&, wchar_t)
+      1    0.0%    0.0%  T std::__1::__next_prime(unsigned long)
+      1    0.0%    0.0%  T non-virtual thunk to node::LibuvStreamWrap::IsAlive()
+      1    0.0%    0.0%  T node::tracing::TraceEventHelper::GetTracingController()
+      1    0.0%    0.0%  T node::fs::Close(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  T node::TCPWrap::Bind6(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  T node::StreamBase::Writev(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  T node::NodeArrayBufferAllocator::Free(void*, unsigned long)
+      1    0.0%    0.0%  T node::InternalCallbackScope::Close()
+      1    0.0%    0.0%  T node::AsyncWrap::EmitTraceEventAfter(node::AsyncWrap::ProviderType, double)
+      1    0.0%    0.0%  T node::AsyncWrap::EmitBefore(node::Environment*, double)
+      1    0.0%    0.0%  T _pthread_cond_destroy
+      1    0.0%    0.0%  T _proc_set_cpumon_params
+      1    0.0%    0.0%  T _malloc_zone_from_ptr
+      1    0.0%    0.0%  T _inet_net_pton
+      1    0.0%    0.0%  T _dxprintf_exec
+      1    0.0%    0.0%  T ___sfp
+      1    0.0%    0.0%  T ___sflags
+      1    0.0%    0.0%  T __ZNK4node6crypto10ByteSource3getEv
+      1    0.0%    0.0%  T __ZNK2v86String12WriteOneByteEPNS_7IsolateEPhiii
+      1    0.0%    0.0%  T __ZNK2v86String10Utf8LengthEPNS_7IsolateE
+      1    0.0%    0.0%  T __ZNK2v85Array6LengthEv
+      1    0.0%    0.0%  T __ZN4node6crypto4Hmac10HmacUpdateERKN2v820FunctionCallbackInfoINS2_5ValueEEE
+      1    0.0%    0.0%  T __ZN4node27DTRACE_HTTP_SERVER_RESPONSEERKN2v820FunctionCallbackInfoINS0_5ValueEEE
+      1    0.0%    0.0%  T __ZN4node26DTRACE_HTTP_SERVER_REQUESTERKN2v820FunctionCallbackInfoINS0_5ValueEEE
+      1    0.0%    0.0%  T __ZN2v88internal25PropertyCallbackArgumentsC1EPNS0_7IsolateENS0_6ObjectES4_NS0_8JSObjectENS_5MaybeINS0_11ShouldThrowEEE
+      1    0.0%    0.0%  T __ZN2v88TryCatchD2Ev
+      1    0.0%    0.0%  T __ZN2v87Isolate16ClearKeptObjectsEv
+      1    0.0%    0.0%  T __ZN2v87Context29GetNumberOfEmbedderDataFieldsEv
+      1    0.0%    0.0%  T __ZN2v87Context17GetMicrotaskQueueEv
+      1    0.0%    0.0%  T __ZN2v86String14NewFromOneByteEPNS_7IsolateEPKhNS_13NewStringTypeEi
+      1    0.0%    0.0%  T __ZN2v86Object3SetENS_5LocalINS_7ContextEEENS1_INS_5ValueEEES5_
+      1    0.0%    0.0%  T __ZN2v85Array3NewEPNS_7IsolateEPNS_5LocalINS_5ValueEEEm
+      1    0.0%    0.0%  T __ZN2v815ArrayBufferView6BufferEv
+      1    0.0%    0.0%  T __ZN2v811HandleScopeD1Ev
+
+ [Summary]:
+   ticks  total  nonlib   name
+    156    2.3%    2.3%  JavaScript
+   6587   97.0%   97.5%  C++
+     84    1.2%    1.2%  GC
+     33    0.5%          Shared libraries
+     12    0.2%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+   3089   92.4%   45.5%  T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+    115    3.4%    1.7%  T _semaphore_wait
+     98    2.9%    1.4%  T _task_restartable_ranges_synchronize
+      4    0.1%    0.1%  t _tiny_malloc_should_clear
+      4    0.1%    0.1%  T _kdebug_typefilter
+      2    0.1%    0.0%  t node::task_queue::RunMicrotasks(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.1%    0.0%  t _small_malloc_should_clear
+      2    0.1%    0.0%  t _free_small
+      2    0.1%    0.0%  T void node::StreamBase::JSMethod<&(node::StreamBase::Writev(v8::FunctionCallbackInfo<v8::Value> const&))>(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.1%    0.0%  T node::ParseEncoding(char const*, node::encoding)
+      2    0.1%    0.0%  T __ZNK2v85Value8ToStringENS_5LocalINS_7ContextEEE
+      2    0.1%    0.0%  T __ZN2v86Object3GetENS_5LocalINS_7ContextEEEj
+      2    0.1%    0.0%  T __ZN2v820EscapableHandleScopeC2EPNS_7IsolateE
+      1    0.0%    0.0%  t _tiny_malloc_from_free_list
+      1    0.0%    0.0%  t _szone_realloc
+      1    0.0%    0.0%  t _small_malloc_from_free_list
+      1    0.0%    0.0%  t _nanov2_malloc
+      1    0.0%    0.0%  t _nanov2_find_block_and_allocate
+      1    0.0%    0.0%  t _free_tiny
+      1    0.0%    0.0%  t __os_nospin_lock_lock_slow
+      1    0.0%    0.0%  T non-virtual thunk to node::LibuvStreamWrap::IsAlive()
+      1    0.0%    0.0%  T node::tracing::TraceEventHelper::GetTracingController()
+      1    0.0%    0.0%  T node::StreamBase::Writev(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  T node::NodeArrayBufferAllocator::Free(void*, unsigned long)
+      1    0.0%    0.0%  T _vm_copy
+      1    0.0%    0.0%  T __ZNK4node6crypto10ByteSource3getEv
+      1    0.0%    0.0%  T __ZNK2v86String12WriteOneByteEPNS_7IsolateEPhiii
+      1    0.0%    0.0%  T __ZNK2v86String10Utf8LengthEPNS_7IsolateE
+      1    0.0%    0.0%  T __ZN2v815ArrayBufferView6BufferEv
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   2793   41.1%  T __kernelrpc_thread_policy_set
+
+   2661   39.2%  T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+   1080   40.6%    T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+     77    7.1%      T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+     12   15.6%        LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/dateformat/lib/dateformat.js:1:696
+     12  100.0%          LazyCompile: ~formatTime /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:60:21
+      7   58.3%            LazyCompile: *pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+      5   41.7%            LazyCompile: ~prettifyTime /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:430:23
+     12   15.6%        LazyCompile: *header /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:754:29
+     12  100.0%          LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+     12  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     11   14.3%        LazyCompile: *<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/dateformat/lib/dateformat.js:1:696
+     11  100.0%          LazyCompile: ~formatTime /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:60:21
+     11  100.0%            LazyCompile: *pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+      6    7.8%        LazyCompile: ~header /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:754:29
+      5   83.3%          LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+      5  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+      1   16.7%          LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      1  100.0%            LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+      5    6.5%        LazyCompile: ~expressInit /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/init.js:29:30
+      4   80.0%          LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      4  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      1   20.0%          LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      3    3.9%        LazyCompile: ~format /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/content-type/index.js:65:17
+      2   66.7%          LazyCompile: ~setCharset /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/utils.js:250:41
+      2  100.0%            LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      1   33.3%          LazyCompile: *send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      1  100.0%            LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+      3    3.9%        LazyCompile: ~checkInvalidHeaderChar node:_http_common:233:32
+      3  100.0%          LazyCompile: ~<anonymous> node:_http_outgoing:561:45
+      3  100.0%            LazyCompile: ~setHeader node:_http_outgoing:571:57
+      3    3.9%        LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      3  100.0%          LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+      3  100.0%            LazyCompile: ~LOG /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:37:16
+      2    2.6%        LazyCompile: ~prettifyObject /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:345:25
+      2  100.0%          LazyCompile: ~pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+      2  100.0%            LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      2    2.6%        LazyCompile: ~parseQueryStringValues /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:41:50
+      2  100.0%          LazyCompile: ~module.exports /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:222:27
+      2  100.0%            LazyCompile: ~parseExtendedQueryString /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/utils.js:291:34
+      2    2.6%        LazyCompile: ~parse /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/content-type/index.js:106:16
+      2  100.0%          LazyCompile: ~setCharset /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/utils.js:250:41
+      2  100.0%            LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      2    2.6%        LazyCompile: *pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+      2  100.0%          LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      2  100.0%            LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+      2    2.6%        LazyCompile: *parseQueryStringValues /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:41:50
+      1   50.0%          LazyCompile: ~module.exports /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:222:27
+      1  100.0%            LazyCompile: ~parseExtendedQueryString /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/utils.js:291:34
+      1   50.0%          LazyCompile: *module.exports /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/qs/lib/parse.js:222:27
+      1  100.0%            LazyCompile: ~parseExtendedQueryString /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/utils.js:291:34
+      1    1.3%        LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      1  100.0%          LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+      1  100.0%            LazyCompile: ~LOG /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:37:16
+      1    1.3%        LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+      1  100.0%          LazyCompile: ~LOG /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:37:16
+      1  100.0%            LazyCompile: ~info /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/config/logger.js:31:14
+      1    1.3%        LazyCompile: ~toIdentifier /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/toidentifier/index.js:22:23
+      1  100.0%          LazyCompile: ~forEachCode /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/http-errors/index.js:243:38
+      1  100.0%            T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+      1    1.3%        LazyCompile: ~realpathSync node:fs:1731:22
+      1  100.0%          LazyCompile: ~toRealPath node:internal/modules/cjs/loader:384:20
+      1  100.0%            LazyCompile: ~tryFile node:internal/modules/cjs/loader:375:17
+      1    1.3%        LazyCompile: ~readPackage node:internal/modules/cjs/loader:281:21
+      1  100.0%          LazyCompile: ~tryPackage node:internal/modules/cjs/loader:329:20
+      1  100.0%            LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:485:28
+      1    1.3%        LazyCompile: ~populateMaps /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/mime-types/index.js:154:23
+      1  100.0%          Eval: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/mime-types/index.js:1:1
+      1  100.0%            LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1046:37
+      1    1.3%        LazyCompile: ~onParserExecuteCommon node:_http_server:693:31
+      1  100.0%          LazyCompile: ~onParserExecute node:_http_server:636:25
+      1    1.3%        LazyCompile: ~match /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:110:39
+      1  100.0%          LazyCompile: ~matchLayer /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:572:20
+      1  100.0%            LazyCompile: ~next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      1    1.3%        LazyCompile: ~Module.load node:internal/modules/cjs/loader:960:33
+      1  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:748:24
+      1  100.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:988:36
+      1    1.3%        LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/request.js:467:36
+      1  100.0%          T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+      1  100.0%            LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      1    1.3%        LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/debug/src/node.js:34:64
+      1  100.0%          T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+      1  100.0%            Eval: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/debug/src/node.js:1:1
+      1    1.3%        LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      1  100.0%          LazyCompile: ~strategy.pass /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/middleware/authenticate.js:342:31
+      1  100.0%            LazyCompile: ~SessionStrategy.authenticate /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/strategies/session.js:44:50
+     47    4.4%      LazyCompile: *session /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:179:26
+     44   93.6%        LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     36   81.8%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     36  100.0%            LazyCompile: ~cookieParser /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-parser/index.js:44:32
+      8   18.2%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      8  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+      3    6.4%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      3  100.0%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      3  100.0%            LazyCompile: ~cookieParser /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-parser/index.js:44:32
+     45    4.2%      LazyCompile: ~cookieParser /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-parser/index.js:44:32
+     26   57.8%        LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     24   92.3%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     24  100.0%            LazyCompile: ~expressInit /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/init.js:29:30
+      2    7.7%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      2  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+     19   42.2%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     15   78.9%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     15  100.0%            LazyCompile: ~expressInit /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/init.js:29:30
+      4   21.1%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      4  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+     38    3.5%      LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     17   44.7%        LazyCompile: ~strategy.pass /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/middleware/authenticate.js:342:31
+     17  100.0%          LazyCompile: ~SessionStrategy.authenticate /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/strategies/session.js:44:50
+     17  100.0%            LazyCompile: ~attempt /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/middleware/authenticate.js:177:22
+      7   18.4%        LazyCompile: ~cookieParser /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-parser/index.js:44:32
+      6   85.7%          LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      6  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      1   14.3%          LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      7   18.4%        LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:485:38
+      5   71.4%          LazyCompile: *processImmediate node:internal/timers:421:28
+      2   28.6%          LazyCompile: ~processImmediate node:internal/timers:421:28
+      4   10.5%        LazyCompile: ~initialize /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/middleware/initialize.js:44:29
+      3   75.0%          LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      3  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      1   25.0%          LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      2    5.3%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:136:31
+      2  100.0%          LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/application.js:158:29
+      2  100.0%            LazyCompile: ~app /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/express.js:38:21
+      1    2.6%        LazyCompile: ~query /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/query.js:39:24
+      1  100.0%          LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     35    3.2%      LazyCompile: ~expressInit /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/init.js:29:30
+     19   54.3%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     16   84.2%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     16  100.0%            LazyCompile: ~query /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/query.js:39:24
+      3   15.8%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      3  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+     16   45.7%        LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     14   87.5%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     14  100.0%            LazyCompile: ~query /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/middleware/query.js:39:24
+      2   12.5%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      2  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+     31    2.9%      LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+     31  100.0%        LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     17   54.8%          LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     17  100.0%            LazyCompile: ~next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/route.js:114:16
+     14   45.2%          LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     14  100.0%            LazyCompile: ~next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/route.js:114:16
+     27    2.5%      LazyCompile: ~session /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:179:26
+     27  100.0%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     21   77.8%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+     21  100.0%            LazyCompile: ~cookieParser /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-parser/index.js:44:32
+      6   22.2%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      6  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+     26    2.4%      LazyCompile: ~getSession /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/session/memory.js:164:20
+     10   38.5%        LazyCompile: *session /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:179:26
+      9   90.0%          LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      7   77.8%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      2   22.2%            LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      1   10.0%          LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      9   34.6%        LazyCompile: ~touch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/session/memory.js:147:45
+      9  100.0%          LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+      9  100.0%            LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      7   26.9%        LazyCompile: ~get /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/session/memory.js:106:41
+      7  100.0%          LazyCompile: ~session /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:179:26
+      7  100.0%            LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     25    2.3%      LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+     25  100.0%        LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+     25  100.0%          LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     14   56.0%            LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     11   44.0%            LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     24    2.2%      LazyCompile: ~stringify /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:1118:20
+     24  100.0%        LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+     24  100.0%          LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     13   54.2%            LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     11   45.8%            LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     24    2.2%      LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     14   58.3%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     14  100.0%          LazyCompile: ~next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/route.js:114:16
+     14  100.0%            LazyCompile: ~dispatch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/route.js:98:45
+     10   41.7%        LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+     10  100.0%          LazyCompile: ~next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/route.js:114:16
+     10  100.0%            LazyCompile: ~dispatch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/route.js:98:45
+     23    2.1%      LazyCompile: ~end node:_http_outgoing:813:45
+     23  100.0%        LazyCompile: ~writeend /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:260:24
+     20   87.0%          LazyCompile: ~ontouch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:347:65
+     15   75.0%            LazyCompile: *processImmediate node:internal/timers:421:28
+      5   25.0%            LazyCompile: ~processImmediate node:internal/timers:421:28
+      3   13.0%          LazyCompile: ~onsave /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:335:41
+      3  100.0%            LazyCompile: ~processImmediate node:internal/timers:421:28
+     22    2.0%      LazyCompile: *nextTick node:internal/process/task_queues:102:18
+     13   59.1%        LazyCompile: ~onwrite node:internal/streams/writable:431:17
+      7   53.8%          LazyCompile: ~afterWriteDispatched node:internal/stream_base_commons:155:30
+      7  100.0%            LazyCompile: ~writevGeneric node:internal/stream_base_commons:122:23
+      6   46.2%          LazyCompile: *clearBuffer node:internal/streams/writable:534:21
+      6  100.0%            LazyCompile: ~Writable.uncork node:internal/streams/writable:347:37
+      3   13.6%        LazyCompile: ~emitReadable node:internal/streams/readable:559:22
+      3  100.0%          LazyCompile: ~onEofChunk node:internal/streams/readable:529:20
+      3  100.0%            LazyCompile: ~readableAddChunk node:internal/streams/readable:235:26
+      3   13.6%        LazyCompile: *write_ node:_http_outgoing:710:16
+      3  100.0%          LazyCompile: ~write node:_http_outgoing:681:49
+      2   66.7%            LazyCompile: *writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      1   33.3%            LazyCompile: ~writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      2    9.1%        LazyCompile: ~write_ node:_http_outgoing:710:16
+      2  100.0%          LazyCompile: ~write node:_http_outgoing:681:49
+      2  100.0%            LazyCompile: ~writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      1    4.5%        LazyCompile: *Readable.read node:internal/streams/readable:394:35
+      1  100.0%          LazyCompile: ~resume_ node:internal/streams/readable:979:17
+      1  100.0%            LazyCompile: *processTicksAndRejections node:internal/process/task_queues:66:35
+     21    1.9%      LazyCompile: *hash /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:596:14
+     11   52.4%        LazyCompile: ~inflate /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:371:22
+     11  100.0%          LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:485:38
+     11  100.0%            LazyCompile: *processImmediate node:internal/timers:421:28
+     10   47.6%        LazyCompile: ~isSaved /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:430:21
+     10  100.0%          LazyCompile: ~shouldSave /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:440:24
+      6   60.0%            LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+      4   40.0%            LazyCompile: ~shouldTouch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:453:25
+     18    1.7%      LazyCompile: ~res.get /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:788:19
+     17   94.4%        LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+     17  100.0%          LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     11   64.7%            LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      6   35.3%            LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      1    5.6%        LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/request.js:467:36
+      1  100.0%          T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+      1  100.0%            LazyCompile: *send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+     18    1.7%      LazyCompile: ~hash /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:596:14
+     12   66.7%        LazyCompile: ~inflate /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:371:22
+     12  100.0%          LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:485:38
+      7   58.3%            LazyCompile: *processImmediate node:internal/timers:421:28
+      5   41.7%            LazyCompile: ~processImmediate node:internal/timers:421:28
+      6   33.3%        LazyCompile: ~isSaved /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:430:21
+      6  100.0%          LazyCompile: ~shouldSave /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:440:24
+      4   66.7%            LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+      1   16.7%            LazyCompile: ~shouldTouch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:453:25
+      1   16.7%            LazyCompile: *send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+     17    1.6%      LazyCompile: ~Hmac node:internal/crypto/hash:127:14
+     17  100.0%        LazyCompile: ~createHmac node:crypto:161:20
+     17  100.0%          LazyCompile: ~exports.sign /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-signature/index.js:16:24
+     16   94.1%            LazyCompile: ~exports.unsign /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/cookie-signature/index.js:36:26
+      1    5.9%            LazyCompile: ~setcookie /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:655:19
+     17    1.6%      LazyCompile: *end node:_http_outgoing:813:45
+     17  100.0%        LazyCompile: ~writeend /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:260:24
+     17  100.0%          LazyCompile: ~ontouch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:347:65
+     17  100.0%            LazyCompile: *processImmediate node:internal/timers:421:28
+     16    1.5%      LazyCompile: ~setWriteHeadHeaders /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/on-headers/index.js:105:30
+     16  100.0%        LazyCompile: ~writeHead /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/on-headers/index.js:28:29
+     12   75.0%          LazyCompile: ~_implicitHeader node:_http_server:269:68
+     12  100.0%            LazyCompile: ~writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      4   25.0%          LazyCompile: *writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      4  100.0%            LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+     16    1.5%      LazyCompile: ~Store.createSession /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/session/store.js:86:41
+     16  100.0%        LazyCompile: ~inflate /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:371:22
+     16  100.0%          LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:485:38
+     13   81.3%            LazyCompile: *processImmediate node:internal/timers:421:28
+      3   18.8%            LazyCompile: ~processImmediate node:internal/timers:421:28
+     14    1.3%      LazyCompile: ~writeHead node:_http_server:274:19
+     14  100.0%        LazyCompile: ~writeHead /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/on-headers/index.js:28:29
+     14  100.0%          LazyCompile: ~_implicitHeader node:_http_server:269:68
+     14  100.0%            LazyCompile: ~writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+     14    1.3%      LazyCompile: ~clearIncoming node:_http_server:749:23
+      7   50.0%        LazyCompile: ~resOnFinish node:_http_server:793:21
+      5   71.4%          LazyCompile: *emit node:events:327:44
+      5  100.0%            LazyCompile: ~onFinish node:_http_outgoing:808:18
+      2   28.6%          LazyCompile: ~emit node:events:327:44
+      2  100.0%            LazyCompile: ~onFinish node:_http_outgoing:808:18
+      7   50.0%        LazyCompile: *emit node:events:327:44
+      7  100.0%          LazyCompile: ~endReadableNT node:internal/streams/readable:1300:23
+      7  100.0%            LazyCompile: *processTicksAndRejections node:internal/process/task_queues:66:35
+     14    1.3%      LazyCompile: *onwrite node:internal/streams/writable:431:17
+     12   85.7%        LazyCompile: *clearBuffer node:internal/streams/writable:534:21
+      8   66.7%          LazyCompile: ~Writable.uncork node:internal/streams/writable:347:37
+      6   75.0%            LazyCompile: ~connectionCorkNT node:_http_outgoing:776:26
+      2   25.0%            LazyCompile: ~end node:_http_outgoing:813:45
+      4   33.3%          LazyCompile: *end node:_http_outgoing:813:45
+      4  100.0%            LazyCompile: ~writeend /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:260:24
+      2   14.3%        LazyCompile: *writevGeneric node:internal/stream_base_commons:122:23
+      2  100.0%          LazyCompile: ~Socket._writeGeneric node:net:747:42
+      2  100.0%            LazyCompile: ~Socket._writev node:net:779:36
+     14    1.3%      LazyCompile: *_storeHeader node:_http_outgoing:373:22
+      7   50.0%        LazyCompile: ~writeHead node:_http_server:274:19
+      7  100.0%          LazyCompile: ~writeHead /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/on-headers/index.js:28:29
+      5   71.4%            LazyCompile: ~_implicitHeader node:_http_server:269:68
+      2   28.6%            LazyCompile: *writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      7   50.0%        LazyCompile: *writeHead node:_http_server:274:19
+      7  100.0%          LazyCompile: ~writeHead /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/on-headers/index.js:28:29
+      7  100.0%            LazyCompile: *writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+     13    1.2%      LazyCompile: ~touch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/session/memory.js:147:45
+     10   76.9%        LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+     10  100.0%          LazyCompile: ~send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+     10  100.0%            LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+      3   23.1%        LazyCompile: *send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+      3  100.0%          LazyCompile: ~json /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:239:25
+      3  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     13    1.2%      LazyCompile: ~initialize /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/passport/lib/middleware/initialize.js:44:29
+      7   53.8%        LazyCompile: *handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      5   71.4%          LazyCompile: ~trim_prefix /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:288:23
+      5  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:275:64
+      2   28.6%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      2  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:485:38
+      6   46.2%        LazyCompile: ~handle /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/layer.js:86:49
+      6  100.0%          LazyCompile: *next /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/router/index.js:176:16
+      6  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:485:38
+     13    1.2%      LazyCompile: *write_ node:_http_outgoing:710:16
+     13  100.0%        LazyCompile: ~write node:_http_outgoing:681:49
+      8   61.5%          LazyCompile: *writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      8  100.0%            LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+      5   38.5%          LazyCompile: ~writetop /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:270:24
+      3   60.0%            LazyCompile: ~end /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:250:27
+      2   40.0%            LazyCompile: *send /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express/lib/response.js:107:25
+     11    1.0%      LazyCompile: ~createDate /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:101:21
+     11  100.0%        LazyCompile: ~formatTime /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:60:21
+      7   63.6%          LazyCompile: *pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+      5   71.4%            LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      2   28.6%            LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+      4   36.4%          LazyCompile: ~prettifyTime /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/lib/utils.js:430:23
+      4  100.0%            LazyCompile: ~pretty /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino-pretty/index.js:65:19
+
+    115    1.7%  T _semaphore_wait
+     94   81.7%    LazyCompile: *clearBuffer node:internal/streams/writable:534:21
+     84   89.4%      LazyCompile: ~Writable.uncork node:internal/streams/writable:347:37
+     72   85.7%        LazyCompile: ~connectionCorkNT node:_http_outgoing:776:26
+     72  100.0%          LazyCompile: *processTicksAndRejections node:internal/process/task_queues:66:35
+      2    2.8%            LazyCompile: ~runNextTicks node:internal/process/task_queues:57:22
+     12   14.3%        LazyCompile: ~end node:_http_outgoing:813:45
+     12  100.0%          LazyCompile: ~writeend /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:260:24
+     12  100.0%            LazyCompile: ~ontouch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:347:65
+     10   10.6%      LazyCompile: *end node:_http_outgoing:813:45
+     10  100.0%        LazyCompile: ~writeend /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:260:24
+     10  100.0%          LazyCompile: ~ontouch /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/express-session/index.js:347:65
+     10  100.0%            LazyCompile: *processImmediate node:internal/timers:421:28
+     21   18.3%    LazyCompile: *writevGeneric node:internal/stream_base_commons:122:23
+     21  100.0%      LazyCompile: ~Socket._writeGeneric node:net:747:42
+     21  100.0%        LazyCompile: ~Socket._writev node:net:779:36
+     21  100.0%          LazyCompile: ~doWrite node:internal/streams/writable:404:17
+     21  100.0%            LazyCompile: ~clearBuffer node:internal/streams/writable:534:21
+
+    100    1.5%  T _task_restartable_ranges_synchronize
+     98   98.0%    LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+     88   89.8%      LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+     88  100.0%        LazyCompile: ~LOG /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:37:16
+     88  100.0%          LazyCompile: ~info /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/config/logger.js:31:14
+     88  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+     10   10.2%      LazyCompile: *write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/proto.js:164:16
+     10  100.0%        LazyCompile: ~LOG /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:37:16
+     10  100.0%          LazyCompile: ~info /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/config/logger.js:31:14
+     10  100.0%            LazyCompile: ~<anonymous> /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/src/app-bloq.js:59:17
+
+     98    1.4%  t node::fs::WriteString(v8::FunctionCallbackInfo<v8::Value> const&)
+     98  100.0%    T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+     98  100.0%      LazyCompile: ~writeSync node:fs:720:19
+     98  100.0%        LazyCompile: ~actualWrite /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/sonic-boom/index.js:335:22
+     98  100.0%          LazyCompile: ~SonicBoom.write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/sonic-boom/index.js:210:38
+     98  100.0%            LazyCompile: ~write /Users/rafaelmascayano/git/coderhouse/sesion32/desafio/node/node_modules/pino/lib/tools.js:234:11
+
+     96    1.4%  T void node::StreamBase::JSMethod<&(node::StreamBase::Writev(v8::FunctionCallbackInfo<v8::Value> const&))>(v8::FunctionCallbackInfo<v8::Value> const&)
+     94   97.9%    T __ZN2v88internal4wasm11AsmJsParser19ExpressionStatementEv
+     94  100.0%      LazyCompile: ~writevGeneric node:internal/stream_base_commons:122:23
+     94  100.0%        LazyCompile: ~Socket._writeGeneric node:net:747:42
+     94  100.0%          LazyCompile: ~Socket._writev node:net:779:36
+     94  100.0%            LazyCompile: ~doWrite node:internal/streams/writable:404:17
+      2    2.1%    LazyCompile: *clearBuffer node:internal/streams/writable:534:21
+      2  100.0%      LazyCompile: ~Writable.uncork node:internal/streams/writable:347:37
+      2  100.0%        LazyCompile: ~connectionCorkNT node:_http_outgoing:776:26
+      2  100.0%          LazyCompile: *processTicksAndRejections node:internal/process/task_queues:66:35
+

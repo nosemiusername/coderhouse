@@ -3,7 +3,7 @@ const dotenv = require('dotenv').config({ path: path.resolve(__dirname, '../.env
 
 /** Loading from console if there is parameter */
 module.exports = {
-    port: process.env.PORT,
+    port: process.argv[2] || process.env.PORT,
     sqlite: {
         client: process.env.SQLITE_CLIENT,
         connection: {
