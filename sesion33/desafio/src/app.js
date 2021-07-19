@@ -83,6 +83,10 @@ app.get('/div', (req, res, next) => {
     res.json(result);
 })
 
+app.get('/*', (req, res) => {
+    res.json("Routye doesn't exist");
+});
+
 app.listen(PORT, () => {
     console.log(`Application is listening at port ${PORT}`);
 })

@@ -4,9 +4,7 @@
   "description": "",
   "main": "./src/app.js",
   "scripts": {
-    "test": "nodemon app.js",
-    "FORK": "pm2 start app.js --name='coderhouse' --watch",
-    "CLUSTER": "pm2 start app.js --name='coderhouse' --watch -i max"
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
