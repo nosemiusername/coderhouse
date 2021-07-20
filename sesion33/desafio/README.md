@@ -5,12 +5,12 @@ Se intento desplegar desde el repo actual pero no fue posible pues toma todas la
 # Ejecucion
 
 Se disponibilizan por proyecto anterior tanto info como rando. Para esta segunda esta pendiente la configuracion desde google apps para que autorice el dominio herokuapp como url-callback.
-https://c0ntigosalud.herokuapp.com/info
-https://c0ntigosalud.herokuapp.com/random
+* https://c0ntigosalud.herokuapp.com/info
+* https://c0ntigosalud.herokuapp.com/random
 
 # Analisis
 
-Como se solicita en la consigna, se debe demostrar el log del server. En este ejemplo al fina se imprime en la consola la uri a la cual se intenta acceder (/hola)
+Como se solicita en la consigna, se debe demostrar el log del server. En este ejemplo al final se imprime en la consola la uri a la cual se intenta acceder (/hola)
 
 ```
 2021-07-20T04:18:24.340950+00:00 heroku[web.1]: Starting process with command `npm start`
