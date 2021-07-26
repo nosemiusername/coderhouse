@@ -43,11 +43,11 @@ if (cluster.isMaster) {
     app.use(bodyParser.urlencoded({ extended: false }));
 
     app.get('/', function (req, res) {
-        res.sendFile(`${__dirname}/src/public/index.html`);
+        res.sendFile(`${__dirname}/public/index.html`);
     });
 
     app.get('/main.css', function (req, res) {
-        res.sendFile(`${__dirname}/src/public/main.css`);
+        res.sendFile(`${__dirname}/public/main.css`);
     });
 
     app.post('/save', function (req, res) {
@@ -63,9 +63,7 @@ if (cluster.isMaster) {
                 if (err.code === 'ConditionalCheckFailedException') {
                     returnStatus = 409;
                 }
-
-                res.status(returnStatus).end();
-                console.log('DDB Error: ' + err);
+                console.error('DDB Error: ' + err);
             } else {
                 sns.publish({
                     'Message': `Item detail: ${item}`,
@@ -73,14 +71,14 @@ if (cluster.isMaster) {
                     'TopicArn': snsTopic
                 }, function (err, data) {
                     if (err) {
-                        res.status(500).end();
-                        console.log('SNS Error: ' + err);
+                        console.error('SNS Error: ' + err);
                     } else {
-                        res.status(201).end();
+                        console.warn("Created");
                     }
                 });
             }
         });
+        res.redirect('/');
     });
 
     var port = process.env.PORT || 3000;
