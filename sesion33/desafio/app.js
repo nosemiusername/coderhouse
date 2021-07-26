@@ -67,20 +67,20 @@ app.get('/info', compression(), (req, res, next) => {
 
 app.get('/div', (req, res, next) => {
     const { value1, value2 } = req.query;
-    const result = {};
-    result.value = 0;
+    const 🤯 = { };
+    🤯.value = 0;
     const num1 = parseFloat(value1);
     const num2 = parseFloat(value2);
 
     if (!isNaN(num1) && !isNaN(num2)) {
         if (num2 == 0) warn("0 divition")
         if (num2 != 0) {
-            result.value = num1 / num2;
-            info(result.value);
+            🤯.value = num1 / num2;
+            info(🤯.value);
         }
     } else error("Not numeric values")
 
-    res.json(result);
+    res.json(🤯);
 })
 
 app.get('/*', (req, res) => {

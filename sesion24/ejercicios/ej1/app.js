@@ -1,5 +1,5 @@
 import express from 'express';
-import cookieParser  from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 
 const PORT = 3000;
 const app = express();
@@ -13,7 +13,7 @@ app.post('/cookies', (req, res, next) => {
     console.log(req.body);
     const { name, value, time } = req.body;
 
-    res.cookie(name, value, {maxAge:time ? time : 3000}).send('coockie set');
+    res.cookie(name, value, { maxAge: time ? time : 3000 }).send('coockie set');
 
 });
 
