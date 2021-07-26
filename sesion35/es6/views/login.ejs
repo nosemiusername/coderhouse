@@ -1,0 +1,19 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v11.0&appId=496117064774752&autoLogAppEvents=1"
+    nonce="LSQ0q73z"></script>
+<%- include('layouts/index'); -%>
+    <div class="container" id="form-container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card" style="border-radius: 2rem;">
+                    <div class="card-body p-5 text-center">
+                        <button class="btn btn-primary" onclick="location.href='/auth/google'">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="div-table-container">
+    </div>
+    <%- include('layouts/footer'); -%>
