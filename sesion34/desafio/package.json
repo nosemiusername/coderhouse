@@ -1,21 +1,14 @@
 {
-  "type": "module",
-  "name": "desafio",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./src/app.js",
-  "scripts": {
-    "start": "nodemon ."
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "Elastic-Beanstalk-Sample-App",
+  "version": "0.0.1",
+  "private": true,
   "dependencies": {
-    "aws-sdk": "^2.953.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "ejs": "latest",
+    "aws-sdk": "latest",
+    "express": "latest",
+    "body-parser": "latest"
   },
-  "devDependencies": {
-    "@types/express": "^4.17.13"
+  "scripts": {
+    "start": "node app.js"
   }
 }
