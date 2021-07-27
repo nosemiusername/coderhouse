@@ -16,9 +16,11 @@ class WebSoccket {
                 });
 
             socket.on('new-chat', data => {
+                if (data.text == config.sms_text_notification) {
+                    sendSMS(JSON.stringify(data));
+                }
                 const chat = MessageController.createMessage(data);
                 io.sockets.emit('chats', chat);
-                if (data == config.SMS_TEXT_NOTIFICATION) sendSMS(chat);
             });
         });
     }

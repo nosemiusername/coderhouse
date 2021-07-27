@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
-import { config } from '../config/index.js'
+import config from '../config/index.js'
 import twilio from 'twilio';
 
-const createSendMail = (mailconfig) => {
+function createSendMail(mailconfig) {
     const transporter = nodemailer.createTransport(mailconfig);
 
     return async function sendMail({ html }) {
@@ -12,20 +12,20 @@ const createSendMail = (mailconfig) => {
 
 }
 
-const createSendMailEthereal = () => {
+function createSendMailEthereal() {
     return createSendMail(
         {
             host: config.ethereal_host,
             port: config.ethereal_port,
             auth: {
                 user: config.ethereal_user,
-                pass: config.gmail_pass,
+                pass: config.ethereal_pass,
             }
         }
     );
 }
 
-const createSendMailGmail = () => {
+function createSendMailGmail() {
     return createSendMail(
         {
             service: config.gmail_service,
@@ -35,6 +35,7 @@ const createSendMailGmail = () => {
             }
         });
 }
+
 
 export const sendMail = async (type = 'ethereal', op, name, timestamp, attachment) => {
 
@@ -57,22 +58,36 @@ export const sendMail = async (type = 'ethereal', op, name, timestamp, attachmen
     </body>
     </html>
     `
-
-    if (type == 'ethereal') const info = await createSendMailEthereal(html, attachment);
-    if (type == 'gmail') const info = await createSendMailGmail(html, attachment);
-    console.log(info);
+    try {
+        if (type == 'ethereal') {
+            const sendGenericMail = createSendMailEthereal();
+            const info = await sendGenericMail({ html });
+            // console.log(info);
+        } else if (type == 'gmail') {
+            const sendGenericMail = createSendMailGmail();
+            const info = await sendGenericMail({ html });
+            // console.log(info);
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export const sendSMS = async (text) => {
 
-    const client = twilio(sid, auth);
+    try {
+        const client = twilio(config.twillio_sid, config.twillio_auth);
 
-    const info = await client.messages.create({
-        body: text,
-        from: config.twillio_from,
-        to: config.twillio_to,
-    })
+        const messages = {
+            body: text,
+            from: config.twillio_from,
+            to: config.twillio_to,
+        };
 
-    return info;
+        const info = await client.messages.create(messages);
 
+        console.log(info);
+    } catch (error) {
+        console.error(error);
+    }
 }

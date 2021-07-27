@@ -12,19 +12,6 @@ export default class WebController {
         res.render('login');
     };
 
-    static sendIndex(req, res, next) {
-        if (req.isAuthenticated()) {
-            const ts = Date.now();
-            const date_ob = new Date(ts);
-            sendChat(req, res, next);
-            sendMail('ethereal', 'login', req.user.displayName, date_ob, req.user.photos[0].value);
-            sendMail('gmail', 'login', req.user.displayName, date_ob, req.user.photos[0].value);
-        }
-        else {
-            res.render('login');
-        }
-
-    };
 
     static sendChat(req, res, next) {
         req.user.counter = req.user.counter = 0 || req.user.counter++;
@@ -36,7 +23,28 @@ export default class WebController {
         });
     }
 
+    static sendIndex(req, res, next) {
+        if (req.isAuthenticated()) {
+            const ts = Date.now();
+            const date_ob = new Date(ts);
+            sendMail('ethereal', 'login', req.user.displayName, date_ob, req.user.photos[0].value);
+            sendMail('gmail', 'login', req.user.displayName, date_ob, req.user.photos[0].value);
+            res.render('chat', {
+                name: req.user.displayName,
+                photo: req.user.photos[0].value,
+                email: req.user.emails[0].value,
+                contador: req.user.counter
+            });
+        }
+        else {
+            res.render('login');
+        }
+
+    };
+
     static sendLogout(req, res, next) {
+        const ts = Date.now();
+        const date_ob = new Date(ts);
         sendMail('ethereal', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
         sendMail('gmail', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
         req.logout();

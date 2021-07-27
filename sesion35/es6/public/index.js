@@ -102,7 +102,7 @@ const denormalizer = (normalizedChats) => {
 
     const chatsSchema = new normalizr.schema.Array(chatSchema);
     const denormalizedChats = normalizr.denormalize(normalizedChats.result, chatsSchema, normalizedChats.entities);
-    const compresionRate =  100 - (100 * JSON.stringify(normalizedChats).length / JSON.stringify(denormalizedChats).length).toFixed(2);
-    
-    return {denormalizedChats:denormalizedChats, compresionRate:compresionRate > 0 ? compresionRate : 0};
+    const compresionRate = 100 - (100 * JSON.stringify(normalizedChats).length / JSON.stringify(denormalizedChats).length).toFixed(2);
+
+    return { denormalizedChats: denormalizedChats, compresionRate: compresionRate > 0 ? compresionRate : 0 };
 }
