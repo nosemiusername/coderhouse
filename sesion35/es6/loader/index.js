@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Server as ioServer } from 'socket.io';
 import config from '../config/index.js';
 import { MessageController } from '../controllers/message.controller.js';
-
+import { sendSMS } from '../helper/index.js';
 class WebSoccket {
     static connect(http) {
         const io = new ioServer(http);
@@ -18,6 +18,7 @@ class WebSoccket {
             socket.on('new-chat', data => {
                 const chat = MessageController.createMessage(data);
                 io.sockets.emit('chats', chat);
+                if (data == config.SMS_TEXT_NOTIFICATION) sendSMS(chat);
             });
         });
     }

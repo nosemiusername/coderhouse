@@ -1,5 +1,7 @@
 import config from "../config/index.js";
 import { fork } from "child_process";
+import { sendMail, sendSMS } from '../helper/index.js'
+
 export default class WebController {
 
     static sendRegister(req, res, next) {
@@ -12,8 +14,11 @@ export default class WebController {
 
     static sendIndex(req, res, next) {
         if (req.isAuthenticated()) {
+            const ts = Date.now();
+            const date_ob = new Date(ts);
             sendChat(req, res, next);
-            sendmail();
+            sendMail('ethereal', 'login', req.user.displayName, date_ob, req.user.photos[0].value);
+            sendMail('gmail', 'login', req.user.displayName, date_ob, req.user.photos[0].value);
         }
         else {
             res.render('login');
@@ -32,6 +37,8 @@ export default class WebController {
     }
 
     static sendLogout(req, res, next) {
+        sendMail('ethereal', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
+        sendMail('gmail', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
         req.logout();
         res.render('login');
     }
