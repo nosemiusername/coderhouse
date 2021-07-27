@@ -32,4 +32,5 @@ export default {
         scope: process.env.FB_SCOPE,
     },
     random_numbers: process.env.RANDOM_NUMBERS,
+    from_mail: process.env.FROM_MAIL,
 }
