@@ -1,4 +1,4 @@
-const pino = require('pino');
+import pino, { destination } from 'pino';
 
 const loggerWarn = pino({
     prettyPrint: {
@@ -6,7 +6,7 @@ const loggerWarn = pino({
         levelFirst: true,
         translateTime: "yyyy-dd-mm, h:MM:ss TT",
     },
-}, pino.destination("/tmp/warn.log"));
+}, destination("/tmp/warn.log"));
 
 const loggerError = pino({
     prettyPrint: {
@@ -14,7 +14,7 @@ const loggerError = pino({
         levelFirst: true,
         translateTime: "yyyy-dd-mm, h:MM:ss TT",
     },
-}, pino.destination("/tmp/error.log"));
+}, destination("/tmp/error.log"));
 
 const loggerConsole = pino({
     prettyPrint: {
@@ -22,23 +22,24 @@ const loggerConsole = pino({
         levelFirst: true,
         translateTime: "yyyy-dd-mm, h:MM:ss TT",
     },
-}, pino.destination());
+}, destination());
 
 loggerWarn.level = 'warn';
 loggerError.level = 'error';
 loggerConsole.level = 'info';
 
-export const info = (msg) => {
+const info = (msg) => {
     loggerConsole.info(msg);
 }
 
-export const warn = (msg) => {
+const warn = (msg) => {
     loggerWarn.warn(msg);
     loggerConsole.warn(msg);
 }
 
-export const error = (msg) => {
+const error = (msg) => {
     loggerError.error(msg);
     loggerConsole.error(msg);
 }
 
+export default { info, warn, error }

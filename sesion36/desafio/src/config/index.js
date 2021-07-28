@@ -11,4 +11,6 @@ export default {
     twillio_from: process.env.TWILLIO_FROM,
     twillio_to: process.env.TWILLIO_TO,
     subject_mail: process.env.SUBJECT_MAIL,
+    mongo_uri: process.env.MONGO_URI,
+    mongo_max_age: process.env.MONGO_MAX_AGE,
 }
