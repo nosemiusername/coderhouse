@@ -1,0 +1,66 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    font-size: 62.5%;
+
+}
+
+.navbar {
+    /* border-style: solid; */
+    display: flex;
+    justify-items: center;
+    flex-direction: row;
+
+}
+
+.li {
+    width: 100px;
+    display: block;
+    /* border-style: solid; */
+    /* padding: 5px; */
+    font-size: 1.5rem;
+    list-style-type: none;
+    text-align: center;
+    margin: auto;
+}
+
+
+.section {
+    border-style: solid;
+    width: 400px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.div {
+    display: flex;
+}
+
+.h1 {
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+}
+
+.form {
+    margin: auto;
+}
+
+.input {
+    display: block;
+    margin: 5px 0px 5px;
+
+}
+
+.btn {
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.input-shrink {
+    width: 50px;
+}
