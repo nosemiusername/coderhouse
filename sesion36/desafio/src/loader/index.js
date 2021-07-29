@@ -1,15 +1,17 @@
 import mongoose from "mongoose";
+import config from '../config/index.js';
+import { info } from '../config/logger.js'
 
 class MongoDBaaS {
     static async connect() {
         try {
-            const res = await mongoose.connect(config.mongoURI, {
+            const res = await mongoose.connect(config.mongo_uri, {
                 useNewUrlParser: true,
                 useCreateIndex: true, useUnifiedTopology: true
             });
-            console.log(`MongoDBaaS: Connection ${mongoose.STATES[res.connection.readyState]}`);
+            info(`MongoDBaaS: Connection ${mongoose.STATES[res.connection.readyState]}`);
         } catch (error) {
-            console.log(`Error in DB connection ${error}`);
+            info(`Error in DB connection ${error}`);
         }
     }
 }

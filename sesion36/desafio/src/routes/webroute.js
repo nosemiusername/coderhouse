@@ -24,19 +24,27 @@ passport.use('signup', new LocalStrategy(async (name, email, password, age, addr
     }
 }))
 
-webRouter.get('/register', passport.authenticate('signup', { failureRedirect: '/login' }), (req, res, next) => {
+webRouter.post('/register', passport.authenticate('signup', { failureRedirect: '/signup.html' }), (req, res, next) => {
     res.redirect('/');
 }
 );
 
-webRouter.get('/signup', (req, res, next) => {
-    res.sendFile(`${__dirname}/public/index.html`);
+webRouter.post('/login', passport.authenticate('signup', { failureRedirect: '/login.html' }), (req, res, next) => {
+    res.redirect('/');
+}
+);
+
+webRouter.get('/signup.html', (req, res, next) => {
+    res.sendFile(`${__dirname}/src/public/signup.html`);
+});
+
+webRouter.get('/login.html', (req, res, next) => {
+    res.sendFile(`${__dirname}/src/public/login.html`);
+});
+webRouter.get('/main.css', (req, res, next) => {
+    res.sendFile(`${__dirname}/src/public/main.css`);
 });
 
 webRouter.get('/', (req, res, next) => {
-    res.sendFile(`${__dirname}/public/index.html`);
-});
-
-webRouter.get('/main.css', (req, res, next) => {
-    res.sendFile(`${__dirname}/public/main.css`);
+    res.sendFile(`${__dirname}/src/public/login.html`);
 });

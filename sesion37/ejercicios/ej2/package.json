@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "nosemiops",
+  "version": "1.0.0",
+  "description": "aritmetics ops",
+  "main": ".op.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rafael Mascayano",
+  "license": "ISC",
+  "dependencies": {
+    "nosemiops": "^1.0.0"
+  }
+}
