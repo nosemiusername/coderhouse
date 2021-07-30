@@ -22,6 +22,11 @@ export class ItemService {
         } catch (error) {
             error(error);
         }
+    }
 
+    static async findAll() {
+        const items = await Item.find();
+        console.log(items);
+        return items;
     }
 }

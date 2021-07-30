@@ -12,9 +12,10 @@ export class WebController {
         res.render('login');
     }
 
-    static sendHome(req, res, next) {
+    static async sendHome(req, res, next) {
         if (req.isAuthenticated()) {
-            res.render('home', { user: req.user })
+            const items = await ItemController.search();
+            res.render('home', { user: req.user, products: items })
         }
     }
 

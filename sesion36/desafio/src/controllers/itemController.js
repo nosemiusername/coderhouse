@@ -5,4 +5,9 @@ export class ItemController {
         ItemService.create(cant);
     }
 
+    static async search() {
+        const items = await ItemService.findAll();
+        return items;
+    }
+
 }

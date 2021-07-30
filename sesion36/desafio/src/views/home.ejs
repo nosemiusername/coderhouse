@@ -1,20 +1,19 @@
 <%- include('layouts/header'); -%>
-    <header>
-        <div class="alert alert-success" role="alert">
-            <span> Hola !</span>
-            <div>
-                <span>
-                    <%= user.username %>
-                </span>
-                <span><img src="" /></span>
+  <% products.forEach( element=> { %>
+    <div class="card mb-3">
+      <img style="width:600px; margin: 20px;" class="card-img-top" src="<%= element.image %>" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= element.productName %>
+        </h5>
+        <p class="card-text">
+          <%= element.productDescription %>
+            <span style="display: block; font-weight: bold;">$<%= element.price %></span>
+        </p>
+        <a href="#" onclick="addCart(<%= element.id %>)" class="btn btn-success">Agregar al carro</a>
+      </div>
+    </div>
+    <% }); %>
+      </body>
 
-                <span style="float: right ; margin-left: 5px;"> <button onclick="location.href='/logout'"
-                        class="btn btn-secondary btn-sm">Logout</button></span>
-                <span style="float: right"> <button onclick="location.href='/logout'"
-                        class="btn btn-secondary btn-sm">Mi Perfil</button></span>
-            </div>
-        </div>
-    </header>
-    </body>
-
-    </html>
+      </html>
