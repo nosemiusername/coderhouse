@@ -12,11 +12,13 @@ export class UserController {
     }
 
     // TODO manage catch error modify return 
-    static async create(name, email, password, age, address) {
+    static async create(user) {
         try {
-            const create = await UserService.create(user);
+            const newuser = await UserService.create(user);
+            return newuser;
         } catch (error) {
             return null;
         }
     }
+
 }
