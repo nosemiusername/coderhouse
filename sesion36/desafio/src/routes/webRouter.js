@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';;
-import { UserController } from '../controllers/userController.js';
 import { WebController } from '../controllers/webController.js';
+import { UserController } from '../controllers/userController.js';
+import { CartController } from '../controllers/cartController.js';
+import { ItemController } from '../controllers/itemController.js';
 
 export const webRouter = Router();
 
@@ -47,7 +49,12 @@ webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/fai
 webRouter.get('/failregister', WebController.failRegister);
 webRouter.get('/faillogin', WebController.failLogin);
 webRouter.get('/logout', WebController.sendIndex);
-webRouter.get('/generateitems', WebController.generateItems);
+webRouter.get('/generateitems', ItemController.generateItems);
+webRouter.post('/addcart', CartController.add);
+webRouter.get('/showcart', CartController.search);
+webRouter.post('/paycart', CartController.pay);
+webRouter.get('/home', WebController.sendHome);
+webRouter.get('/profile', WebController.sendProfile);
 webRouter.get('/', WebController.sendIndex);
 
 

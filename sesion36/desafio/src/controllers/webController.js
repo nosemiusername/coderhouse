@@ -1,4 +1,5 @@
 import { ItemController } from "../controllers/itemController.js"
+import { UserService } from "../services/userService.js"
 const __dirname = process.cwd();
 
 export class WebController {
@@ -19,6 +20,12 @@ export class WebController {
         }
     }
 
+    static async sendProfile(req, res, next) {
+        if (req.isAuthenticated()) {
+            res.render('profile', { user: req.user })
+        }
+    }
+
     static failLogin(req, res, next) {
         res.json('faillogin')
     }
@@ -29,12 +36,6 @@ export class WebController {
 
     static sendIndex(req, res, next) {
         res.sendFile(`${__dirname}/src/public/login.html`);
-    }
-
-    static generateItems(req, res, next) {
-        const cant = req.query.cant || 1;
-        ItemController.create(cant);
-        res.json('ok');
     }
 
 }

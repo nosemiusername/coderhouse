@@ -26,7 +26,6 @@ export class ItemService {
 
     static async findAll() {
         const items = await Item.find();
-        console.log(items);
         return items;
     }
 }
