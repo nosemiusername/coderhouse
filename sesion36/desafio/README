@@ -1,0 +1,8 @@
+1. instalar 
+npm install
+
+2. ejecutar servidor
+npm start
+
+3. opciones para navegar
+Login, logout, home, profile, showcart
