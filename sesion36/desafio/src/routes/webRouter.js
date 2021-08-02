@@ -18,12 +18,12 @@ passport.use('login', new LocalStrategy(async (username, password, done) => {
 }))
 
 passport.use('signup', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
-    const { age, address, email } = req.body;
+    const { age, address, email, cellphone } = req.body;
     const user = await UserController.find(username);
     if (user) {
         return done('User already exist');
     }
-    const newuser = await UserController.create({ username, password, age, address, email });
+    const newuser = await UserController.create({ username, password, age, address, email, cellphone });
     return done(null, newuser);
 }))
 

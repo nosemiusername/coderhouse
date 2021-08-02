@@ -1,5 +1,6 @@
 import { Cart } from '../models/cart.js';
 import { error, info } from '../config/logger.js'
+import { sendMail, sendWzp } from '../helper/index.js'
 export class CartService {
 
 
@@ -39,16 +40,20 @@ export class CartService {
         }
     }
 
-    static async changeStatus(username) {
+    static async changeStatus(user) {
         try {
-            const cart = await this.findOne(username);
+            const cart = await this.findOne(user.username);
             if (cart) {
-                const updateCart = await Cart.findOneAndUpdate({ username, status: "pending" },
+                const updateCart = await Cart.findOneAndUpdate({ username: user.username, status: "pending" },
                     {
                         "$set": {
                             "status": "payed",
                         }
                     });
+                const objectCart = cart.toObject();
+                await sendMail("gmail", user, objectCart.items);
+                await sendWzp(user);
+
             }
         } catch (err) {
             error(err);

@@ -23,6 +23,10 @@ app.get('/main.css', function (req, res) {
 
 app.post('/send', function (req, res) {
     const { to, msg, url } = req.body;
+
+
+    const client = twilio(sid, auth);
+
     client.messages.create({
         body: msg,
         from: 'whatsapp:+14155238886',

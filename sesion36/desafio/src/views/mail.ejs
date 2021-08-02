@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <title>Notificacion venta</title>
+</head>
+
+<body>
+    <h1>Notificacion venta</h1>
+    <h2>Usuario</h2>
+    < <div class="card mb-3">
+        <div class="card-body">
+            <h5 style="font-size: 10pt;" class="card-title">
+                Nombre: <%= user.username %>
+            </h5>
+            <h5 style="font-size: 10pt;" class="card-title">
+                Edad: <%= user.age %>
+            </h5>
+            <h5 style="font-size: 10pt;" class="card-title">
+                Dirección: <%= user.address %>
+            </h5>
+            <h5 style="font-size: 10pt;" class="card-title">
+                Email: <%= user.email %>
+            </h5>
+            <h5 style="font-size: 10pt;" class="card-title">
+                Cellphone: <%= user.cellphone %>
+            </h5>
+        </div>
+        <h2>Productos</h2>
+        <% if (products) {%>
+            <% products.forEach( element=> { %>
+                <div class="card mb-3">
+                    <img style="width:100px; margin: 15px 0px 0px 15px; border-style: solid; border-radius: 5%;"
+                        class="card-img-top" src="<%= element.image %>" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= element.productName %>
+                        </h5>
+                        <h5 class="card-title">
+                            <span style="font-size:10pt">Cantidad: <%= element.quantity %></span>
+                        </h5>
+                        <p class="card-text">
+                            <span style="font-size:10pt;display: block; font-weight: bold;">$<%= element.price *
+                                    element.quantity %>
+                            </span>
+                        </p>
+
+                    </div>
+                </div>
+                <% }); %>
+</body>
+
+</html>
