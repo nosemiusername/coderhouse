@@ -1,5 +1,5 @@
 import { CartService } from "../services/cartService.js";
-
+import { error } from "../config/logger.js"
 export class CartController {
     static async add(req, res, next) {
         const { username, productId, productName, price, image, quantity } = req.body;
@@ -10,17 +10,26 @@ export class CartController {
 
     static async search(req, res, next) {
         if (req.isAuthenticated()) {
-            const { username } = req.user;
-            const items = await CartService.getAllItems(username);
-            res.render('cart', { user: req.user, products: items })
+            try {
+                const { username } = req.user;
+                const items = await CartService.getAllItems(username);
+                res.render('cart', { user: req.user, products: items })
+            } catch (error) {
+                res.redirect('/home');
+            }
+
         }
     }
 
     static async pay(req, res, next) {
         if (req.isAuthenticated()) {
-            const { username } = req.user;
-            const changeStatus = await CartService.changeStatus(username);
-            res.redirect('/home');
+            try {
+                await CartService.changeStatus(req.user);
+            } catch (err) {
+                error(error);
+            } finally {
+                res.redirect('/home');
+            }
         }
 
     }
