@@ -8,8 +8,10 @@ function createSendMail(mailconfig) {
 
     return async function sendMail({ html, to, username }) {
         const mailOption = {
-            from: config.from_mail, to: to,
-            subject: `${config.subject_mail} ${to} ${username}`, html
+            from: config.from_mail,
+            to: to,
+            subject: `${config.subject_mail} ${to} ${username}`,
+            html
         }
         return await transporter.sendMail(mailOption);
     }
@@ -43,16 +45,18 @@ function createSendMailGmail() {
 
 export const sendMail = async (type = 'gmail', user, items) => {
 
-    html = ejs.renderFile(`${__dirname}/src/views/mail.ejs`, { products: items, user });
 
     try {
+        const __dirname = process.cwd();
+        const html = await ejs.renderFile(`${__dirname}/src/views/mail.ejs`, { products: items, user });
+
         if (type == 'ethereal') {
             const sendGenericMail = createSendMailEthereal();
-            const info = await sendGenericMail({ html, to: user.mail, username: user.username });
+            const info = await sendGenericMail({ html, to: user.email, username: user.username });
             // console.log(info);
         } else if (type == 'gmail') {
             const sendGenericMail = createSendMailGmail();
-            const info = await sendGenericMail({ html, to: user.mail, username: user.username });
+            const info = await sendGenericMail({ html, to: user.email, username: user.username });
             // console.log(info);
         }
     } catch (error) {
@@ -65,9 +69,10 @@ export const sendWzp = async (user) => {
     try {
         const client = twilio(config.twillio_sid, config.twillio_auth);
         const messages = {
-            body: `${config.subject_mail} ${user.email} ${user.username}`,
-            from: `whatsapp:${config.twillio_from}`,
-            to: `whatsapp:${user.cellphone}`,
+            body: "msg",
+            from: 'whatsapp:+14155238886',
+            mediaUrl: [url],
+            to: `whatsapp:+569${to}`,
         };
 
         const info = await client.messages.create(messages);

@@ -36,7 +36,7 @@
 <body>
     <h1>Notificacion venta</h1>
     <h2>Usuario</h2>
-    < <div class="card mb-3">
+    <div class="card mb-3">
         <div class="card-body">
             <h5 style="font-size: 10pt;" class="card-title">
                 Nombre: <%= user.username %>
@@ -55,27 +55,26 @@
             </h5>
         </div>
         <h2>Productos</h2>
-        <% if (products) {%>
-            <% products.forEach( element=> { %>
-                <div class="card mb-3">
-                    <img style="width:100px; margin: 15px 0px 0px 15px; border-style: solid; border-radius: 5%;"
-                        class="card-img-top" src="<%= element.image %>" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= element.productName %>
-                        </h5>
-                        <h5 class="card-title">
-                            <span style="font-size:10pt">Cantidad: <%= element.quantity %></span>
-                        </h5>
-                        <p class="card-text">
-                            <span style="font-size:10pt;display: block; font-weight: bold;">$<%= element.price *
-                                    element.quantity %>
-                            </span>
-                        </p>
+        <% products.forEach( element=> { %>
+            <div class="card mb-3">
+                <img style="width:100px; margin: 15px 0px 0px 15px; border-style: solid; border-radius: 5%;"
+                    class="card-img-top" src="<%= element.image %>" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= element.productName %>
+                    </h5>
+                    <h5 class="card-title">
+                        <span style="font-size:10pt">Cantidad: <%= element.quantity %></span>
+                    </h5>
+                    <p class="card-text">
+                        <span style="font-size:10pt;display: block; font-weight: bold;">$<%= element.price *
+                                element.quantity %>
+                        </span>
+                    </p>
 
-                    </div>
                 </div>
-                <% }); %>
+            </div>
+            <% }); %>
 </body>
 
 </html>
