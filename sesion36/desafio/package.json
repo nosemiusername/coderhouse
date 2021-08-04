@@ -5,7 +5,7 @@
   "description": "",
   "main": "./src/app.js",
   "scripts": {
-    "start": "nodemon .",
+    "start": "nodemon --prof .",
     "FORK": "pm2 start . --name='coderhouse' --watch",
     "CLUSTER": "pm2 start . --name='coderhouse' --watch -i max"
   },
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^15.14.3",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",

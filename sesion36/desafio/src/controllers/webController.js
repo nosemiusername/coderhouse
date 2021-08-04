@@ -17,12 +17,16 @@ export class WebController {
         if (req.isAuthenticated()) {
             const items = await ItemController.search();
             res.render('home', { user: req.user, products: items })
+        } else {
+            res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
 
     static async sendProfile(req, res, next) {
         if (req.isAuthenticated()) {
             res.render('profile', { user: req.user })
+        } else {
+            res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
 

@@ -71,7 +71,6 @@ export const sendWzp = async (user) => {
         const messages = {
             body: "msg",
             from: 'whatsapp:+14155238886',
-            mediaUrl: [url],
             to: `whatsapp:+569${to}`,
         };
 

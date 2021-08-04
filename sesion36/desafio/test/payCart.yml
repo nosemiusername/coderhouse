@@ -1,0 +1,14 @@
+config:
+  target: http://localhost:8080
+  phases:
+    - duration: 10
+      arrivalRate: 10
+  defaults:
+    headers:
+      Cookie: "connect.sid=s%3AZyGh9JbEqgZYmZiiQQ9eNSxfMuPYl-wN.jWdhueATLorn9YDWuDuN4x1rYrfm2TKIa0U82D8CIs0"
+scenarios:
+  - flow:
+      - post:
+          url: "/paycart"
+          form:
+            username: "rafa"
