@@ -1,11 +1,11 @@
 config:
   target: http://localhost:8080
   phases:
-    - duration: 60
-      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 100
   defaults:
     headers:
-      Cookie: "Cookie: connect.sid=s%3ASFoKqqoOK_G9LZc_CvWK8VmuatJ9U2Yq.N1vNnsdhYJ3p2wSxY6lJqA5oQsnM9jj53ocWfhya%2FK4'"
+      Cookie: "connect.sid=s%3AkXXDxF1dfwTvX2ujBU_JFQ7KibWhmMaM.%2F4J0zrt8lfba7QfcmMbjicjyKupjvma0Yt6IY8b%2FNYc"
 scenarios:
   - flow:
       - get:
