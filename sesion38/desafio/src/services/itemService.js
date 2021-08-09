@@ -30,7 +30,8 @@ export class ItemService {
     }
 
     static async findOne(productName) {
-        const item = await Item.find({ productName });
+        const res = await Item.findOne({ productName });
+        const item = res == null ? null : res.toObject();
         return item;
     }
 }
