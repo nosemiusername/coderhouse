@@ -15,10 +15,15 @@ export class ItemController {
         ItemController.create(cant);
         res.json('ok');
     }
+
+    static async set(id, item) {
+        const rs = await ItemService.update(id, item);
+    }
+
 }
 
 const getItem = async (query) => {
-    const item = await ItemService.findOne(query.productName);
+    const item = await ItemService.findOne(query.id);
     return item;
 }
 
@@ -26,12 +31,30 @@ const getAllItems = async () => {
     return await ItemService.findAll()
 }
 
+const updateItem = async ({ id, item }) => {
+    return await ItemService.update(id, item);
+}
+
+
 export const schemas = buildSchema(`
     type Query{
-        find(productName: String!): Item,
+        find(id: ID!): Item,
         findAll: [Item],
     }
     
+    type Mutation {
+        update(id: ID!, item:ItemInput!):Item
+    }
+
+    input ItemInput {
+        productName: String
+        department: String
+        price: Int
+        stock: Int
+        productDescription: String
+        image: String
+    }
+
     type Item {
         id: ID!
         productName: String!
@@ -41,10 +64,12 @@ export const schemas = buildSchema(`
         productDescription: String!
         image: String!
     }
+    
     `
 );
 
 export const root = {
     find: getItem,
     findAll: getAllItems,
+    update: updateItem,
 }

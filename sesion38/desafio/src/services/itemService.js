@@ -29,9 +29,27 @@ export class ItemService {
         return items;
     }
 
-    static async findOne(productName) {
-        const res = await Item.findOne({ productName });
+    static async findOne(id) {
+        const res = await Item.findOne({ id });
         const item = res == null ? null : res.toObject();
         return item;
+    }
+
+    static async update(id, item) {
+        const oldItem = await this.findOne(id);
+        item = { ...oldItem, ...item };
+        const res = await Item.findOneAndUpdate({ id },
+            {
+                $set: {
+                    "productName": item.productName,
+                    "department": item.department,
+                    "price": item.price,
+                    "stock": item.stock,
+                    "productDescription": item.productDescription,
+                    "image ": item.image,
+                }
+            });
+
+        return res;
     }
 }

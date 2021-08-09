@@ -7,7 +7,8 @@
   "scripts": {
     "start": "nodemon .",
     "FORK": "pm2 start . --name='coderhouse' --watch",
-    "CLUSTER": "pm2 start . --name='coderhouse' --watch -i max"
+    "CLUSTER": "pm2 start . --name='coderhouse' --watch -i max",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -31,5 +32,16 @@
     "pino": "^6.13.0",
     "pino-pretty": "^5.1.2",
     "twilio": "^3.66.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.3.2"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }

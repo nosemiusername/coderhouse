@@ -13,9 +13,18 @@ apiRouter.get('/products', async (req, res, next) => {
 });
 
 
-apiRouter.get('/product/:productname', async (req, res, next) => {
+apiRouter.get('/product/:id', async (req, res, next) => {
     try {
-        const items = await ItemController.search(req.params.productname);
+        const items = await ItemController.search(req.params.id);
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(501).json('Internal server Error');
+    }
+});
+
+apiRouter.put('/product/:id', async (req, res, next) => {
+    try {
+        const items = await ItemController.set(req.params.id, req.body);
         res.status(200).json(items);
     } catch (error) {
         res.status(501).json('Internal server Error');
