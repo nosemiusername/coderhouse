@@ -1,0 +1,18 @@
+config:
+  target: http://localhost:8080
+  phases:
+    - duration: 10
+      arrivalRate: 100
+  defaults:
+    headers:
+      Cookie: "connect.sid=s%3AkXXDxF1dfwTvX2ujBU_JFQ7KibWhmMaM.%2F4J0zrt8lfba7QfcmMbjicjyKupjvma0Yt6IY8b%2FNYc"
+scenarios:
+  - flow:
+      - post:
+          url: "/addcart"
+          form:
+            username: "rafa"
+            productId: "89938"
+            productName: "Rustico"
+            price: "7213"
+            image: "http://placeimg.com/640/480/nature?random=2"
