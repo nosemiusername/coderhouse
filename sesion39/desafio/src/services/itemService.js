@@ -4,7 +4,8 @@ import faker from 'faker';
 faker.locale = 'es';
 
 export class ItemService {
-    static generate(cant) {
+    static generate(cant, save = true) {
+        const newItemList = [];
         try {
             Array.from(new Array(Number(cant)), async (v, k) => {
                 const newItemDAO = {
@@ -16,11 +17,15 @@ export class ItemService {
                     productDescription: faker.commerce.productDescription(),
                     image: `${faker.image.nature()}?random=${Math.round(Math.random() * 1000)}`
                 };
-
-                const newItem = await this.create(newItemDAO);
+                if (save) {
+                    await this.create(newItemDAO);
+                }
+                newItemList.push(newItemDAO);
             })
         } catch (error) {
             error(error);
+        } finally {
+            return newItemList;
         }
     }
 
