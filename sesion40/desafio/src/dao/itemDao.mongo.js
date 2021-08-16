@@ -1,13 +1,13 @@
+
+import ItemDAO from './itemDao.js';
 import { Item } from '../models/item.mongo.js'
-import { error } from '../config/logger.js'
 import faker from 'faker';
 faker.locale = 'es';
 
-export class ItemService {
+export default class ItemDaoMongo extends ItemDAO {
 
-    constructor(config) {
-
-
+    constructor() {
+        super();
     }
 
     generate(cant, save = true) {
@@ -35,7 +35,7 @@ export class ItemService {
         }
     }
 
-    async create(newItemDAO) {
+    async add(newItemDAO) {
 
         const existedItem = await this.findOne(newItemDAO.id);
         if (!existedItem) {
@@ -46,18 +46,18 @@ export class ItemService {
         }
     }
 
-    async findAll() {
+    async getAll() {
         const items = await Item.find();
         return items;
     }
 
-    async findOne(id) {
+    async getById(id) {
         const res = await Item.findOne({ id });
-        const item = res == null ? null : res.toObject();
+        const item = res == null ? [] : res.toObject();
         return item;
     }
 
-    async update(id, item) {
+    async updateById(id, item) {
         const oldItem = await this.findOne(id);
         item = { ...oldItem, ...item };
         const res = await Item.findOneAndUpdate({ id },
@@ -73,5 +73,12 @@ export class ItemService {
             });
 
         return res;
+    }
+
+    async deleteById(id) {
+        throw new Error('pending implementation!');
+    };
+    async deleteAll() {
+        throw new Error('pending implementation!');
     }
 }

@@ -1,39 +1,47 @@
-import { ItemService } from "../services/itemService.js";
+import ItemDaoMongo from "../dao/itemDao.mongo.js";
 import { buildSchema } from 'graphql'
 
+/** API Rest **/
 export class ItemController {
-    static create(req, res, next) {
+
+    constructor(config) {
+        if (config == "MongoClient") {
+            this.itemDao = new ItemDaoMongo();
+        }
+    }
+
+    create(req, res, next) {
         try {
-            const items = ItemService.create(req.body);
+            const items = this.itemDao.add(req.body);
             res.status(200).json(items);
         } catch (error) {
             res.status(501).json('Internal server Error');
         }
     }
 
-    static async search(req, res, next) {
+    async search(req, res, next) {
         try {
             const { id } = req.params;
-            const items = id === undefined ? await ItemService.findAll() : await ItemService.findOne(id);
+            const items = id === undefined ? await this.itemDao.getAll() : await this.itemDao.getById(id);
             res.status(200).json(items);
         } catch (error) {
             res.status(501).json('Internal server Error');
         }
     }
 
-    static async generate(req, res, next) {
+    async generate(req, res, next) {
         try {
             const cant = req.params.cant || 1;
-            const items = await ItemService.generate(cant);
+            const items = await this.itemDao.generate(cant);
             res.status(200).json(items);
         } catch (error) {
             res.status(501).json('Internal server Error');
         }
     }
 
-    static async update(req, res, next) {
+    async update(req, res, next) {
         try {
-            const items = await ItemService.update(req.params.id, req.body);
+            const items = await this.itemDao.updateById(req.params.id, req.body);
             res.status(200).json(items);
         } catch (error) {
             res.status(501).json('Internal server Error');
@@ -41,17 +49,19 @@ export class ItemController {
     }
 }
 
+/** Graphql **/
+
 const getItem = async (query) => {
-    const item = await ItemService.findOne(query.id);
+    const item = await this.itemDao.getById(query.id);
     return item;
 }
 
 const getAllItems = async () => {
-    return await ItemService.findAll()
+    return await this.itemDao.getAllItems()
 }
 
 const updateItem = async ({ id, item }) => {
-    return await ItemService.update(id, item);
+    return await this.itemDao.updateById(id, item);
 }
 
 

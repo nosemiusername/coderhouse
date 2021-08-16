@@ -1,21 +1,11 @@
-import mongoose from "mongoose";
+import MongoClient from '../db/dbClient.mongo.js'
 import config from '../config/index.js';
-import { info } from '../config/logger.js'
-
-class MongoDBaaS {
-    static async connect() {
-        try {
-            const res = await mongoose.connect(config.mongo_uri, {
-                useNewUrlParser: true,
-                useCreateIndex: true, useUnifiedTopology: true
-            });
-            info(`MongoDBaaS: Connection ${mongoose.STATES[res.connection.readyState]}`);
-        } catch (error) {
-            info(`Error in DB connection ${error}`);
-        }
-    }
-}
 
 export const load = async () => {
-    await MongoDBaaS.connect();
+    try {
+        const db = await eval(`${config.flagDB}.getInstance()`);
+        await db.connect();
+    } catch (error) {
+        throw new Error(error);
+    }
 };

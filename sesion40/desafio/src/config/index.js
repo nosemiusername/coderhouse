@@ -14,4 +14,5 @@ export default {
     mongo_max_age: process.env.MONGO_MAX_AGE,
     saltrounds: process.env.SALTROUNDS,
     cluster_mode: process.env.CLUSTER_MODE,
+    flagDB: process.env.FLAG_DB,
 }
