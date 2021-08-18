@@ -58,7 +58,8 @@ export default class ItemDaoMongo extends ItemDAO {
     }
 
     async updateById(id, item) {
-        const oldItem = await this.findOne(id);
+        const oldItem = await this.getById(id);
+        if (!oldItem.length) throw new Error("No data");
         item = { ...oldItem, ...item };
         const res = await Item.findOneAndUpdate({ id },
             {
@@ -71,7 +72,6 @@ export default class ItemDaoMongo extends ItemDAO {
                     "image ": item.image,
                 }
             });
-
         return res;
     }
 
