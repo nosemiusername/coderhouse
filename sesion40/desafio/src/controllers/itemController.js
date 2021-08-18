@@ -1,12 +1,15 @@
 import ItemDaoMongo from "../dao/itemDao.mongo.js";
+import ItemDaoFile from "../dao/itemDao.file.js";
 import { buildSchema } from 'graphql'
-
+import { error } from '../config/logger.js'
 /** API Rest **/
 export class ItemController {
 
     constructor(config) {
-        if (config == "MongoClient") {
+        if (config == "Mongo") {
             this.itemDao = new ItemDaoMongo();
+        } else if (config == "File") {
+            this.itemDao = new ItemDaoFile();
         }
     }
 
@@ -14,8 +17,9 @@ export class ItemController {
         try {
             const items = this.itemDao.add(req.body);
             res.status(200).json(items);
-        } catch (error) {
+        } catch (err) {
             res.status(501).json('Internal server Error');
+            error(err);
         }
     }
 
@@ -24,8 +28,9 @@ export class ItemController {
             const { id } = req.params;
             const items = id === undefined ? await this.itemDao.getAll() : await this.itemDao.getById(id);
             res.status(200).json(items);
-        } catch (error) {
+        } catch (err) {
             res.status(501).json('Internal server Error');
+            error(err);
         }
     }
 
@@ -34,8 +39,9 @@ export class ItemController {
             const cant = req.params.cant || 1;
             const items = await this.itemDao.generate(cant);
             res.status(200).json(items);
-        } catch (error) {
+        } catch (err) {
             res.status(501).json('Internal server Error');
+            error(err);
         }
     }
 
@@ -43,8 +49,19 @@ export class ItemController {
         try {
             const items = await this.itemDao.updateById(req.params.id, req.body);
             res.status(200).json(items);
-        } catch (error) {
+        } catch (err) {
             res.status(501).json('Internal server Error');
+            error(err);
+        }
+    }
+
+    async delete(req, res, next) {
+        try {
+            const items = await this.itemDao.deleteById(req.params.id);
+            res.status(200).json(items);
+        } catch (err) {
+            res.status(501).json('Internal server Error');
+            error(err);
         }
     }
 }

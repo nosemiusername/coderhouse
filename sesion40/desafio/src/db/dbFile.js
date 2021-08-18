@@ -3,13 +3,13 @@ import config from '../config/index.js';
 import DbClient from './dbClient.js'
 import { info, error } from '../config/logger.js'
 
-export default class MongoClient extends DbClient {
+export default class File extends DbClient {
     static instance;
 
     constructor() {
         super();
         this.connected = false;
-        this.client = filesystem;
+        this.client = 'file';
     }
 
     async connect() {

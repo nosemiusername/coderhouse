@@ -1,22 +1,24 @@
-
 import ItemDAO from './itemDao.js';
 import faker from 'faker';
-import logger, { error } from '../config/logger.js';
+import { error } from '../config/logger.js';
+import config from '../config/index.js';
+import fs from 'fs';
 faker.locale = 'es';
 
-export default class ItemDaoMongo extends ItemDAO {
+export default class ItemDaoFile extends ItemDAO {
 
     constructor() {
         super();
         this.list = [];
+        this.filename = config.filename;
     }
 
     updateById(id, newItem) {
         try {
-            this.deleteItem(id);
+            this.deleteById(id);
             newItem = [{ id: Number(id), ...newItem }];
             this.list = [... this.list, ...newItem]
-            this.save(this.list, config.fs.connection.filename);
+            this.save(this.list);
         } catch (error) {
             console.error(error);
         }
@@ -24,7 +26,7 @@ export default class ItemDaoMongo extends ItemDAO {
 
     getAll() {
         try {
-            this.save(this.list, config.fs.connection.filename);
+            this.save(this.list);
             return this.list;
         } catch (error) {
             throw new Error(error);
@@ -34,34 +36,33 @@ export default class ItemDaoMongo extends ItemDAO {
     getById(id) {
         const item = this.list.filter(item => item.id == Number(id));
         if (!item.length) throw new Error("No data");
-        this.save(this.list, config.fs.connection.filename);
+        this.save(this.list);
         return item;
     }
 
-    insertItem(items) {
-        items.forEach(item => {
-            this.list.push({ id: this.list.length, ...item });
-        });
-        this.save(this.list, config.fs.connection.filename);
-        return items;
+    add(item) {
+        this.list.push({ id: this.list.length, ...item });
+        this.save(this.list);
+        return item;
     }
 
     deleteById(id) {
         const item = this.list.filter(item => item.id == Number(id));
-        if (!item.length) throw new Error("No data");
+        if (!item.length) {
+            throw new Error("No data");
+        }
 
         this.list = this.list.filter(element => element.id != Number(id))
-        this.save(this.list, config.fs.connection.filename);
-
+        this.save(this.list);
         return item;
-
     }
+
     deleteAll() {
         throw new Error('pending implementation!');
     }
 
-    save(jsonData, filename = "../db/db.json") {
-        fs.writeFile(filename, JSON.stringify(jsonData, null, '\t'), function (err) {
+    save(jsonData) {
+        fs.writeFile(this.filename, JSON.stringify(jsonData, null, '\t'), function (err) {
             if (err) {
                 error(err);
             }

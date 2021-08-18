@@ -1,4 +1,5 @@
-import MongoClient from '../db/dbClient.mongo.js'
+import Mongo from '../db/dbMongo.js';
+import File from '../db/dbFile.js'
 import config from '../config/index.js';
 
 export const load = async () => {

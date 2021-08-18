@@ -15,4 +15,5 @@ export default {
     saltrounds: process.env.SALTROUNDS,
     cluster_mode: process.env.CLUSTER_MODE,
     flagDB: process.env.FLAG_DB,
+    filename: process.env.FILENAME,
 }
