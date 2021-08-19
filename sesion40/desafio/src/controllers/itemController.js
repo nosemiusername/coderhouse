@@ -1,5 +1,6 @@
 import ItemDaoMongo from "../dao/itemDao.mongo.js";
 import ItemDaoFile from "../dao/itemDao.file.js";
+import ItemDto from "../dto/itemDto.js";
 import { buildSchema } from 'graphql'
 import { error } from '../config/logger.js'
 /** API Rest **/
@@ -27,7 +28,8 @@ export class ItemController {
         try {
             const { id } = req.params;
             const items = id === undefined ? await this.itemDao.getAll() : await this.itemDao.getById(id);
-            res.status(200).json(items);
+            const itemsDto = items.map(item => ItemDto(item));
+            res.status(200).json(itemsDto);
         } catch (err) {
             res.status(501).json('Internal server Error');
             error(err);

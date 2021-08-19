@@ -47,14 +47,15 @@ export default class ItemDaoMongo extends ItemDAO {
     }
 
     async getAll() {
-        const items = await Item.find();
+        const res = await Item.find();
+        const items = res.map(item => item.toObject());
         return items;
     }
 
     async getById(id) {
         const res = await Item.findOne({ id });
         const item = res == null ? [] : res.toObject();
-        return item;
+        return [item];
     }
 
     async updateById(id, item) {

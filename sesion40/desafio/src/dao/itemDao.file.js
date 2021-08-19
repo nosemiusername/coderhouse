@@ -37,7 +37,7 @@ export default class ItemDaoFile extends ItemDAO {
         const item = this.list.filter(item => item.id == Number(id));
         if (!item.length) throw new Error("No data");
         this.save(this.list);
-        return item;
+        return [item];
     }
 
     add(item) {
