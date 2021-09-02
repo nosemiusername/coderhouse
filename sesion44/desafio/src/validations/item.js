@@ -2,7 +2,6 @@ import Joi from 'joi'
 
 export const validateNewItem = item => {
     const itemSchema = Joi.object({
-        id: Joi.number().greater(1).required(),
         productName: Joi.string().required(),
         department: Joi.string().required(),
         price: Joi.number().greater(1).required(),
@@ -23,6 +22,7 @@ export const validateNewItem = item => {
 
 export const validateUpdatedItem = item => {
     const itemSchema = Joi.object({
+        id: Joi.number().greater(1).required(),
         productName: Joi.string().optional(),
         department: Joi.string().optional(),
         price: Joi.number().greater(1).optional(),

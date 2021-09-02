@@ -21,7 +21,6 @@ export class ApiRouter {
     }
 
     input ItemInput {
-        id: ID
         productName: String
         department: String
         price: Int

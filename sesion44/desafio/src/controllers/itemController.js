@@ -14,7 +14,8 @@ export class ItemController {
     }
 
     async create(item) {
-        return await this.itemDao.add(item);
+        const createdItem = await this.itemDao.add(item);
+        return createdItem;
     }
 
     async getItem(query) {

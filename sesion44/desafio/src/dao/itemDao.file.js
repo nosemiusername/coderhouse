@@ -16,14 +16,10 @@ export default class ItemDaoFile extends ItemDAO {
 
     updateById(id, newItem) {
         try {
-            if (validateUpdatedItem(newItem).result) {
-                this.deleteById(id);
-                newItem = [{ id: Number(id), ...newItem }];
-                this.list = [... this.list, ...newItem]
-                this.save(this.list);
-            } else {
-                throw new Error("Validate item");
-            }
+            this.deleteById(id);
+            newItem = [{ id: Number(id), ...newItem }];
+            this.list = [... this.list, ...newItem]
+            this.save(this.list);
         } catch (error) {
             console.error(error);
             throw new Error(error);
@@ -43,17 +39,13 @@ export default class ItemDaoFile extends ItemDAO {
         const item = this.list.filter(item => item.id == Number(id));
         if (!item.length) throw new Error("No data");
         this.save(this.list);
-        return [item];
+        return item;
     }
 
     add(item) {
-        if (validateNewItem(item).result) {
-            this.list.push({ id: this.list.length, ...item });
-            this.save(this.list);
-            return item;
-        } else {
-            throw new Error("Validate item");
-        }
+        this.list.push({ id: this.list.length, ...item });
+        this.save(this.list);
+        return item;
     }
 
     deleteById(id) {
