@@ -1,8 +1,6 @@
 import express from 'express';
 import { webRouter } from './routes/webRouter.js';
-import { apiRouter } from './routes/apiRouter.js';
-import { root, schemas } from './controllers/itemController.js';
-import { graphqlHTTP } from 'express-graphql'
+import { ApiRouter } from './routes/apiRouter.js';
 import config from './config/index.js';
 import { load } from './loader/index.js';
 import { info, error } from './config/logger.js'
@@ -61,12 +59,8 @@ if (cluster.isMaster) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use('/', webRouter);
-    app.use('/api', apiRouter);
-    app.use('/graphql', graphqlHTTP({
-        schema: schemas,
-        rootValue: root,
-        graphiql: true,
-    }));
+    const apiRouter = new ApiRouter();
+    app.use('/api/product', apiRouter.start());
 
     app.listen(config.port, () => {
         info(`Application on port ${config.port}`);

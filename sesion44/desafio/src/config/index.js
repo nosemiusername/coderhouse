@@ -24,4 +24,5 @@ export default {
     cluster_mode: process.env.CLUSTER_MODE,
     flagDB: process.env.FLAG_DB,
     filename: process.env.FILENAME,
+    graphiql: process.env.GRAPHIQL,
 }
