@@ -25,3 +25,4 @@ sesion26/desafio/.env
 **/*.env
 **/*.log
 **/*0x
+**/production.js
