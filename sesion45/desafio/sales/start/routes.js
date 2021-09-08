@@ -17,3 +17,9 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+Route.get('/item', 'ItemController.getAll')
+Route.post('/item', 'ItemController.add')
+Route.get('/item/:id', 'ItemController.get')
+Route.delete('/item/:id', 'ItemController.delete')
+
+
