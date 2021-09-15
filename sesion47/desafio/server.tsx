@@ -10,6 +10,7 @@ const app = createApp();
 
 const colors = [];
 
+//TODO: Implementar carga de listado de colors
 app.handle("/", async (req) => {
   await req.respond({
     status: 200,
@@ -20,11 +21,26 @@ app.handle("/", async (req) => {
       <html>
         <head></head>
         <body>
-          <h1>Hola Mundo!</h1>
+          <form action="/addColor" method="POST">
+            <input
+              class="input"
+              type="text"
+              name="color"
+              id="color"
+              placeholder="Insertar Color"
+            />
+            <button style="display:block" type="submit">
+              Enviar
+            </button>
+          </form>
+          <div id="divColor"></div>
         </body>
       </html>
     ),
   });
 });
+
+//TODO: Implementar redirect de /
+app.handle("/addColor", async (req) => {});
 
 app.listen({ port: 8080 });
