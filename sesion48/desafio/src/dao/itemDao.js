@@ -17,4 +17,7 @@ export default class ItemDAO {
     async updateById(id) {
         throw new Error('pending implementation!');
     }
+    generate(quantity, save) {
+        throw new Error('pending implementation!');
+    }
 }

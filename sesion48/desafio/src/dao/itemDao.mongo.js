@@ -11,34 +11,29 @@ export default class ItemDaoMongo extends ItemDAO {
         super();
     }
 
-    generate(cant, save = true) {
+    generate(quantity, save = true) {
         const newItemList = [];
-        try {
-            Array.from(new Array(Number(cant)), async (v, k) => {
-                const newItemDAO = {
-                    id: Math.floor(Math.random() * 100000),
-                    productName: faker.commerce.productName(),
-                    department: faker.commerce.department(),
-                    price: Math.floor(Math.random() * 10000),
-                    stock: Math.floor(Math.random() * 255),
-                    productDescription: faker.commerce.productDescription(),
-                    image: `${faker.image.nature()}?random=${Math.round(Math.random() * 1000)}`
-                };
-                if (save) {
-                    await this.create(newItemDAO);
-                }
-                newItemList.push(newItemDAO);
-            })
-        } catch (error) {
-            error(error);
-        } finally {
-            return newItemList;
-        }
+        Array.from(new Array(Number(quantity)), async (v, k) => {
+            const newItemDAO = {
+                id: Math.floor(Math.random() * 100000),
+                productName: faker.commerce.productName(),
+                department: faker.commerce.department(),
+                price: Math.floor(Math.random() * 10000),
+                stock: Math.floor(Math.random() * 255),
+                productDescription: faker.commerce.productDescription(),
+                image: `${faker.image.nature()}?random=${Math.round(Math.random() * 1000)}`
+            };
+            if (save) {
+                await this.add(newItemDAO);
+            }
+            newItemList.push(newItemDAO);
+        });
+        return quantity;
     }
 
     async add(newItemDAO) {
         if (validateNewItem(newItemDAO).result) {
-            const existedItem = await this.findOne(newItemDAO.id);
+            const existedItem = await this.getById(newItemDAO.id);
             if (!existedItem) {
                 const newItem = await Item.create(newItemDAO);
                 return newItem;
@@ -46,7 +41,7 @@ export default class ItemDaoMongo extends ItemDAO {
                 throw new Error("Duplicated id");
             }
         } else {
-            throw new Error("Validate item");
+            throw new Error("Validate item error");
         }
     }
 
@@ -58,35 +53,34 @@ export default class ItemDaoMongo extends ItemDAO {
 
     async getById(id) {
         const res = await Item.findOne({ id });
-        const item = res == null ? [] : res.toObject();
-        return [item];
+        const item = res == null ? null : res.toObject();
+        return item;
     }
 
     async updateById(id, item) {
         if (validateUpdatedItem(item).result) {
             const oldItem = await this.getById(id);
-            if (!oldItem.length) throw new Error("No data");
-            item = { ...oldItem, ...item };
-            const res = await Item.findOneAndUpdate({ id },
-                {
-                    $set: {
-                        "productName": item.productName,
-                        "department": item.department,
-                        "price": item.price,
-                        "stock": item.stock,
-                        "productDescription": item.productDescription,
-                        "image ": item.image,
-                    }
-                });
+            if (!oldItem) throw new Error("No data");
+            const filter = { id: id };
+            const update = { ...oldItem, ...item };
+            const res = await Item.findOneAndUpdate(filter, update, { returnOriginal: false });
             return res;
         } else {
-            throw new Error("Validate item");
+            throw new Error("Validate item error");
         }
     }
 
     async deleteById(id) {
-        throw new Error('pending implementation!');
+        const existedItem = await this.getById(id);
+        if (existedItem) {
+            const filter = { id: id };
+            const newItem = await Item.deleteOne(filter);
+            return newItem;
+        } else {
+            throw new Error("Duplicated id");
+        }
     };
+
     async deleteAll() {
         throw new Error('pending implementation!');
     }

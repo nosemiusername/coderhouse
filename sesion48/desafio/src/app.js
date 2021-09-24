@@ -1,6 +1,6 @@
 import express from 'express';
 import { webRouter } from './routes/webRouter.js';
-import { ApiRouter } from './routes/apiRouter.js';
+import { ItemRouter } from './routes/itemRouter.js';
 import config from './config/index.js';
 import { load } from './loader/index.js';
 import { info, error } from './config/logger.js'
@@ -59,8 +59,8 @@ if (cluster.isMaster) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use('/', webRouter);
-    const apiRouter = new ApiRouter();
-    app.use('/api/product', apiRouter.start());
+    const itemRouter = new ItemRouter();
+    app.use('/productos', itemRouter.start());
 
     app.listen(config.port, () => {
         info(`Application on port ${config.port}`);

@@ -1,5 +1,6 @@
-import { ItemController } from "../controllers/itemController.js"
-import { UserService } from "../services/userService.js"
+import { ItemController } from "./itemController.js";
+import { UserService } from "../services/userService.js";
+import config from "../config/index.js";
 const __dirname = process.cwd();
 
 export class WebController {
@@ -15,8 +16,9 @@ export class WebController {
 
     static async sendHome(req, res, next) {
         if (req.isAuthenticated()) {
-            const items = await ItemController.search();
-            res.render('home', { user: req.user, products: items })
+            const itemController = new ItemController(config.flagDB);
+            const items = await itemController.getAll();
+            res.render('home', { user: req.user, products: items });
         } else {
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
@@ -24,14 +26,14 @@ export class WebController {
 
     static async sendProfile(req, res, next) {
         if (req.isAuthenticated()) {
-            res.render('profile', { user: req.user })
+            res.render('profile', { user: req.user });
         } else {
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
 
     static failLogin(req, res, next) {
-        res.json('faillogin')
+        res.json('faillogin');
     }
 
     static failRegister(req, res, next) {
