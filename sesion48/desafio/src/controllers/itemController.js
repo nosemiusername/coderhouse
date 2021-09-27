@@ -15,7 +15,7 @@ export class ItemController {
             const createdItem = await this.itemDao.add(item);
             res.status(200).json(item);
         } catch (err) {
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
             error(err.message);
         }
     }
@@ -26,7 +26,7 @@ export class ItemController {
             const item = await this.itemDao.getById(id);
             res.status(200).json(item);
         } catch (err) {
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
             error(err.message);
         }
     }
@@ -36,7 +36,7 @@ export class ItemController {
             const items = await this.itemDao.getAll()
             res.status(200).json(items);
         } catch (err) {
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
             error(err.message);
         }
     }
@@ -49,7 +49,7 @@ export class ItemController {
             const updatedItem = await this.itemDao.updateById(id, item);
             res.status(200).json(updatedItem);
         } catch (err) {
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
             error(err.message);
         }
     }
@@ -60,7 +60,7 @@ export class ItemController {
             const items = await this.itemDao.deleteById(id);
             res.status(200).json(items);
         } catch (err) {
-            res.status(501).json(err.message);
+            res.status(404).json(err.message);
             error(err.message);
         }
     }
@@ -71,7 +71,7 @@ export class ItemController {
             const items = this.itemDao.generate(quantity);
             res.status(200).json(items);
         } catch (err) {
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
             error(err.message);
         }
     }

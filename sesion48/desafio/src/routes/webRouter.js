@@ -40,7 +40,7 @@ const isAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.render('login');
+        res.render('login.ejs');
     }
 }
 
@@ -54,6 +54,7 @@ webRouter.get('/showcart', CartController.search);
 webRouter.post('/paycart', CartController.pay);
 webRouter.get('/home', WebController.sendHome);
 webRouter.get('/profile', WebController.sendProfile);
+webRouter.get('/info', WebController.sendInfo);
 webRouter.get('/', WebController.sendIndex);
 
 

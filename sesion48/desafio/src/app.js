@@ -42,6 +42,7 @@ if (cluster.isMaster) {
     const app = express();
 
     app.set('view engine', 'ejs');
+    app.set('view engine', 'pug');
     app.set('views', './src/views');
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));

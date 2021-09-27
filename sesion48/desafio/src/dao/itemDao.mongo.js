@@ -52,8 +52,8 @@ export default class ItemDaoMongo extends ItemDAO {
     }
 
     async getById(id) {
-        const res = await Item.findOne({ id });
-        const item = res == null ? null : res.toObject();
+        const res = !isNaN(id) ? await Item.findOne({ id }) : await Item.find({ department: id });
+        const item = res == null ? null : (!Array.isArray(res) ? res.toObject() : res.map(item => item.toObject()));
         return item;
     }
 
@@ -77,7 +77,7 @@ export default class ItemDaoMongo extends ItemDAO {
             const newItem = await Item.deleteOne(filter);
             return newItem;
         } else {
-            throw new Error("Duplicated id");
+            throw new Error("Product not found");
         }
     };
 

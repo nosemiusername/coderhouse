@@ -13,7 +13,7 @@ export class CartController {
             try {
                 const { username } = req.user;
                 const items = await CartService.getAllItems(username);
-                res.render('cart', { user: req.user, products: items })
+                res.render('cart.ejs', { user: req.user, products: items })
             } catch (error) {
                 res.redirect('/home');
             }
