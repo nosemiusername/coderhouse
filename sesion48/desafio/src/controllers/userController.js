@@ -1,4 +1,4 @@
-import { UserService } from "../services/userService.js";
+import { UserDao } from "../dao/userDao.js";
 
 export class UserController {
     // TODO manage catch error modify return 

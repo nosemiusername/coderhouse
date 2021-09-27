@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer';
 import config from '../config/index.js'
-import twilio from 'twilio';
 import ejs from 'ejs';
 
 function createSendMail(mailconfig) {
@@ -18,18 +17,6 @@ function createSendMail(mailconfig) {
 
 }
 
-function createSendMailEthereal() {
-    return createSendMail(
-        {
-            host: config.ethereal_host,
-            port: config.ethereal_port,
-            auth: {
-                user: config.ethereal_user,
-                pass: config.ethereal_pass,
-            }
-        }
-    );
-}
 
 function createSendMailGmail() {
     return createSendMail(
@@ -64,19 +51,3 @@ export const sendMail = async (type = 'gmail', user, items) => {
     }
 }
 
-export const sendWzp = async (user) => {
-
-    try {
-        const client = twilio(config.twillio_sid, config.twillio_auth);
-        const messages = {
-            body: "msg",
-            from: 'whatsapp:+14155238886',
-            to: `whatsapp:+569${to}`,
-        };
-
-        const info = await client.messages.create(messages);
-        console.log(info);
-    } catch (error) {
-        console.error(error);
-    }
-}

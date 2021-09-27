@@ -1,8 +1,8 @@
 import { Cart } from '../models/cart.js';
 import { error, info } from '../config/logger.js'
-import { sendMail, sendWzp } from '../helper/index.js'
-export class CartService {
+import { sendMail } from '../helper/index.js'
 
+export class CartDao {
 
     static async findOne(username, status = "pending") {
         const cart = await Cart.findOne({ username, status });
@@ -52,8 +52,6 @@ export class CartService {
                     });
                 const objectCart = cart.toObject();
                 await sendMail("gmail", user, objectCart.items);
-                await sendWzp(user);
-
             }
         } catch (err) {
             error(err);

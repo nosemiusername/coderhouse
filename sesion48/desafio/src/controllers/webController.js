@@ -1,5 +1,5 @@
 import { ItemController } from "./itemController.js";
-import { UserService } from "../services/userService.js";
+import { UserDao } from "../dao/userDao.js";
 import config from "../config/index.js";
 const __dirname = process.cwd();
 

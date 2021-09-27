@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import config from '../config/index.js'
 import { error } from '../config/logger.js'
 
-export class UserService {
+export class UserDao {
 
     static async create(user) {
         try {

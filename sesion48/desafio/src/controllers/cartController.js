@@ -1,4 +1,4 @@
-import { CartService } from "../services/cartService.js";
+import { CartDao } from "../dao/cartDao.js";
 import { error } from "../config/logger.js"
 export class CartController {
     static async add(req, res, next) {
