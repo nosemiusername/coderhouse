@@ -4,7 +4,7 @@ export class UserController {
     // TODO manage catch error modify return 
     static async find(email, password) {
         try {
-            const user = await UserService.findOne(email, password);
+            const user = await UserDao.findOne(email, password);
             return user;
         } catch (error) {
             return null;
@@ -14,7 +14,7 @@ export class UserController {
     // TODO manage catch error modify return 
     static async create(user) {
         try {
-            const newuser = await UserService.create(user);
+            const newuser = await UserDao.create(user);
             return newuser;
         } catch (error) {
             return null;

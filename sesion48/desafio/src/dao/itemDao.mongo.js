@@ -3,6 +3,7 @@ import ItemDAO from './itemDao.js';
 import { Item } from '../models/item.mongo.js';
 import { validateNewItem, validateUpdatedItem } from '../validations/item.js';
 import faker from 'faker';
+import { mongoToObject } from '../utils/index.js'
 faker.locale = 'es';
 
 export default class ItemDaoMongo extends ItemDAO {
@@ -53,7 +54,7 @@ export default class ItemDaoMongo extends ItemDAO {
 
     async getById(id) {
         const res = !isNaN(id) ? await Item.findOne({ id }) : await Item.find({ department: id });
-        const item = res == null ? null : (!Array.isArray(res) ? res.toObject() : res.map(item => item.toObject()));
+        const item = mongoToObject(res);
         return item;
     }
 

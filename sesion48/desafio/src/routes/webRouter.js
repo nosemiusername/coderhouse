@@ -55,6 +55,7 @@ webRouter.post('/paycart', CartController.pay);
 webRouter.get('/home', WebController.sendHome);
 webRouter.get('/profile', WebController.sendProfile);
 webRouter.get('/info', WebController.sendInfo);
+webRouter.get('/chat', WebController.chat);
 webRouter.get('/', WebController.sendIndex);
 
 

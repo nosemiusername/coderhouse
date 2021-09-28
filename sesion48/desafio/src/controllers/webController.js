@@ -46,6 +46,14 @@ export class WebController {
         res.render('info.pug', { data: data });
     }
 
+    static chat(req, res, next) {
+        if (req.isAuthenticated()) {
+            res.render('chat.ejs', { user: req.user });
+        } else {
+            res.sendFile(`${__dirname}/src/public/login.html`);
+        }
+    }
+
     static failLogin(req, res, next) {
         res.json('faillogin');
     }

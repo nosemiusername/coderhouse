@@ -1,22 +1,6 @@
-<%- include('layouts/index'); -%>
-    <div class="alert alert-success" role="alert">
-        <span> Te damos la bienvenida </span>
-        <div>
-            <span>
-                <%= name %>
-            </span>
-            <span><img src="<%= photo %>" /></span>
-            <span style="float: right"> <button onclick="location.href='/logout'"
-                    class="btn btn-secondary btn-sm">Logout</button></span>
-        </div>
-    </div>
+<%- include('layouts/header'); -%>
 
-    <div class="container" id="div-table-container"></div>
     <div class="container" id="div-chat-container">
-        <h2 style='color:blue'>Centro de mensajes</h2>
-        <h3 id='compresionTitle' style='color:blue'></h3>
-        <hr>
-        <h2>Chat</h2>
         <form id="form-chat" onsubmit="return addChat()">
             <label for="nickname">
                 <div class="form-group">

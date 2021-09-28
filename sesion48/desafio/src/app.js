@@ -1,4 +1,5 @@
 import express from 'express';
+import { Server as httpServer } from 'http';
 import { webRouter } from './routes/webRouter.js';
 import { ItemRouter } from './routes/itemRouter.js';
 import config from './config/index.js';
@@ -38,8 +39,9 @@ if (cluster.isMaster) {
     // Code to run if we're in a worker process
 } else {
 
-    load();
     const app = express();
+    const http = new httpServer(app);
+    load(http);
 
     app.set('view engine', 'ejs');
     app.set('view engine', 'pug');
@@ -63,7 +65,7 @@ if (cluster.isMaster) {
     const itemRouter = new ItemRouter();
     app.use('/productos', itemRouter.start());
 
-    app.listen(config.port, () => {
+    http.listen(config.port, () => {
         info(`Application on port ${config.port}`);
     });
 }
