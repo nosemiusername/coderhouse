@@ -4,7 +4,6 @@ import ejs from 'ejs';
 
 function createSendMail(mailconfig) {
     const transporter = nodemailer.createTransport(mailconfig);
-
     return async function sendMail({ html, to, username }) {
         const mailOption = {
             from: config.from_mail,
@@ -14,9 +13,7 @@ function createSendMail(mailconfig) {
         }
         return await transporter.sendMail(mailOption);
     }
-
 }
-
 
 function createSendMailGmail() {
     return createSendMail(
@@ -30,22 +27,15 @@ function createSendMailGmail() {
 }
 
 
-export const sendMail = async (type = 'gmail', user, items) => {
-
-
+export const sendMail = async (user, items) => {
     try {
         const __dirname = process.cwd();
         const html = await ejs.renderFile(`${__dirname}/src/views/mail.ejs`, { products: items, user });
 
-        if (type == 'ethereal') {
-            const sendGenericMail = createSendMailEthereal();
-            const info = await sendGenericMail({ html, to: user.email, username: user.username });
-            // console.log(info);
-        } else if (type == 'gmail') {
-            const sendGenericMail = createSendMailGmail();
-            const info = await sendGenericMail({ html, to: user.email, username: user.username });
-            // console.log(info);
-        }
+        const sendGenericMail = createSendMailGmail();
+        const info = await sendGenericMail({ html, to: user.email, username: user.username });
+        console.log(info);
+
     } catch (error) {
         console.error(error);
     }

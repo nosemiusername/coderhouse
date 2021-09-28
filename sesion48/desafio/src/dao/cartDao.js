@@ -51,7 +51,7 @@ export class CartDao {
                         }
                     });
                 const objectCart = cart.toObject();
-                await sendMail("gmail", user, objectCart.items);
+                await sendMail(user, objectCart.items);
             }
         } catch (err) {
             error(err);
