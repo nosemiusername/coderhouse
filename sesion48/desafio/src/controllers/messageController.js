@@ -1,6 +1,4 @@
 import { MessageDao } from '../dao/messageDao.js';
-import { normalize, schema } from 'normalizr';
-
 export class MessageController {
 
     static async createMessage(data) {

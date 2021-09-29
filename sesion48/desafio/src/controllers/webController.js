@@ -1,8 +1,7 @@
 import { ItemController } from "./itemController.js";
-import { UserDao } from "../dao/userDao.js";
 import config from "../config/index.js";
-const __dirname = process.cwd();
 
+const __dirname = process.cwd();
 export class WebController {
 
     static sendLogout(req, res, next) {
@@ -21,7 +20,6 @@ export class WebController {
             const items = id == null ? await itemController.getAll() : await itemController.get(id);
             res.render('productos.ejs', { user: req.user, products: items });
         } else {
-            const __dirname = process.cwd();
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
@@ -30,7 +28,6 @@ export class WebController {
         if (req.isAuthenticated()) {
             res.render('profile.ejs', { user: req.user });
         } else {
-            const __dirname = process.cwd();
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
@@ -49,11 +46,15 @@ export class WebController {
         res.render('info.pug', { data: data });
     }
 
+    static async enviroment(req, res, next) {
+        const annonymConf = { ...config, mongo_uri: "***", gmail_pass: "***", gmail_user: "***" }
+        res.render('enviroment.hbs', { enviroments: annonymConf });
+    }
+
     static chat(req, res, next) {
         if (req.isAuthenticated()) {
-            res.render('chat.ejs', { user: req.user });
+            res.render('chat.hbs', { user: req.user });
         } else {
-            const __dirname = process.cwd();
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }

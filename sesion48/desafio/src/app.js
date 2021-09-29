@@ -9,6 +9,7 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
+import handlebars from 'express-handlebars'
 import cluster from 'cluster';
 import os from 'os';
 
@@ -39,10 +40,23 @@ if (cluster.isMaster) {
     // Code to run if we're in a worker process
 } else {
 
+    const __dirname = process.cwd();
     const app = express();
     const http = new httpServer(app);
+
     load(http);
 
+    app.engine(
+        'hbs',
+        handlebars({
+            extname: '.hbs',
+            defaultLayout: 'main.hbs',
+            layoutsDir: __dirname + '/src/views/layouts',
+        }
+        )
+    );
+
+    app.set('view engine', 'hbs');
     app.set('view engine', 'ejs');
     app.set('view engine', 'pug');
     app.set('views', './src/views');

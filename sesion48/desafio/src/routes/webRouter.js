@@ -57,6 +57,7 @@ webRouter.get('/productos', WebController.sendProductos);
 webRouter.get('/productos/:id', WebController.sendProductos);
 webRouter.get('/profile', WebController.sendProfile);
 webRouter.get('/info', WebController.sendInfo);
+webRouter.get('/enviroment', WebController.enviroment);
 webRouter.get('/chat', WebController.chat);
 webRouter.get('/', WebController.sendIndex);
 
