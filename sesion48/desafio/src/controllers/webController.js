@@ -1,4 +1,5 @@
 import { ItemController } from "./itemController.js";
+import { MessageDao } from "../dao/messageDao.js";
 import config from "../config/index.js";
 
 const __dirname = process.cwd();
@@ -51,9 +52,15 @@ export class WebController {
         res.render('enviroment.hbs', { enviroments: annonymConf });
     }
 
-    static chat(req, res, next) {
+    static async chat(req, res, next) {
         if (req.isAuthenticated()) {
-            res.render('chat.hbs', { user: req.user });
+            const { email } = req.params;
+            if (email) {
+                const chats = await MessageDao.getChatsByUser(email);
+                res.render('mychat.hbs', { user: req.user, chats: chats });
+            } else {
+                res.render('chat.hbs', { user: req.user });
+            }
         } else {
             res.sendFile(`${__dirname}/src/public/login.html`);
         }

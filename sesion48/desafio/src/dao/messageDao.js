@@ -14,6 +14,17 @@ export class MessageDao {
         }
     }
 
+    static async getChatsByUser(email) {
+        try {
+            const res = await Message.find({ 'autor.email': email });
+            const chats = mongoToObject(res);
+            return chats;
+        } catch (err) {
+            error(err);
+        }
+
+    }
+
     static async insertChat(chat) {
         try {
             const text = chat.text;

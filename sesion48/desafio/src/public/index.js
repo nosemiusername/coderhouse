@@ -3,7 +3,6 @@ const socket = io();
 
 socket.on('chats', data => {
     const divChatContainer = document.getElementById('div-chat-list');
-    console.log(data);
     if (data.length > 0) {
         divChatContainer.innerHTML = fillChatList(data);
     }

@@ -4,7 +4,6 @@ import { Strategy as LocalStrategy } from 'passport-local';;
 import { WebController } from '../controllers/webController.js';
 import { UserController } from '../controllers/userController.js';
 import { CartController } from '../controllers/cartController.js';
-import { ItemController } from '../controllers/itemController.js';
 
 export const webRouter = Router();
 
@@ -59,6 +58,7 @@ webRouter.get('/profile', WebController.sendProfile);
 webRouter.get('/info', WebController.sendInfo);
 webRouter.get('/enviroment', WebController.enviroment);
 webRouter.get('/chat', WebController.chat);
+webRouter.get('/chat/:email', WebController.chat);
 webRouter.get('/', WebController.sendIndex);
 
 

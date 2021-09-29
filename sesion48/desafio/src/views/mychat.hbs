@@ -1,0 +1,11 @@
+<div class="container" id="div-chat-container">
+  <ul>
+    {{#each chats}}
+      <li>
+        <span style="color:blue">{{this.autor.email}}</span>
+        <span style="color:red">[{{this.fecha}}]:</span>
+        <span style="color:green">{{this.text}}</span>
+      </li>
+    {{/each}}
+  </ul>
+</div>
