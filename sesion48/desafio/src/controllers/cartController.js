@@ -5,7 +5,7 @@ export class CartController {
         const { username, productId, productName, price, image, quantity } = req.body;
         const createdCart = await CartDao.updateCart(username, productId, productName, price, image, quantity);
         // res.status(createdCart.status).json(createdCart);
-        res.redirect('/home');
+        res.redirect('/productos');
     }
 
     static async search(req, res, next) {
@@ -15,9 +15,10 @@ export class CartController {
                 const items = await CartDao.getAllItems(username);
                 res.render('cart.ejs', { user: req.user, products: items })
             } catch (error) {
-                res.redirect('/home');
+                res.redirect('/productos');
             }
-
+        } else {
+            res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
 
@@ -28,8 +29,25 @@ export class CartController {
             } catch (err) {
                 error(error);
             } finally {
-                res.redirect('/home');
+                res.redirect('/productos');
             }
+        } else {
+            res.sendFile(`${__dirname}/src/public/login.html`);
+        }
+
+    }
+
+    static async remove(req, res, next) {
+        if (req.isAuthenticated()) {
+            try {
+                await CartDao.deleteCart(req.user);
+            } catch (err) {
+                error(error);
+            } finally {
+                res.redirect('/productos');
+            }
+        } else {
+            res.sendFile(`${__dirname}/src/public/login.html`);
         }
 
     }

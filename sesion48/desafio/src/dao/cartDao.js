@@ -59,6 +59,15 @@ export class CartDao {
         }
     }
 
+    static async deleteCart(user) {
+        try {
+            const newCart = await Cart.findOneAndDelete({ username: user.username, status: "pending" });
+        } catch (err) {
+            error(err);
+            return ({ status: 404, msg: "No cart" });
+        }
+    }
+
     static async getAllItems(username) {
         const res = await this.findOne(username);
         const cart = res == null ? null : res.toObject();

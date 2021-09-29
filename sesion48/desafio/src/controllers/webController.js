@@ -14,12 +14,14 @@ export class WebController {
         res.render('login.ejs');
     }
 
-    static async sendHome(req, res, next) {
+    static async sendProductos(req, res, next) {
         if (req.isAuthenticated()) {
             const itemController = new ItemController(config.flagDB);
-            const items = await itemController.getAll();
-            res.render('home.ejs', { user: req.user, products: items });
+            const { id } = req.params;
+            const items = id == null ? await itemController.getAll() : await itemController.get(id);
+            res.render('productos.ejs', { user: req.user, products: items });
         } else {
+            const __dirname = process.cwd();
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
@@ -28,6 +30,7 @@ export class WebController {
         if (req.isAuthenticated()) {
             res.render('profile.ejs', { user: req.user });
         } else {
+            const __dirname = process.cwd();
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
@@ -50,16 +53,25 @@ export class WebController {
         if (req.isAuthenticated()) {
             res.render('chat.ejs', { user: req.user });
         } else {
+            const __dirname = process.cwd();
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
 
     static failLogin(req, res, next) {
-        res.json('faillogin');
+        const error = {
+            status: 401,
+            message: "Unauthorized"
+        };
+        res.render('error.ejs', error);
     }
 
     static failRegister(req, res, next) {
-        res.json('failregister');
+        const error = {
+            status: 500,
+            message: "Fail register"
+        };
+        res.render('error.ejs', { error: error });
     }
 
     static sendIndex(req, res, next) {

@@ -44,15 +44,17 @@ const isAuth = (req, res, next) => {
     }
 }
 
-webRouter.post('/register', passport.authenticate('signup', { failureRedirect: '/failregister' }), WebController.sendHome);;
-webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), WebController.sendHome);
+webRouter.post('/register', passport.authenticate('signup', { failureRedirect: '/failregister' }), WebController.sendProductos);;
+webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), WebController.sendProductos);
 webRouter.get('/failregister', WebController.failRegister);
 webRouter.get('/faillogin', WebController.failLogin);
 webRouter.get('/logout', WebController.sendIndex);
 webRouter.post('/addcart', CartController.add);
-webRouter.get('/showcart', CartController.search);
+webRouter.get('/carrito', CartController.search);
 webRouter.post('/paycart', CartController.pay);
-webRouter.get('/home', WebController.sendHome);
+webRouter.post('/removecart', CartController.remove);
+webRouter.get('/productos', WebController.sendProductos);
+webRouter.get('/productos/:id', WebController.sendProductos);
 webRouter.get('/profile', WebController.sendProfile);
 webRouter.get('/info', WebController.sendInfo);
 webRouter.get('/chat', WebController.chat);

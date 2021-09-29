@@ -1,2 +1,2 @@
 
-export const mongoToObject = (res) => res == null ? null : (!Array.isArray(res) ? res.toObject() : res.map(item => item.toObject()));
+export const mongoToObject = (res) => res == null ? [] : (!Array.isArray(res) ? [res.toObject()] : res.map(item => item.toObject()));

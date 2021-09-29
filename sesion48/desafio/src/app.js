@@ -63,7 +63,7 @@ if (cluster.isMaster) {
     app.use(passport.session());
     app.use('/', webRouter);
     const itemRouter = new ItemRouter();
-    app.use('/productos', itemRouter.start());
+    app.use('/api/productos', itemRouter.start());
 
     http.listen(config.port, () => {
         info(`Application on port ${config.port}`);

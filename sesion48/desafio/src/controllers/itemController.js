@@ -79,5 +79,9 @@ export class ItemController {
     async getAll() {
         return await this.itemDao.getAll()
     }
+
+    async get(id) {
+        return await this.itemDao.getById(id);
+    }
 }
 

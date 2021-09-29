@@ -35,7 +35,7 @@ export default class ItemDaoMongo extends ItemDAO {
     async add(newItemDAO) {
         if (validateNewItem(newItemDAO).result) {
             const existedItem = await this.getById(newItemDAO.id);
-            if (!existedItem) {
+            if (!existedItem.length) {
                 const newItem = await Item.create(newItemDAO);
                 return newItem;
             } else {
@@ -54,20 +54,25 @@ export default class ItemDaoMongo extends ItemDAO {
 
     async getById(id) {
         const res = !isNaN(id) ? await Item.findOne({ id }) : await Item.find({ department: id });
-        const item = mongoToObject(res);
-        return item;
+        const items = mongoToObject(res);
+        return items;
     }
 
     async updateById(id, item) {
-        if (validateUpdatedItem(item).result) {
-            const oldItem = await this.getById(id);
-            if (!oldItem) throw new Error("No data");
-            const filter = { id: id };
-            const update = { ...oldItem, ...item };
-            const res = await Item.findOneAndUpdate(filter, update, { returnOriginal: false });
-            return res;
+        const existedItem = await this.getById(id);
+        if (existedItem.length) {
+            if (validateUpdatedItem(item).result) {
+                const oldItem = await this.getById(id);
+                if (!oldItem) throw new Error("No data");
+                const filter = { id: id };
+                const update = { ...oldItem, ...item };
+                const res = await Item.findOneAndUpdate(filter, update, { returnOriginal: false });
+                return res;
+            } else {
+                throw new Error("Validate item error");
+            }
         } else {
-            throw new Error("Validate item error");
+            throw new Error("Id not found");
         }
     }
 

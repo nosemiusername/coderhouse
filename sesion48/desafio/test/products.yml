@@ -9,4 +9,4 @@ config:
 scenarios:
   - flow:
       - get:
-          url: "/home"
+          url: "/productos"
