@@ -1,1 +1,0 @@
-import { Persona } from '../DAO/PersonaDAO.js';
