@@ -1,5 +1,5 @@
 import { ItemController } from "./itemController.js";
-import { MessageDao } from "../dao/messageDao.js";
+import { MessageDao } from "../dao/messageDao.mongo.js";
 import config from "../config/index.js";
 
 const __dirname = process.cwd();

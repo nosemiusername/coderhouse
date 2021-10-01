@@ -7,8 +7,8 @@
   "scripts": {
     "test": "mocha ./src/test/apirestful.test.js",
     "start": "node .",
-    "development": "export NODE_ENV=development && node . --port 8080",
-    "production": "export NODE_ENV=production && node . --port 8080",
+    "development": "export NODE_ENV=development && nodemon . --port 8080",
+    "production": "export NODE_ENV=production && nodemon . --port 8080",
     "prepare": "husky install"
   },
   "keywords": [],

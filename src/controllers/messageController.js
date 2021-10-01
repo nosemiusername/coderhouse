@@ -1,4 +1,4 @@
-import { MessageDao } from '../dao/messageDao.js';
+import { MessageDao } from '../dao/messageDao.mongo.js';
 export class MessageController {
 
     static async createMessage(data) {

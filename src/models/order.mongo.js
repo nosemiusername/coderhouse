@@ -6,13 +6,14 @@ const itemsSchema = new mongoose.Schema({
     quantity: Number,
     productName: String,
     price: Number,
-    image: String,
 })
 
-const cartSchema = new mongoose.Schema({
-    username: String,
+const orderSchema = new mongoose.Schema({
+    id: Number,
+    email: String,
     status: String,
+    date: Date,
     items: [itemsSchema],
 })
 
-export const Cart = mongoose.model('Cart', cartSchema);
+export const Order = mongoose.model('Order', orderSchema);
