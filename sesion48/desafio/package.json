@@ -5,13 +5,10 @@
   "description": "",
   "main": "./src/app.js",
   "scripts": {
-    "single-test": "nodemon ./test/clientHttpAxios.js",
     "test": "mocha ./src/test/apirestful.test.js",
-    "start": "nodemon .",
-    "development": "export NODE_ENV=development && nodemon . --port 8080",
-    "production": "export NODE_ENV=production && nodemon . --port 8080",
-    "FORK": "pm2 start . --name='coderhouse' --watch",
-    "CLUSTER": "pm2 start . --name='coderhouse' --watch -i max",
+    "start": "npm run production",
+    "development": "export NODE_ENV=development && node . --port 8080",
+    "production": "export NODE_ENV=production && node . --port 8080",
     "prepare": "husky install"
   },
   "keywords": [],

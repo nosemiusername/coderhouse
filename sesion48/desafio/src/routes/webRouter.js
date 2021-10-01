@@ -49,6 +49,7 @@ webRouter.get('/failregister', WebController.failRegister);
 webRouter.get('/faillogin', WebController.failLogin);
 webRouter.get('/logout', WebController.sendIndex);
 webRouter.post('/addcart', CartController.add);
+webRouter.post('/carrito/:productId', CartController.updateCart);
 webRouter.get('/carrito', CartController.search);
 webRouter.post('/paycart', CartController.pay);
 webRouter.post('/removecart', CartController.remove);

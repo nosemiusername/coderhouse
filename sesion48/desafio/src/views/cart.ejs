@@ -16,7 +16,21 @@
               <span style="font-size:10pt;display: block; font-weight: bold;">$<%= element.price * element.quantity %>
               </span>
           </p>
-
+          <div class="col=4">
+            <form action="carrito/<%=element.productId %>" method="POST">
+              <input type="hidden" name="username" value=<%=user.username%>>
+              <select id="quantity" name="quantity">
+                <% if (element.quantity> 1) {%>
+                  <% Array.from(new Array(element.quantity-1), (v, k)=> { %>
+                    <option value="<%=k+1%>">
+                      <%=k+1%>
+                    </option>
+                    <% }); %>
+                      <% } %>
+              </select>
+              <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+            </form>
+          </div>
         </div>
       </div>
       <% }); %>
@@ -25,13 +39,13 @@
             <div class="col=4">
               <form action="paycart" method="POST">
                 <input type="hidden" name="username" value=<%=user.username %>>
-                <button type="submit" style="margin-left: 15px;" class="btn btn-success">Pagar</button>
+                <button type="submit" class="btn btn-success btn-sm">Pagar</button>
               </form>
             </div>
             <div class="col=4">
               <form action="removecart" method="POST">
                 <input type="hidden" name="username" value=<%=user.username %>>
-                <button type="submit" style="margin-left: 15px;" class="btn btn-danger">Eliminar Carrito</button>
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar Carrito</button>
               </form>
             </div>
           </div>

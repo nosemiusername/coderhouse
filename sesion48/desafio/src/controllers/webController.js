@@ -71,7 +71,7 @@ export class WebController {
             status: 401,
             message: "Unauthorized"
         };
-        res.render('error.ejs', error);
+        res.render('error.ejs', { error: error });
     }
 
     static failRegister(req, res, next) {

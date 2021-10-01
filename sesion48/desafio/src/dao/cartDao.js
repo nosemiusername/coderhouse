@@ -9,7 +9,7 @@ export class CartDao {
         return cart;
     }
 
-    static async updateCart(username, productId, productName, price, image, quantity = 1) {
+    static async updateCart(username, productId, quantity = 1, productName, price, image) {
         try {
             const cart = await this.findOne(username);
             if (!cart) {
@@ -21,7 +21,10 @@ export class CartDao {
                 const objectCart = cart.toObject();
                 const id = objectCart.items.filter((v) => v.productId == productId);
                 if (id.length) {
-                    quantity += id[0].quantity;
+                    // if quantity equals one dont substract
+                    quantity = parseInt(quantity);
+                    id[0].quantity = parseInt(id[0].quantity);
+                    quantity = quantity < 0 && id[0].quantity == 1 ? 1 : id[0].quantity + quantity;
                     const updateCart = await Cart.findOneAndUpdate({ username, "items._id": id[0]._id },
                         {
                             "$set": {

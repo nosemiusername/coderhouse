@@ -37,8 +37,15 @@ export const warn = (msg) => {
     loggerConsole.warn(msg);
 }
 
-export const error = (msg) => {
+export const error = (msg, renderErrorPage = false, status = 500) => {
     loggerError.error(msg);
     loggerConsole.error(msg);
+    if (renderErrorPage) {
+        const err = {
+            status: status,
+            message: msg
+        };
+        res.render('error.ejs', { error: err });
+    }
 }
 
