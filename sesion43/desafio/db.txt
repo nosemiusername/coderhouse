@@ -1,9 +1,0 @@
-[
-	{
-		"id": 89939,
-		"productName": "Casa loca en el mar",
-		"department": "Casa",
-		"price": 7412,
-		"stock": 228
-	}
-]
