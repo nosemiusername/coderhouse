@@ -1,6 +1,7 @@
 import { ItemController } from "./itemController.js";
 import { MessageController } from "./messageController.js";
 import config from "../config/index.js";
+import { error } from "../config/logger.js";
 
 const __dirname = process.cwd();
 export class WebController {
@@ -88,6 +89,17 @@ export class WebController {
 
     sendIndex = (req, res, next) => {
         res.sendFile(`${__dirname}/src/public/login.html`);
+    }
+
+    logout = async (req, res, next) => {
+        req.logout();
+        try {
+            await req.session.destroy();
+            res.clearCookie('connect.sid');
+            res.redirect('/');
+        } catch {
+            error(err, res);
+        }
     }
 
 }

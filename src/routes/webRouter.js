@@ -57,7 +57,7 @@ export class WebRouter {
         this.webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), this.webController.sendProductos);
         this.webRouter.get('/failregister', this.webController.failRegister);
         this.webRouter.get('/faillogin', this.webController.failLogin);
-        this.webRouter.get('/logout', this.webController.sendIndex);
+        this.webRouter.get('/logout', this.webController.logout);
         this.webRouter.post('/addcart', this.cartController.add);
         this.webRouter.post('/carrito/:productId', this.cartController.updateCart);
         this.webRouter.get('/carrito', this.cartController.search);
