@@ -5,7 +5,11 @@ import config from "../config/index.js";
 const __dirname = process.cwd();
 export class WebController {
 
-    static sendLogout(req, res, next) {
+    constructor() {
+        this.itemController = new ItemController(config.flagDB);
+    }
+
+    sendLogout = (req, res, next) => {
         const ts = Date.now();
         const date_ob = new Date(ts);
         sendMail('ethereal', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
@@ -14,18 +18,17 @@ export class WebController {
         res.render('login.ejs');
     }
 
-    static async sendProductos(req, res, next) {
+    sendProductos = async (req, res, next) => {
         if (req.isAuthenticated()) {
-            const itemController = new ItemController(config.flagDB);
             const { id } = req.params;
-            const items = id == null ? await itemController.getAll() : await itemController.get(id);
+            const items = id == null ? await this.itemController.getAll() : await this.itemController.get(id);
             res.render('productos.ejs', { user: req.user, products: items });
         } else {
             res.sendFile(`${__dirname}/src/public/login.html`);
         }
     }
 
-    static async sendProfile(req, res, next) {
+    sendProfile = async (req, res, next) => {
         if (req.isAuthenticated()) {
             res.render('profile.ejs', { user: req.user });
         } else {
@@ -33,7 +36,7 @@ export class WebController {
         }
     }
 
-    static async sendInfo(req, res, next) {
+    sendInfo = async (req, res, next) => {
         const data = {
             arg: process.argv,
             platform_name: process.platform,
@@ -47,12 +50,12 @@ export class WebController {
         res.render('info.pug', { data: data });
     }
 
-    static async enviroment(req, res, next) {
+    enviroment = async (req, res, next) => {
         const annonymConf = { ...config, mongo_uri: "***", gmail_pass: "***", gmail_user: "***" }
         res.render('enviroment.hbs', { enviroments: annonymConf });
     }
 
-    static async chat(req, res, next) {
+    chat = async (req, res, next) => {
         if (req.isAuthenticated()) {
             const { email } = req.params;
             if (email) {
@@ -66,7 +69,7 @@ export class WebController {
         }
     }
 
-    static failLogin(req, res, next) {
+    failLogin = (req, res, next) => {
         const error = {
             status: 401,
             message: "Unauthorized"
@@ -74,7 +77,7 @@ export class WebController {
         res.render('error.ejs', { error: error });
     }
 
-    static failRegister(req, res, next) {
+    failRegister = (req, res, next) => {
         const error = {
             status: 500,
             message: "Fail register"
@@ -82,7 +85,7 @@ export class WebController {
         res.render('error.ejs', { error: error });
     }
 
-    static sendIndex(req, res, next) {
+    sendIndex = (req, res, next) => {
         res.sendFile(`${__dirname}/src/public/login.html`);
     }
 

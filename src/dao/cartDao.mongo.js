@@ -1,16 +1,22 @@
 import { Cart } from '../models/cart.mongo.js';
 import { Order } from '../models/order.mongo.js';
 import { error } from '../config/logger.js'
+import CartDao from './carDao.js'
 import { sendMail } from '../helper/index.js'
 import moment from 'moment';
-export class CartDao {
 
-    static async findOne(email, status = "pending") {
+export class CartDaoMongo extends CartDao {
+
+    constructor() {
+        super();
+    }
+
+    async findOne(email, status = "pending") {
         const cart = await Cart.findOne({ email, status });
         return cart;
     }
 
-    static async updateCart(email, productId, quantity = 1, discount = false, productName, price, image,) {
+    async updateCart(email, productId, quantity = 1, discount = false, productName, price, image,) {
         try {
             const cart = await this.findOne(email);
             if (!cart) {
@@ -45,7 +51,7 @@ export class CartDao {
         }
     }
 
-    static async changeStatus(user) {
+    async changeStatus(user) {
         try {
             const cart = await this.findOne(user.email);
             if (cart) {
@@ -74,7 +80,7 @@ export class CartDao {
         }
     }
 
-    static async deleteCart(user) {
+    async deleteCart(user) {
         try {
             const newCart = await Cart.findOneAndDelete({ email: user.email, status: "pending" });
         } catch (err) {
@@ -83,7 +89,7 @@ export class CartDao {
         }
     }
 
-    static async getAllItems(email) {
+    async getAllItems(email) {
         const res = await this.findOne(email);
         const cart = res == null ? null : res.toObject();
         if (cart) {

@@ -1,12 +1,19 @@
-import { CartDao } from "../dao/cartDao.mongo.js";
+import { CartDaoMongo } from "../dao/cartDao.mongo.js";
 import { error } from "../config/logger.js"
 export class CartController {
-    static async add(req, res, next) {
+
+    constructor(config) {
+        if (config == "Mongo") {
+            this.cartDao = new CartDaoMongo();
+        }
+    }
+
+    add = async (req, res, next) => {
         if (req.isAuthenticated()) {
 
             try {
                 const { email, productId, productName, price, image, quantity } = req.body;
-                const createdCart = await CartDao.updateCart(email, productId, quantity, false, productName, price, image);
+                const createdCart = await this.cartDao.updateCart(email, productId, quantity, false, productName, price, image);
                 res.redirect('/productos');
             } catch (err) {
                 error(err, res);
@@ -18,11 +25,11 @@ export class CartController {
 
     }
 
-    static async search(req, res, next) {
+    search = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
                 const { email } = req.user;
-                const items = await CartDao.getAllItems(email);
+                const items = await this.cartDao.getAllItems(email);
                 res.render('cart.ejs', { user: req.user, products: items })
             } catch (err) {
                 error(err, res);
@@ -33,10 +40,10 @@ export class CartController {
         }
     }
 
-    static async pay(req, res, next) {
+    pay = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
-                await CartDao.changeStatus(req.user);
+                await this.cartDao.changeStatus(req.user);
                 res.redirect('/productos');
             } catch (err) {
                 error(err, res);
@@ -48,10 +55,10 @@ export class CartController {
 
     }
 
-    static async remove(req, res, next) {
+    remove = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
-                await CartDao.deleteCart(req.user);
+                await this.cartDao.deleteCart(req.user);
                 res.redirect('/productos');
             } catch (err) {
                 error(err, res);
@@ -62,12 +69,12 @@ export class CartController {
         }
     }
 
-    static async updateCart(req, res, next) {
+    updateCart = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
                 const { email, quantity } = req.body;
                 const { productId } = req.params;
-                const createdCart = await CartDao.updateCart(email, productId, quantity, true);
+                const createdCart = await this.cartDao.updateCart(email, productId, quantity, true);
                 res.redirect('/carrito');
             } catch (err) {
                 error(err, res);
