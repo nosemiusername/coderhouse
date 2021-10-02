@@ -10,9 +10,11 @@ const itemsSchema = new mongoose.Schema({
 })
 
 const cartSchema = new mongoose.Schema({
-    username: String,
+    email: String,
     status: String,
     items: [itemsSchema],
+    created_at: Date,
+    updated_at: Date,
 })
 
 export const Cart = mongoose.model('Cart', cartSchema);

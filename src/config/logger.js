@@ -37,10 +37,10 @@ export const warn = (msg) => {
     loggerConsole.warn(msg);
 }
 
-export const error = (msg, renderErrorPage = false, status = 500) => {
+export const error = (msg, res, status = 500) => {
     loggerError.error(msg);
     loggerConsole.error(msg);
-    if (renderErrorPage) {
+    if (res) {
         const err = {
             status: status,
             message: msg

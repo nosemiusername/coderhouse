@@ -1,12 +1,12 @@
 
-import ItemDAO from './itemDao.js';
+import ItemDao from './itemDao.js';
 import { Item } from '../models/item.mongo.js';
 import { validateNewItem, validateUpdatedItem } from '../validations/item.js';
 import faker from 'faker';
 import { mongoToObject } from '../utils/index.js'
 faker.locale = 'es';
 
-export default class ItemDaoMongo extends ItemDAO {
+export default class ItemDaoMongo extends ItemDao {
 
     constructor() {
         super();

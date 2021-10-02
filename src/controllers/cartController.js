@@ -1,15 +1,22 @@
-import { CartDao } from "../dao/cartDao.js";
+import { CartDaoMongo } from "../dao/cartDao.mongo.js";
 import { error } from "../config/logger.js"
 export class CartController {
-    static async add(req, res, next) {
+
+    constructor(config) {
+        if (config == "Mongo") {
+            this.cartDao = new CartDaoMongo();
+        }
+    }
+
+    add = async (req, res, next) => {
         if (req.isAuthenticated()) {
 
             try {
-                const { username, productId, productName, price, image, quantity } = req.body;
-                const createdCart = await CartDao.updateCart(username, productId, quantity, productName, price, image);
+                const { email, productId, productName, price, image, quantity } = req.body;
+                const createdCart = await this.cartDao.updateCart(email, productId, quantity, false, productName, price, image);
                 res.redirect('/productos');
             } catch (err) {
-                error(err, true);
+                error(err, res);
             }
         } else {
             const __dirname = process.cwd();
@@ -18,14 +25,14 @@ export class CartController {
 
     }
 
-    static async search(req, res, next) {
+    search = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
-                const { username } = req.user;
-                const items = await CartDao.getAllItems(username);
+                const { email } = req.user;
+                const items = await this.cartDao.getAllItems(email);
                 res.render('cart.ejs', { user: req.user, products: items })
             } catch (err) {
-                error(err, true);
+                error(err, res);
             }
         } else {
             const __dirname = process.cwd();
@@ -33,13 +40,13 @@ export class CartController {
         }
     }
 
-    static async pay(req, res, next) {
+    pay = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
-                await CartDao.changeStatus(req.user);
+                await this.cartDao.changeStatus(req.user);
                 res.redirect('/productos');
             } catch (err) {
-                error(err, true);
+                error(err, res);
             }
         } else {
             const __dirname = process.cwd();
@@ -48,13 +55,13 @@ export class CartController {
 
     }
 
-    static async remove(req, res, next) {
+    remove = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
-                await CartDao.deleteCart(req.user);
+                await this.cartDao.deleteCart(req.user);
                 res.redirect('/productos');
             } catch (err) {
-                error(err, true);
+                error(err, res);
             }
         } else {
             const __dirname = process.cwd();
@@ -62,15 +69,15 @@ export class CartController {
         }
     }
 
-    static async updateCart(req, res, next) {
+    updateCart = async (req, res, next) => {
         if (req.isAuthenticated()) {
             try {
-                const { username, quantity } = req.body;
+                const { email, quantity } = req.body;
                 const { productId } = req.params;
-                const createdCart = await CartDao.updateCart(username, productId, -quantity);
+                const createdCart = await this.cartDao.updateCart(email, productId, quantity, true);
                 res.redirect('/carrito');
             } catch (err) {
-                error(err, true);
+                error(err, res);
             }
         } else {
             const __dirname = process.cwd();

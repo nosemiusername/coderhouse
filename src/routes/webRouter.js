@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import passport from 'passport';
+import config from '../config/index.js'
 import { Strategy as LocalStrategy } from 'passport-local';;
 import { WebController } from '../controllers/webController.js';
 import { UserController } from '../controllers/userController.js';
 import { CartController } from '../controllers/cartController.js';
-
-export const webRouter = Router();
 
 passport.use('login', new LocalStrategy(async (username, password, done) => {
     const user = await UserController.find(username, password);
@@ -42,24 +41,37 @@ const isAuth = (req, res, next) => {
         res.render('login.ejs');
     }
 }
+export class WebRouter {
+    constructor() {
+        this.cartController = new CartController(config.flagDB);
+        this.webController = new WebController();
+        this.webRouter = Router();
+    }
 
-webRouter.post('/register', passport.authenticate('signup', { failureRedirect: '/failregister' }), WebController.sendProductos);;
-webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), WebController.sendProductos);
-webRouter.get('/failregister', WebController.failRegister);
-webRouter.get('/faillogin', WebController.failLogin);
-webRouter.get('/logout', WebController.sendIndex);
-webRouter.post('/addcart', CartController.add);
-webRouter.post('/carrito/:productId', CartController.updateCart);
-webRouter.get('/carrito', CartController.search);
-webRouter.post('/paycart', CartController.pay);
-webRouter.post('/removecart', CartController.remove);
-webRouter.get('/productos', WebController.sendProductos);
-webRouter.get('/productos/:id', WebController.sendProductos);
-webRouter.get('/profile', WebController.sendProfile);
-webRouter.get('/info', WebController.sendInfo);
-webRouter.get('/enviroment', WebController.enviroment);
-webRouter.get('/chat', WebController.chat);
-webRouter.get('/chat/:email', WebController.chat);
-webRouter.get('/', WebController.sendIndex);
+    start() {
+
+        this.webRouter.post('/register', passport.authenticate('signup', { failureRedirect: '/failregister' }), this.webController.sendProductos);;
+        this.webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), this.webController.sendProductos);
+        this.webRouter.get('/failregister', this.webController.failRegister);
+        this.webRouter.get('/faillogin', this.webController.failLogin);
+        this.webRouter.get('/logout', this.webController.sendIndex);
+        this.webRouter.post('/addcart', this.cartController.add);
+        this.webRouter.post('/carrito/:productId', this.cartController.updateCart);
+        this.webRouter.get('/carrito', this.cartController.search);
+        this.webRouter.post('/paycart', this.cartController.pay);
+        this.webRouter.post('/removecart', this.cartController.remove);
+        this.webRouter.get('/productos', this.webController.sendProductos);
+        this.webRouter.get('/productos/:id', this.webController.sendProductos);
+        this.webRouter.get('/profile', this.webController.sendProfile);
+        this.webRouter.get('/info', this.webController.sendInfo);
+        this.webRouter.get('/enviroment', this.webController.enviroment);
+        this.webRouter.get('/chat', this.webController.chat);
+        this.webRouter.get('/chat/:email', this.webController.chat);
+        this.webRouter.get('/', this.webController.sendIndex);
+
+        return this.webRouter;
+
+    }
 
 
+}

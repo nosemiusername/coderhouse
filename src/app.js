@@ -1,6 +1,6 @@
 import express from 'express';
 import { Server as httpServer } from 'http';
-import { webRouter } from './routes/webRouter.js';
+import { WebRouter } from './routes/webRouter.js';
 import { ItemRouter } from './routes/itemRouter.js';
 import config from './config/index.js';
 import { load } from './loader/index.js';
@@ -75,8 +75,9 @@ if (cluster.isMaster) {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use('/', webRouter);
     const itemRouter = new ItemRouter();
+    const webRouter = new WebRouter();
+    app.use('/', webRouter.start());
     app.use('/api/productos', itemRouter.start());
 
     http.listen(config.port, () => {

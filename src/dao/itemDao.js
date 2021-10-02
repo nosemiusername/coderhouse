@@ -1,4 +1,4 @@
-export default class ItemDAO {
+export default class ItemDao {
     async getAll() {
         throw new Error('pending implementation!');
     };
