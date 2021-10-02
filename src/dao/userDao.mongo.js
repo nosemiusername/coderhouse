@@ -1,10 +1,11 @@
 import { User } from '../models/user.mongo.js';
+import UserDao from './userDao.js';
 import bcrypt from 'bcrypt';
 import config from '../config/index.js'
 
-export class UserDao {
+export class UserDaoMongo extends UserDao {
 
-    static async create(user) {
+    async create(user) {
         try {
             const hash = await bcrypt.hash(user.password, Number(config.saltrounds));
             user.password = hash;
@@ -15,7 +16,7 @@ export class UserDao {
         }
     };
 
-    static async findOne(username, password = null) {
+    async findOne(username, password = null) {
         const res = await User.findOne({ username: username });
         const user = res == null ? null : res.toObject();
         if (user && password) {

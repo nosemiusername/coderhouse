@@ -1,20 +1,31 @@
-import { UserDao } from "../dao/userDao.mongo.js";
-
+import { UserDaoMongo } from "../dao/userDao.mongo.js";
 export class UserController {
-    // TODO manage catch error modify return 
-    static async find(email, password) {
+
+    constructor(config) {
+        if (!UserController._instance) {
+            if (config == "Mongo") {
+                this.userDao = new UserDaoMongo();
+            }
+            UserController._instance = this;
+        } else {
+            return UserController._instance;
+        }
+    }
+
+    async find(email, password) {
         try {
-            const user = await UserDao.findOne(email, password);
+            const user = await this.userDao.findOne(email, password);
             return user;
         } catch (error) {
             return null;
         }
     }
 
-    // TODO manage catch error modify return 
-    static async create(user) {
+
+
+    async create(user) {
         try {
-            const newuser = await UserDao.create(user);
+            const newuser = await this.userDao.create(user);
             return newuser;
         } catch (error) {
             return null;
