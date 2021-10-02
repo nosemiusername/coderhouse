@@ -12,7 +12,8 @@ const orderSchema = new mongoose.Schema({
     id: Number,
     email: String,
     status: String,
-    date: Date,
+    created_at: Date,
+    updated_at: Date,
     items: [itemsSchema],
 })
 

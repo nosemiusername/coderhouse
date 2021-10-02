@@ -13,6 +13,8 @@ const cartSchema = new mongoose.Schema({
     email: String,
     status: String,
     items: [itemsSchema],
+    created_at: Date,
+    updated_at: Date,
 })
 
 export const Cart = mongoose.model('Cart', cartSchema);

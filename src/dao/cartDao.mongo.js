@@ -2,7 +2,7 @@ import { Cart } from '../models/cart.mongo.js';
 import { Order } from '../models/order.mongo.js';
 import { error } from '../config/logger.js'
 import { sendMail } from '../helper/index.js'
-
+import moment from 'moment';
 export class CartDao {
 
     static async findOne(email, status = "pending") {
@@ -14,7 +14,7 @@ export class CartDao {
         try {
             const cart = await this.findOne(email);
             if (!cart) {
-                const newCart = await Cart.create({ email, status: "pending" });
+                const newCart = await Cart.create({ email, status: "pending", created_at: moment().toString(), updated_at: moment().toString() });
                 newCart.items.push({ productId, productName, price, image, quantity });
                 await newCart.save();
                 return ({ status: 201, msg: "Cart created" });
@@ -29,6 +29,7 @@ export class CartDao {
                     const updateCart = await Cart.findOneAndUpdate({ email, "items._id": id[0]._id },
                         {
                             "$set": {
+                                "updated_at": moment().toString(),
                                 "items.$.quantity": quantity,
                             }
                         });
@@ -48,15 +49,16 @@ export class CartDao {
         try {
             const cart = await this.findOne(user.email);
             if (cart) {
-                const updateCart = await Cart.findOneAndUpdate({ email: user.email, status: "pending" },
+                const updateCart = await Cart.findOneAndUpdate({ email: user.email, status: "pending", },
                     {
                         "$set": {
                             "status": "payed",
+                            "updated_at": moment().toString(),
                         }
                     });
                 const objectCart = cart.toObject();
                 const ordersQuantity = await Order.countDocuments({});
-                const newOrder = await Order.create({ email: user.email, status: "generated", id: ordersQuantity + 1 });
+                const newOrder = await Order.create({ email: user.email, status: "generated", id: ordersQuantity + 1, created_at: moment().toString(), updated_at: moment().toString() });
                 objectCart.items.forEach(item => {
                     newOrder.items.push({
                         productId: item.productId, productName: item.productName,
