@@ -1,10 +1,14 @@
 import { Message } from '../models/message.mongo.js';
 import { mongoToObject } from '../utils/index.js';
 import { error } from '../config/logger.js';
+import MessageDao from '../dao/messageDao.js';
+export default class MessageDaoMongo extends MessageDao {
 
-export class MessageDao {
+    constructor() {
+        super();
+    }
 
-    static async getAllChats() {
+    async getAllChats() {
         try {
             const res = await Message.find();
             const chats = mongoToObject(res);
@@ -14,7 +18,7 @@ export class MessageDao {
         }
     }
 
-    static async getChatsByUser(email) {
+    async getChatsByUser(email) {
         try {
             const res = await Message.find({ 'autor.email': email });
             const chats = mongoToObject(res);
@@ -25,7 +29,7 @@ export class MessageDao {
 
     }
 
-    static async insertChat(chat) {
+    async insertChat(chat) {
         try {
             const text = chat.text;
             delete chat.text;

@@ -1,5 +1,5 @@
 import { ItemController } from "./itemController.js";
-import { MessageDao } from "../dao/messageDao.mongo.js";
+import { MessageController } from "./messageController.js";
 import config from "../config/index.js";
 
 const __dirname = process.cwd();
@@ -59,7 +59,8 @@ export class WebController {
         if (req.isAuthenticated()) {
             const { email } = req.params;
             if (email) {
-                const chats = await MessageDao.getChatsByUser(email);
+                const messageController = new MessageController(config.flagDB);
+                const chats = await messageController.getChatsByUser(email);
                 res.render('mychat.hbs', { user: req.user, chats: chats });
             } else {
                 res.render('chat.hbs', { user: req.user });
