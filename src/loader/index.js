@@ -1,22 +1,22 @@
 import Mongo from '../db/dbMongo.js';
 import { Server as ioServer } from 'socket.io';
 import config from '../config/index.js';
-import { MessageController } from '../controllers/messageController.js'
-
+import { MessageController } from '../controllers/messageController.js';
 class WebSoccket {
     static connect(http) {
         const io = new ioServer(http);
+        const messageController = new MessageController(config.flagDB);
         console.log(`Websocket: Connection Succesful`)
         io.on('connection', (socket) => {
             console.log("New Connection");
 
-            MessageController.getAllChats()
+            messageController.getAllChats()
                 .then(chats => {
                     socket.emit('chats', chats);
                 });
 
             socket.on('new-chat', data => {
-                const chat = MessageController.createMessage(data);
+                const chat = messageController.createMessage(data);
                 io.sockets.emit('chats', chat);
             });
         });

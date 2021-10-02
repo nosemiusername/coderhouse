@@ -1,6 +1,7 @@
 import { ItemController } from "./itemController.js";
-import { MessageDao } from "../dao/messageDao.mongo.js";
+import { MessageController } from "./messageController.js";
 import config from "../config/index.js";
+import { error } from "../config/logger.js";
 
 const __dirname = process.cwd();
 export class WebController {
@@ -59,7 +60,8 @@ export class WebController {
         if (req.isAuthenticated()) {
             const { email } = req.params;
             if (email) {
-                const chats = await MessageDao.getChatsByUser(email);
+                const messageController = new MessageController(config.flagDB);
+                const chats = await messageController.getChatsByUser(email);
                 res.render('mychat.hbs', { user: req.user, chats: chats });
             } else {
                 res.render('chat.hbs', { user: req.user });
@@ -87,6 +89,17 @@ export class WebController {
 
     sendIndex = (req, res, next) => {
         res.sendFile(`${__dirname}/src/public/login.html`);
+    }
+
+    logout = async (req, res, next) => {
+        req.logout();
+        try {
+            await req.session.destroy();
+            res.clearCookie('connect.sid');
+            res.redirect('/');
+        } catch {
+            error(err, res);
+        }
     }
 
 }

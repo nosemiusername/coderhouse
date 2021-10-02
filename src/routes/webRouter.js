@@ -7,7 +7,8 @@ import { UserController } from '../controllers/userController.js';
 import { CartController } from '../controllers/cartController.js';
 
 passport.use('login', new LocalStrategy(async (username, password, done) => {
-    const user = await UserController.find(username, password);
+    const userController = new UserController(config.flagDB)
+    const user = await userController.find(username, password);
     if (user) {
         return done(null, user);
     } else {
@@ -17,11 +18,12 @@ passport.use('login', new LocalStrategy(async (username, password, done) => {
 
 passport.use('signup', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
     const { age, address, email, cellphone } = req.body;
-    const user = await UserController.find(username);
+    const userController = new UserController(config.flagDB)
+    const user = await userController.find(username);
     if (user) {
         return done('User already exist');
     }
-    const newuser = await UserController.create({ username, password, age, address, email, cellphone });
+    const newuser = await userController.create({ username, password, age, address, email, cellphone });
     return done(null, newuser);
 }))
 
@@ -30,7 +32,8 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (username, done) => {
-    const user = await UserController.find(username);
+    const userController = new UserController(config.flagDB)
+    const user = await userController.find(username);
     done(null, user);
 })
 
@@ -54,7 +57,7 @@ export class WebRouter {
         this.webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), this.webController.sendProductos);
         this.webRouter.get('/failregister', this.webController.failRegister);
         this.webRouter.get('/faillogin', this.webController.failLogin);
-        this.webRouter.get('/logout', this.webController.sendIndex);
+        this.webRouter.get('/logout', this.webController.logout);
         this.webRouter.post('/addcart', this.cartController.add);
         this.webRouter.post('/carrito/:productId', this.cartController.updateCart);
         this.webRouter.get('/carrito', this.cartController.search);
