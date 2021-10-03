@@ -1,3 +1,4 @@
+/** enable error pino based*/
 import pino, { destination } from 'pino';
 
 const loggerWarn = pino({
@@ -37,6 +38,7 @@ export const warn = (msg) => {
     loggerConsole.warn(msg);
 }
 
+/** at error if need render error page */
 export const error = (msg, res, status = 500) => {
     loggerError.error(msg);
     loggerConsole.error(msg);

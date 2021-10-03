@@ -6,6 +6,11 @@ import config from '../config/index.js';
 /** API Rest **/
 export class ItemController {
 
+    /**
+     * Factory. If needed other database, just add in enviroment, dao, and de clause over if
+     * @param {string} config  
+     *      database type
+     */
     constructor(config) {
         if (config == "Mongo") {
             this.itemDao = new ItemDaoMongo();

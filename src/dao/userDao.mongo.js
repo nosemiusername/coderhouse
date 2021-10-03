@@ -5,6 +5,11 @@ import config from '../config/index.js'
 
 export class UserDaoMongo extends UserDao {
 
+    /**
+     * Create new user
+     * @param {string} user 
+     * @returns User
+     */
     async create(user) {
         try {
             const hash = await bcrypt.hash(user.password, Number(config.saltrounds));
@@ -16,6 +21,12 @@ export class UserDaoMongo extends UserDao {
         }
     };
 
+    /**
+     * Find existing user
+     * @param {string} username 
+     * @param {string} password 
+     * @returns 
+     */
     async findOne(username, password = null) {
         const res = await User.findOne({ username: username });
         const user = res == null ? null : res.toObject();

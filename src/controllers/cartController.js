@@ -2,6 +2,11 @@ import { CartDaoMongo } from "../dao/cartDao.mongo.js";
 import { error } from "../config/logger.js"
 export class CartController {
 
+    /**
+     * Factory. If needed other database, just add in enviroment, dao, and de clause over if
+     * @param {string} config  
+     *      database type
+     */
     constructor(config) {
         if (config == "Mongo") {
             this.cartDao = new CartDaoMongo();

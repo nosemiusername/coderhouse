@@ -11,11 +11,28 @@ export class CartDaoMongo extends CartDao {
         super();
     }
 
+    /**
+     * Find cart by email
+     * @param {string} email 
+     * @param {string} status 
+     * @returns Cart
+     */
     async findOne(email, status = "pending") {
         const cart = await Cart.findOne({ email, status });
         return cart;
     }
 
+    /**
+     * Update feats and amount of item at cart, considering if is add just one more, or updated overall quantity
+     * @param {string} email 
+     * @param {string} productId 
+     * @param {string} quantity 
+     * @param {string} discount 
+     * @param {string} productName 
+     * @param {string} price 
+     * @param {string} image 
+     * @returns Json(status)
+     */
     async updateCart(email, productId, quantity = 1, discount = false, productName, price, image,) {
         try {
             const cart = await this.findOne(email);
@@ -51,6 +68,11 @@ export class CartDaoMongo extends CartDao {
         }
     }
 
+    /**
+     * When user pay, change status cart to payedm and create order
+     * @param {Object User} user 
+     * @returns Json(status)
+     */
     async changeStatus(user) {
         try {
             const cart = await this.findOne(user.email);
@@ -80,6 +102,11 @@ export class CartDaoMongo extends CartDao {
         }
     }
 
+    /**
+     * When user reset cart to start new one
+     * @param {Onject user} user 
+     * @returns Json(status)
+     */
     async deleteCart(user) {
         try {
             const newCart = await Cart.findOneAndDelete({ email: user.email, status: "pending" });
@@ -89,6 +116,11 @@ export class CartDaoMongo extends CartDao {
         }
     }
 
+    /**
+     * List all cart
+     * @param {string} email 
+     * @returns Array(items)
+     */
     async getAllItems(email) {
         const res = await this.findOne(email);
         const cart = res == null ? null : res.toObject();

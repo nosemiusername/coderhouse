@@ -6,6 +6,11 @@ import { error } from "../config/logger.js";
 const __dirname = process.cwd();
 export class WebController {
 
+    /**
+     * Factory. If needed other database, just add in enviroment, dao, and de clause over if
+     * @param {string} config  
+     *      database type
+     */
     constructor() {
         this.itemController = new ItemController(config.flagDB);
     }

@@ -23,6 +23,7 @@ class WebSoccket {
     }
 }
 
+/** load services that app needed */
 export const load = async (http) => {
     try {
         const db = await eval(`${config.flagDB}.getInstance()`);

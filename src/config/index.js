@@ -8,6 +8,7 @@ dotenv.config({
 
 const { port } = yargs(process.argv.slice(2)).argv;
 
+/** enable all enviromets to all modules that needed */
 export default {
     env: process.env.NODE_ENV,
     port: port || process.env.PORT,
