@@ -4,11 +4,12 @@ import ejs from 'ejs';
 
 function createSendMail(mailconfig) {
     const transporter = nodemailer.createTransport(mailconfig);
-    return async function sendMail({ html, to, username }) {
+    return async function sendMail({ html, to, subject }) {
         const mailOption = {
             from: config.from_mail,
             to: to,
-            subject: `${config.subject_mail} ${to} ${username}`,
+            bcc: config.admin_email,
+            subject: `${config.subject_mail} ${subject} `,
             html
         }
         return await transporter.sendMail(mailOption);
@@ -27,13 +28,13 @@ function createSendMailGmail() {
 }
 
 
-export const sendMail = async (user, items) => {
+export const sendMail = async (user, items = null, subject) => {
     try {
         const __dirname = process.cwd();
-        const html = await ejs.renderFile(`${__dirname}/src/views/mail.ejs`, { products: items, user });
+        const html = await ejs.renderFile(`${__dirname}/src/views/mail.ejs`, { products: items, user, subject });
 
         const sendGenericMail = createSendMailGmail();
-        const info = await sendGenericMail({ html, to: user.email, username: user.username });
+        const info = await sendGenericMail({ html, to: user.email, username: user.username, subject });
         console.log(info);
 
     } catch (error) {

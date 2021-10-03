@@ -30,11 +30,13 @@
         }
     </style>
 
-    <title>Notificacion venta</title>
+    <title>Notificacion <%= subject %>
+    </title>
 </head>
 
 <body>
-    <h1>Notificacion venta</h1>
+    <h1>Notificacion <%= subject %>
+    </h1>
     <h2>Usuario</h2>
     <div class="card mb-3">
         <div class="card-body">
@@ -54,6 +56,8 @@
                 Cellphone: <%= user.cellphone %>
             </h5>
         </div>
+    </div>
+    <% if (products) { %>
         <h2>Productos</h2>
         <% products.forEach( element=> { %>
             <div class="card mb-3">
@@ -75,6 +79,7 @@
                 </div>
             </div>
             <% }); %>
+                <% } %>
 </body>
 
 </html>

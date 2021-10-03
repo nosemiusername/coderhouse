@@ -94,7 +94,7 @@ export class CartDaoMongo extends CartDao {
                     });
                 });
                 await newOrder.save();
-                await sendMail(user, objectCart.items);
+                await sendMail(user, objectCart.items, "Venta");
             }
         } catch (err) {
             error(err);

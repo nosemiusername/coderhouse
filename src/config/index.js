@@ -23,4 +23,5 @@ export default {
     flagDB: process.env.FLAG_DB,
     tokenSecret: process.env.TOKEN_SECRET,
     jwt_max_age: process.env.JWT_MAX_AGE,
+    admin_email: process.env.ADMIN_EMAIL,
 }
