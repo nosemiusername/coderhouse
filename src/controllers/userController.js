@@ -12,9 +12,9 @@ export class UserController {
         }
     }
 
-    async find(email, password) {
+    async find(username, password) {
         try {
-            const user = await this.userDao.findOne(email, password);
+            const user = await this.userDao.findOne(username, password);
             return user;
         } catch (error) {
             return null;
