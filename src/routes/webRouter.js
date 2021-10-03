@@ -57,7 +57,7 @@ export class WebRouter {
         this.webRouter.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), this.webController.sendProductos);
         this.webRouter.get('/failregister', this.webController.failRegister);
         this.webRouter.get('/faillogin', this.webController.failLogin);
-        this.webRouter.get('/logout', this.webController.logout);
+        this.webRouter.get('/logout', this.webController.sendLogout);
         this.webRouter.post('/addcart', this.cartController.add);
         this.webRouter.post('/carrito/:productId', this.cartController.updateCart);
         this.webRouter.get('/carrito', this.cartController.search);
@@ -67,9 +67,9 @@ export class WebRouter {
         this.webRouter.get('/productos/:id', this.webController.sendProductos);
         this.webRouter.get('/profile', this.webController.sendProfile);
         this.webRouter.get('/info', this.webController.sendInfo);
-        this.webRouter.get('/enviroment', this.webController.enviroment);
-        this.webRouter.get('/chat', this.webController.chat);
-        this.webRouter.get('/chat/:email', this.webController.chat);
+        this.webRouter.get('/enviroment', this.webController.sendEnviroment);
+        this.webRouter.get('/chat', this.webController.sendChat);
+        this.webRouter.get('/chat/:email', this.webController.sendChat);
         this.webRouter.get('/', this.webController.sendIndex);
 
         return this.webRouter;
