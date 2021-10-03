@@ -70,7 +70,7 @@ export class WebController {
     failLogin = (req, res, next) => {
         const error = {
             status: 401,
-            message: "Unauthorized"
+            message: "No autorizado: Usuario no existe o error en password."
         };
         res.render('error.ejs', { error: error });
     }
@@ -78,7 +78,7 @@ export class WebController {
     failRegister = (req, res, next) => {
         const error = {
             status: 500,
-            message: "Fail register"
+            message: "Registro fallido: Usuario ya existe."
         };
         res.render('error.ejs', { error: error });
     }

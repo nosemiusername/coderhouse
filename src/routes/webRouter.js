@@ -6,34 +6,39 @@ import { WebController } from '../controllers/webController.js';
 import { UserController } from '../controllers/userController.js';
 import { CartController } from '../controllers/cartController.js';
 
-passport.use('login', new LocalStrategy(async (username, password, done) => {
-    const userController = new UserController(config.flagDB);
-    const user = await userController.find(username, password);
-    if (user) {
-        return done(null, user);
-    } else {
-        return done(null, false);
-    }
-}))
+passport.use('login', new LocalStrategy(
+    {
+        usernameField: 'email',
+        passwordField: 'password'
+    },
+    async (username, password, done) => {
+        const userController = new UserController(config.flagDB);
+        const user = await userController.find(username, password);
+        if (user) {
+            return done(null, user);
+        } else {
+            return done(null, false);
+        }
+    }))
 
 passport.use('signup', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
     const { age, address, email, cellphone } = req.body;
     const userController = new UserController(config.flagDB)
-    const user = await userController.find(username);
+    const user = await userController.find(email);
     if (user) {
-        return done('User already exist');
+        return done(null, false);
     }
     const newuser = await userController.create({ username, password, age, address, email, cellphone });
     return done(null, newuser);
 }))
 
 passport.serializeUser((user, done) => {
-    done(null, user.username);
+    done(null, user.email);
 })
 
-passport.deserializeUser(async (username, done) => {
+passport.deserializeUser(async (email, done) => {
     const userController = new UserController(config.flagDB)
-    const user = await userController.find(username);
+    const user = await userController.find(email);
     done(null, user);
 })
 

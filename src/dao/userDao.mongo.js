@@ -25,12 +25,12 @@ export class UserDaoMongo extends UserDao {
 
     /**
      * Find existing user
-     * @param {string} username 
+     * @param {string} email 
      * @param {string} password 
      * @returns 
      */
-    async findOne(username, password = null) {
-        const res = await User.findOne({ username: username });
+    async findOne(email, password = null) {
+        const res = await User.findOne({ email: email });
         const user = res == null ? null : res.toObject();
         if (user && password) {
             const isValidate = await bcrypt.compare(password, user.password);
