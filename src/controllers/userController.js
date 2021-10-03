@@ -1,6 +1,12 @@
 import { UserDaoMongo } from "../dao/userDao.mongo.js";
 export class UserController {
 
+    /**
+     * Factory. If needed other database, just add in enviroment, dao, and de clause over if
+     * It added singleton cause its called more than one controller
+     * @param {string} config  
+     *      database type
+     */
     constructor(config) {
         if (!UserController._instance) {
             if (config == "Mongo") {
@@ -12,9 +18,9 @@ export class UserController {
         }
     }
 
-    async find(email, password) {
+    async find(username, password) {
         try {
-            const user = await this.userDao.findOne(email, password);
+            const user = await this.userDao.findOne(username, password);
             return user;
         } catch (error) {
             return null;

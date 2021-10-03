@@ -8,6 +8,10 @@ export default class MessageDaoMongo extends MessageDao {
         super();
     }
 
+    /**
+     * Return all messages
+     * @returns Array(Message)
+     */
     async getAllChats() {
         try {
             const res = await Message.find();
@@ -18,6 +22,11 @@ export default class MessageDaoMongo extends MessageDao {
         }
     }
 
+    /**
+     * Find chats by user
+     * @param {string} email 
+     * @returns Message
+     */
     async getChatsByUser(email) {
         try {
             const res = await Message.find({ 'autor.email': email });
@@ -29,6 +38,11 @@ export default class MessageDaoMongo extends MessageDao {
 
     }
 
+    /**
+     * Save chat
+     * @param {string} chat 
+     * @returns Array(Message)
+     */
     async insertChat(chat) {
         try {
             const text = chat.text;

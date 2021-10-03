@@ -12,6 +12,12 @@ export default class ItemDaoMongo extends ItemDao {
         super();
     }
 
+    /**
+     * Create randoms items
+     * @param {int} quantity 
+     * @param {bool} save 
+     * @returns Item
+     */
     generate(quantity, save = true) {
         const newItemList = [];
         Array.from(new Array(Number(quantity)), async (v, k) => {
@@ -32,6 +38,11 @@ export default class ItemDaoMongo extends ItemDao {
         return quantity;
     }
 
+    /**
+     * Add one item
+     * @param {Item} newItemDAO 
+     * @returns Item
+     */
     async add(newItemDAO) {
         if (validateNewItem(newItemDAO).result) {
             const existedItem = await this.getById(newItemDAO.id);
@@ -46,18 +57,33 @@ export default class ItemDaoMongo extends ItemDao {
         }
     }
 
+    /**
+     * List items
+     * @returns Array(Item)
+     */
     async getAll() {
         const res = await Item.find();
         const items = res.map(item => item.toObject());
         return items;
     }
 
+    /**
+     * Find by productId or department name
+     * @param {string} id 
+     * @returns Array(Item)
+     */
     async getById(id) {
         const res = !isNaN(id) ? await Item.findOne({ id }) : await Item.find({ department: id });
         const items = mongoToObject(res);
         return items;
     }
 
+    /**
+     * Find by product Id and replace for Item
+     * @param {string} id 
+     * @param {Item} item 
+     * @returns updated item
+     */
     async updateById(id, item) {
         const existedItem = await this.getById(id);
         if (existedItem.length) {
@@ -76,6 +102,11 @@ export default class ItemDaoMongo extends ItemDao {
         }
     }
 
+    /**
+     * Delete Item by product id
+     * @param {string} id 
+     * @returns 
+     */
     async deleteById(id) {
         const existedItem = await this.getById(id);
         if (existedItem) {
@@ -87,6 +118,9 @@ export default class ItemDaoMongo extends ItemDao {
         }
     };
 
+    /**
+     * TODO: Delete all items.
+     */
     async deleteAll() {
         throw new Error('pending implementation!');
     }

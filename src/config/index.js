@@ -8,6 +8,7 @@ dotenv.config({
 
 const { port } = yargs(process.argv.slice(2)).argv;
 
+/** enable all enviromets to all modules that needed */
 export default {
     env: process.env.NODE_ENV,
     port: port || process.env.PORT,
@@ -20,4 +21,7 @@ export default {
     saltrounds: process.env.SALTROUNDS,
     cluster_mode: process.env.CLUSTER_MODE,
     flagDB: process.env.FLAG_DB,
+    tokenSecret: process.env.TOKEN_SECRET,
+    jwt_max_age: process.env.JWT_MAX_AGE,
+    admin_email: process.env.ADMIN_EMAIL,
 }

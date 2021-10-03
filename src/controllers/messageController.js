@@ -1,6 +1,12 @@
 import MessageDaoMongo from '../dao/messageDao.mongo.js';
 export class MessageController {
 
+    /**
+     * Factory. If needed other database, just add in enviroment, dao, and de clause over if
+     * It added singleton cause its called more than one controller
+     * @param {string} config  
+     *      database type
+     */
     constructor(config) {
         if (!MessageController._instance) {
             if (config == "Mongo") {

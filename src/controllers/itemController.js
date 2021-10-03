@@ -1,8 +1,16 @@
-import ItemDaoMongo from "../dao/itemDao.mongo.js";
-import { error } from '../config/logger.js'
+import ItemDaoMongo from '../dao/itemDao.mongo.js';
+import jwt from 'jsonwebtoken';
+import { error } from '../config/logger.js';
+import { UserController } from './userController.js';
+import config from '../config/index.js';
 /** API Rest **/
 export class ItemController {
 
+    /**
+     * Factory. If needed other database, just add in enviroment, dao, and de clause over if
+     * @param {string} config  
+     *      database type
+     */
     constructor(config) {
         if (config == "Mongo") {
             this.itemDao = new ItemDaoMongo();
@@ -75,6 +83,39 @@ export class ItemController {
             error(err.message);
         }
     }
+
+    login = async (req, res, next) => {
+        try {
+            const { username, password } = req.body;
+            const userController = new UserController(config.flagDB)
+            const user = await userController.find(username, password);;
+            if (user) {
+                res.json({ token: this.generateToken(user.username) });
+            } else {
+                res.status(403).json("Not allowed");
+            }
+        } catch (err) {
+            res.status(500).json(err.message);
+            error(err.message);
+        }
+    }
+
+    verify = async (req, res, next) => {
+        const token = req.headers.authorization;
+        if (!token) res.status(403).json("Not allowed");
+        else {
+            try {
+                await jwt.verify(token.split(" ")[1], config.tokenSecret);
+                next();
+            } catch (err) {
+                res.status(403).json("Not allowed");
+            }
+        }
+    }
+
+    generateToken = (user) => {
+        return jwt.sign({ data: user }, config.tokenSecret, { expiresIn: config.jwt_max_age });
+    };
 
     async getAll() {
         return await this.itemDao.getAll()
