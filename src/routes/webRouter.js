@@ -7,7 +7,7 @@ import { UserController } from '../controllers/userController.js';
 import { CartController } from '../controllers/cartController.js';
 
 passport.use('login', new LocalStrategy(async (username, password, done) => {
-    const userController = new UserController(config.flagDB)
+    const userController = new UserController(config.flagDB);
     const user = await userController.find(username, password);
     if (user) {
         return done(null, user);
