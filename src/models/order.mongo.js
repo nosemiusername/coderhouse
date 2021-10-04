@@ -11,6 +11,7 @@ const itemsSchema = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
     id: Number,
     email: String,
+    address: String,
     status: String,
     created_at: Date,
     updated_at: Date,

@@ -33,11 +33,11 @@ export class CartDaoMongo extends CartDao {
      * @param {string} image 
      * @returns Json(status)
      */
-    async updateCart(email, productId, quantity = 1, discount = false, productName, price, image,) {
+    async updateCart(email, address, productId, quantity = 1, discount = false, productName, price, image) {
         try {
             const cart = await this.findOne(email);
             if (!cart) {
-                const newCart = await Cart.create({ email, status: "pending", created_at: moment().toString(), updated_at: moment().toString() });
+                const newCart = await Cart.create({ email, address, status: "pending", created_at: moment().toString(), updated_at: moment().toString() });
                 newCart.items.push({ productId, productName, price, image, quantity });
                 await newCart.save();
                 return ({ status: 201, msg: "Cart created" });
@@ -86,7 +86,7 @@ export class CartDaoMongo extends CartDao {
                     });
                 const objectCart = cart.toObject();
                 const ordersQuantity = await Order.countDocuments({});
-                const newOrder = await Order.create({ email: user.email, status: "generated", id: ordersQuantity + 1, created_at: moment().toString(), updated_at: moment().toString() });
+                const newOrder = await Order.create({ email: user.email, address: user.address, status: "generated", id: ordersQuantity + 1, created_at: moment().toString(), updated_at: moment().toString() });
                 objectCart.items.forEach(item => {
                     newOrder.items.push({
                         productId: item.productId, productName: item.productName,

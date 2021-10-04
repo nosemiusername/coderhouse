@@ -1,6 +1,6 @@
 # Introduccion 🤚🏻
 
-## Desafio
+## Desafío
 
 Desarrollo del backend de una aplicación de e-commerce para poder vender productos de un rubro a elección.
 
@@ -11,6 +11,8 @@ Coderhouse, comision11875
 # Consideraciones 🤔
 
 Sobre el punto de "Se implementará una API RESTful con los verbos get, post, put y delete ...", se implemento API RESTful solo para la creación de itemes, pues se entendia que era la unica parte del desafio que no tenia CRUD desde interfaz web. Este es el mecanismo que se dipondrīa para administración de stock.
+
+Sobre la API del apartado anterior, para la generacion de las imagenes utiliza el servicio de generacion de imagenes random, por lo cual si bien la url es la misma, al refrescar la pagina se puede desplegar otra imagen.
 
 Sobre el punto "Debe brindar al frontend un mecanismo de ingreso autorizado al sistema basado en JWT..." se implemento para la api del punto anterior, y para el caso de la interfaz web se utilizo passport con estrategia local.
 
@@ -86,3 +88,4 @@ Luego de registrarse, se desplegará el listado de productos disponibles los cua
 ## Prueba de la API RESTful
 
 Se adjunta colección de postman para recrear los distintos metodos sobre Item.
+Para ejecutar cada endpoint, se debe hacer con un token que lo da el servicio Login.
