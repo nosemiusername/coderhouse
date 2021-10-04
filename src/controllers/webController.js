@@ -15,15 +15,6 @@ export class WebController {
         this.itemController = new ItemController(config.flagDB);
     }
 
-    sendLogout = (req, res, next) => {
-        const ts = Date.now();
-        const date_ob = new Date(ts);
-        sendMail('ethereal', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
-        sendMail('gmail', 'logout', req.user.displayName, date_ob, req.user.photos[0].value);
-        req.logout();
-        res.render('login.ejs');
-    }
-
     sendProductos = async (req, res, next) => {
         if (req.isAuthenticated()) {
             const { id } = req.params;
@@ -56,12 +47,12 @@ export class WebController {
         res.render('info.pug', { data: data });
     }
 
-    enviroment = async (req, res, next) => {
+    sendEnviroment = async (req, res, next) => {
         const annonymConf = { ...config, mongo_uri: "***", gmail_pass: "***", gmail_user: "***" }
         res.render('enviroment.hbs', { enviroments: annonymConf });
     }
 
-    chat = async (req, res, next) => {
+    sendChat = async (req, res, next) => {
         if (req.isAuthenticated()) {
             const { email } = req.params;
             if (email) {
@@ -79,7 +70,7 @@ export class WebController {
     failLogin = (req, res, next) => {
         const error = {
             status: 401,
-            message: "Unauthorized"
+            message: "No autorizado: Usuario no existe o error en password."
         };
         res.render('error.ejs', { error: error });
     }
@@ -87,7 +78,7 @@ export class WebController {
     failRegister = (req, res, next) => {
         const error = {
             status: 500,
-            message: "Fail register"
+            message: "Registro fallido: Usuario ya existe."
         };
         res.render('error.ejs', { error: error });
     }
@@ -96,7 +87,7 @@ export class WebController {
         res.sendFile(`${__dirname}/src/public/login.html`);
     }
 
-    logout = async (req, res, next) => {
+    sendLogout = async (req, res, next) => {
         req.logout();
         try {
             await req.session.destroy();

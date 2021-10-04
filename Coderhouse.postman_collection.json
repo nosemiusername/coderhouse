@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "e329314a-53ad-48c0-8a4c-da6a2c4b7fac",
+		"name": "Coderhouse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [{
+		"name": "Desafio final",
+		"item": [{
+			"name": "productos",
+			"item": [{
+					"name": "Generar datos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos/generar/5",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"generar",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicmFmYWVsIiwiaWF0IjoxNjMzMjkwODc0LCJleHAiOjE2MzMyOTA5OTR9.TDNlc3z0wEWRHvV9N_YBIc7-yTPvGBzdvz_jh5d4y_c",
+								"type": "string"
+							}]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar detalle de un item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicmFmYWVsIiwiaWF0IjoxNjMzMjk4MDQzLCJleHAiOjE2MzMyOTgxNjN9.cVCWdxtsRqTSndYAF6bVfFNpi2O-FEe-Cc5QlFS0syI",
+								"type": "string"
+							}]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos/89940",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"89940"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un registro",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicmFmYWVsIiwiaWF0IjoxNjMzMjk4MDQzLCJleHAiOjE2MzMyOTgxNjN9.cVCWdxtsRqTSndYAF6bVfFNpi2O-FEe-Cc5QlFS0syI",
+								"type": "string"
+							}]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos/89939",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"89939"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insertar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicmFmYWVsIiwiaWF0IjoxNjMzMjk4MDQzLCJleHAiOjE2MzMyOTgxNjN9.cVCWdxtsRqTSndYAF6bVfFNpi2O-FEe-Cc5QlFS0syI",
+								"type": "string"
+							}]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 89940,\n    \"productName\": \"Casa loca en el mar\",\n    \"department\": \"Casa\",\n    \"price\": 7412,\n    \"stock\": 228,\n    \"productDescription\": \"New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart\",\n    \"image\": \"http://image.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicmFmYWVsIiwiaWF0IjoxNjMzMjk4MDQzLCJleHAiOjE2MzMyOTgxNjN9.cVCWdxtsRqTSndYAF6bVfFNpi2O-FEe-Cc5QlFS0syI",
+								"type": "string"
+							}]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"productName\": \"Casa dasdasda en el mar\",\n    \"department\": \"dasdasd\",\n    \"price\": 7412,\n    \"stock\": 228,\n    \"image\": \"http://url.cl\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos/89940",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"89940"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRiZDgzM2NiZGY1NjU2NTAyMTY1NWI5YmZkMzIxMzFkNzBlM2MzMjlmYTRiY2VkYmVhNzAxMmU4N2FjZjJkM2JlMDk1YmJhODk1ZDk5ZWJhIn0.eyJhdWQiOiI2IiwianRpIjoiNGJkODMzY2JkZjU2NTY1MDIxNjU1YjliZmQzMjEzMWQ3MGUzYzMyOWZhNGJjZWRiZWE3MDEyZTg3YWNmMmQzYmUwOTViYmE4OTVkOTllYmEiLCJpYXQiOjE2MjIyMTYwNTYsIm5iZiI6MTYyMjIxNjA1NiwiZXhwIjoxNjIyMzAyNDU2LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.Hu-DuwmyepKGWQCSLmvF3LNgK90tY68lp75irkDN1oAKYF7E_ggcf_f249VXVE2wzxvio0LePoo-5N63tf4sqbWGHoA5_Pi2ngSdU8gsfoYmxLZ7zwgIJcH4NvGMfoD-5czNxcNTpUDYg0YyhcACqdb5M_86Cu03QU-HeD-Dq010LzBqoclL4fV69vXrdEkyuZ_7NA3HsQMCd3a3gQ5G_iV_LUchsudP143eHhkFnrZ_kKioBP9p5YzHnce8GJaO1pmKqr3F2pcVUVvYRtVXGrAUJC8uwxwOyBkqwsm5Nz5X4Q0HhyokAtH_lU6IJXx_ao2xXaIIg-PsbdXuhehOd_IAJTAMf4uridWsTglOI_BMw6ymdJkk5anF0ZPnCWs_iaUYejbjH9-s1PJYz3fGGOE0JWkxSQeGNyJOmIBKOzhOyAjJVUKeCc0xCiYXyQEY-dGBHO-BXlli2JkHkWbp7N08KmS25Hlq0aERgZxZjtxr3qny6YZFgvreRaZ9x34VXpcmWqdlqI0VkW4XqJQIRSy4cLUBZKXnBi7pg9v4Wz8l3-WUkhZLQSxJrUhPHq_VbSgIbzreVYEsnrfMRLvPG7ImoXarJ8gM7Zy28X91Su0nyumK_zQ1Zxec48880BKvdMLySVliHiQ1-CGqA9gj9eb_HxHRf0AmBj-EH_IDxW8",
+								"type": "string"
+							}]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"rafael\",\n    \"password\":\"cesgen-rywvy5-zugpoX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://contigosalud.herokuapp.com/api/productos/login",
+							"protocol": "http",
+							"host": [
+								"contigosalud",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}]
+	}]
+}
