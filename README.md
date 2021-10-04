@@ -1,4 +1,4 @@
-# Introduccion
+# Introduccion 🤚🏻
 
 ## Desafio
 
@@ -8,7 +8,7 @@ Desarrollo del backend de una aplicación de e-commerce para poder vender produc
 
 Coderhouse, comision11875
 
-# Consideraciones
+# Consideraciones 🤔
 
 Sobre el punto de "Se implementará una API RESTful con los verbos get, post, put y delete ...", se implemento API RESTful solo para la creación de itemes, pues se entendia que era la unica parte del desafio que no tenia CRUD desde interfaz web. Este es el mecanismo que se dipondrīa para administración de stock.
 
@@ -28,7 +28,7 @@ No se aplicó DTO ni Repository dado que la estructura de datos en la BD exigia 
 
 No se aplicó ninguno de los requisitos extras.
 
-# Despliegue
+# Despliegue 🚀
 
 ## Introducción
 
