@@ -2,6 +2,7 @@ import { Message } from '../models/message.mongo.js';
 import { mongoToObject } from '../utils/index.js';
 import { error } from '../config/logger.js';
 import MessageDao from '../dao/messageDao.js';
+import config from '../config/index.js'
 export default class MessageDaoMongo extends MessageDao {
 
     constructor() {
@@ -49,8 +50,9 @@ export default class MessageDaoMongo extends MessageDao {
             delete chat.text;
             const timeElapsed = Date.now();
             const today = new Date(timeElapsed);
+            const type = chat.email === config.admin_email ? "sistema" : "usuario";
             const updatedChat = {
-                autor: { ...chat },
+                autor: { ...chat, type: type },
                 text: text,
                 fecha: today.toISOString(),
             };

@@ -1,6 +1,6 @@
 # Introduccion 🤚🏻
 
-## Desafio
+## Desafío
 
 Desarrollo del backend de una aplicación de e-commerce para poder vender productos de un rubro a elección.
 
@@ -12,6 +12,8 @@ Coderhouse, comision11875
 
 Sobre el punto de "Se implementará una API RESTful con los verbos get, post, put y delete ...", se implemento API RESTful solo para la creación de itemes, pues se entendia que era la unica parte del desafio que no tenia CRUD desde interfaz web. Este es el mecanismo que se dipondrīa para administración de stock.
 
+Sobre la API del apartado anterior, para la generacion de las imagenes utiliza el servicio de generacion de imagenes random, por lo cual si bien la url es la misma, al refrescar la pagina se puede desplegar otra imagen.
+
 Sobre el punto "Debe brindar al frontend un mecanismo de ingreso autorizado al sistema basado en JWT..." se implemento para la api del punto anterior, y para el caso de la interfaz web se utilizo passport con estrategia local.
 
 Sobre el punto "El cliente tendrá una sesión activa de usuario con tiempo de expiración configurable..." se aplicó variable de ambiente tanto para el tiempo de expiración de JWT como de la sesion de la app web.
@@ -20,7 +22,9 @@ Sobre el punto "Dos opciones para el frontend: ..." se aplicó EJS, PUG y Handle
 
 Sobre el punto "Se dispondrá de un archivo de configuración externo ... vista construida con handlebars" se ofusco aquellas variables sensibles.
 
-Respecto a los nombres de las colecciones, atributos, mensajes de error y comentarios de código, se hizo en inglés. Solo la interfaz web esta en español
+Respecto a los nombres de las colecciones, atributos, mensajes de error y comentarios de código, se hizo en inglés. Solo la interfaz web esta en español.
+
+Respecto a la colección de ordenes, se le agregó también la dirección de entrega como la tiene el carrito.
 
 Respecto al carrito, una vez que se da la orden de pagar, se cambia de estado a pagado (no se elimina) y se genera una orden.
 
@@ -86,3 +90,4 @@ Luego de registrarse, se desplegará el listado de productos disponibles los cua
 ## Prueba de la API RESTful
 
 Se adjunta colección de postman para recrear los distintos metodos sobre Item.
+Para ejecutar cada endpoint, se debe hacer con un token que lo da el servicio Login.

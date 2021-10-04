@@ -11,6 +11,7 @@ const itemsSchema = new mongoose.Schema({
 
 const cartSchema = new mongoose.Schema({
     email: String,
+    address: String,
     status: String,
     items: [itemsSchema],
     created_at: Date,

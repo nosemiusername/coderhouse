@@ -18,7 +18,8 @@ export class CartController {
 
             try {
                 const { email, productId, productName, price, image, quantity } = req.body;
-                const createdCart = await this.cartDao.updateCart(email, productId, quantity, false, productName, price, image);
+                const { address } = req.user;
+                const createdCart = await this.cartDao.updateCart(email, address, productId, quantity, false, productName, price, image);
                 res.redirect('/productos');
             } catch (err) {
                 error(err, res);
@@ -79,7 +80,8 @@ export class CartController {
             try {
                 const { email, quantity } = req.body;
                 const { productId } = req.params;
-                const createdCart = await this.cartDao.updateCart(email, productId, quantity, true);
+                const { address } = req.user;
+                const createdCart = await this.cartDao.updateCart(email, address, productId, quantity, true);
                 res.redirect('/carrito');
             } catch (err) {
                 error(err, res);
