@@ -22,7 +22,9 @@ Sobre el punto "Dos opciones para el frontend: ..." se aplicó EJS, PUG y Handle
 
 Sobre el punto "Se dispondrá de un archivo de configuración externo ... vista construida con handlebars" se ofusco aquellas variables sensibles.
 
-Respecto a los nombres de las colecciones, atributos, mensajes de error y comentarios de código, se hizo en inglés. Solo la interfaz web esta en español
+Respecto a los nombres de las colecciones, atributos, mensajes de error y comentarios de código, se hizo en inglés. Solo la interfaz web esta en español.
+
+Respecto a la colección de ordenes, se le agregó también la dirección de entrega como la tiene el carrito.
 
 Respecto al carrito, una vez que se da la orden de pagar, se cambia de estado a pagado (no se elimina) y se genera una orden.
 

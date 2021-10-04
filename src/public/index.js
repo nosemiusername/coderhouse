@@ -21,7 +21,8 @@ const fillChatList = (data) => {
 
     data.forEach(element => {
         chatList +=
-            `<span style='color:blue'>${element.autor.email}</span> 
+            `<span style='color:blue'>${element.autor.alias}</span>
+            <span style='color:blue'>(${element.autor.type})</span> 
             <span style='color:red'>[${element.fecha}]:</span>
             <span style='color:green'>${element.text}</span>  
             <br>`
